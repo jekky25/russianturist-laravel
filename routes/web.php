@@ -13,16 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
+
 
 
 if (!function_exists('pr')) {
 	function pr (...$ar)
 	{
-		global $USER;
-		if (!$USER->isAdmin()) return false;
 		foreach ($ar as $_ar)
 		{
 			echo '<pre>'; print_r ($_ar); echo '</pre>';
@@ -30,8 +27,15 @@ if (!function_exists('pr')) {
 	}
 }
 
+Route::get('/migr', function () {
+//	Artisan::call('make:migration create_users_table');
+//    return "Миграция выполнена!";
+});
 
-
+Route::get('/artis', function () {
+		//Artisan::call('make:model Hotel');
+	    //return "Артисан выполнен!";
+});
 
 Route::get('/clear', function () {
     /*
