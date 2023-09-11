@@ -42,7 +42,6 @@ class HomeController extends Controller
 		$hotels 	= Hotel::select('*')->orderBy('hotels_time','desc')->limit(5)->get();
 		$countries	= Country::select('*')->orderBy('countries_name')->get();
 
-//		DB::connection()->enableQueryLog();
 		foreach ($hotels as &$row) 
 		{
 		
@@ -51,9 +50,6 @@ class HomeController extends Controller
 				->orderBy('foto_position')
 				->limit(1)
 				->get();
-//			$queries = DB::getQueryLog();
-//			pr ($foto);
-
 			$row['fotos'] = $foto;
 
 			$stars = '';
@@ -62,10 +58,9 @@ class HomeController extends Controller
 				$stars .= '<img alt="" src="' . asset('image/star.png') . '" />';
 			}
 			$row['starsStr'] 	= $stars;
-			$row['fotoStr'] 	= !empty ($row['fotos']) ? asset('fotos/hotel/' . $row['fotos'][0]['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
+			$row['fotoStr'] 	= !empty ($row['fotos']) ? asset('fotos/hotels/' . $row['fotos'][0]['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
 		}
-//		$last_query = end($queries);
-//		dd($hotels);
+
 		$arMeta = [
 			'title' => $title
 		];

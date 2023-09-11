@@ -20,7 +20,7 @@
 	<table><tr class="hh1">
 		<td class="l_main">
 			@if (!empty ($countries))
-			<div class="lm_head"><a href="/countries/" title="Страны">Страны</a></div>
+			<div class="lm_head"><a href="{{route('countries')}}" title="Страны">Страны</a></div>
 			<div class="lm_countr">
 				<div class="lm_c1">
 					<div>
