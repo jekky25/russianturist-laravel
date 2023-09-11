@@ -26,7 +26,7 @@
 					<div>
 						<ul>
 						@foreach ($countries as $item)
-						<li><a href="'/countries/{{$item['countries_eng_name']}}.html" title="{{$item['countries_name']}}">{{$item['countries_name']}}</a></li>
+						<li><a href="{{route('country_name',$item['countries_eng_name'])}}" title="{{$item['countries_name']}}">{{$item['countries_name']}}</a></li>
 						@endforeach
 						</ul>
 					</div>

@@ -28,6 +28,24 @@ class Country extends Model
         return $countries;
     }
 
+	public function getByName($name)
+	{
+		$country = self::select('*')
+				->where('countries_eng_name', $name)
+				->first();
+
+
+		$foto   = $country->fotos()
+				->where('foto_type','country')
+				->orderBy('foto_position')
+				->first()
+				->toArray();
+		
+		$country['foto']	= $foto;
+                
+        return $country;
+    }
+
     public function fotos()
     {
       return $this->hasMany(

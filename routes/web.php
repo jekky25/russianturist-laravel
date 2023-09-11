@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/countries/{name}.html', 'CountryController@getCountry')->name('country_name');
 Route::get('/countries/', 'CountryController@index')->name('countries');
 
 
