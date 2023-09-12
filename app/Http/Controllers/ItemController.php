@@ -68,4 +68,26 @@ class ItemController extends Controller
 		->with(compact('pagination'))
 		->with(compact('arMeta'));
 	}
+
+	public function getItem (Request $request, $id)
+	{
+		$boardConfig = $this->boardConfig;
+		$arMeta 	= [];
+		$item		= Item::getById($id);
+		$countries	= Country::select('*')->orderBy('countries_name')->get();
+		$title 		= $item['items_name'] . ', статья ' . $item['items_name'] . ', русский турист, сайт про туризм и путешествия';
+		$arMeta 	= [
+			'title' => $title
+		];
+		
+		$foto_out = asset('fotos/items/'. $item['foto']['foto_id'] . '.jpg');
+		$item['items_img'] = !empty($foto_out) ? '<img title="' . $item['items_name'] . '" alt="' . $item['items_name'] . '" src="' . $foto_out . '" width="' . $boardConfig['foto_width_item_id'] . '" height="' . $boardConfig['foto_height_item_id'] . '">' : '';
+
+		return view('item_id')
+		->with(compact('item'))
+		->with(compact('countries'))
+		->with(compact('boardConfig'))
+		->with(compact('arMeta'))
+		;
+	}
 }

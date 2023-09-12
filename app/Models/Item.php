@@ -11,6 +11,24 @@ class Item extends Model
 {
     use HasFactory;
 
+    public function getById($id)
+    {
+      $item = self::select('*')
+          ->where('items_id', $id)
+          ->first();
+  
+  
+      $foto   = $item->fotos()
+          ->where('foto_type','item')
+          ->orderBy('foto_position')
+          ->first()
+          ->toArray();
+      
+      $item['foto']	= $foto;
+                  
+          return $item;
+      }
+
     public function fotos()
     {
       return $this->hasMany(

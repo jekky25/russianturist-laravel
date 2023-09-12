@@ -5,13 +5,13 @@
 @if (!empty ($items))
 	@foreach ($items as $item)
 <div class="hot_prew" style="height:{{ ($boardConfig['foto_height_item'] + 10) }}px;">
-<a href="/items/{{$item['items_id']}}'.html" alt="{{$item['items_name']}}" title="{{$item['items_name']}}" class="prew">
+<a href="{{route('item_id',$item['items_id'])}}" alt="{{$item['items_name']}}" title="{{$item['items_name']}}" class="prew">
 	<img title="{{$item['items_name']}}" alt="{{$item['items_name']}}'" src="{{$item['fotoStr']}}" width="{{$boardConfig['foto_width_item']}}" height="{{$boardConfig['foto_height_item']}}">
 </a>
 <h3 class="tit_hot" style="margin-left:{{ ($boardConfig['foto_width_item'] + 10) }}px;">
-<a href="/items/{{$item['items_id']}}.html" alt="{{$item['items_name']}}" title="{{$item['items_name']}}">{{$item['items_name']}}</a>
+<a href="{{route('item_id',$item['items_id'])}}" alt="{{$item['items_name']}}" title="{{$item['items_name']}}">{{$item['items_name']}}</a>
 </h3>
-<p>{!!cutText(strip_tags($item['items_description'],"<b><strong><i>"), 300)!!}<a href="/items/{{$item['items_id']}}.html" title="{{$item['items_name']}}"> »»</a></p>
+<p>{!!cutText(strip_tags($item['items_description'],"<b><strong><i>"), 300)!!}<a href="{{route('item_id',$item['items_id'])}}" title="{{$item['items_name']}}"> »»</a></p>
 </div>
 	@endforeach
 @endif
