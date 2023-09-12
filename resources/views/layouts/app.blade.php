@@ -7,7 +7,7 @@
 <meta name="yandex-verification" content="fe6c88b999494404" />
 <meta content="Туризм и путешествия" name="classification">
 <?/*=$CODE_INPUT['META']*/?>
-<link href="{{ asset("css/site.css") }}" type="text/css" rel="stylesheet">
+<link href="{{ asset("css/site.css?t=3") }}" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="overhtm">
@@ -49,7 +49,7 @@
 							<td class="vert_pm"></td>
 							<td class="vert_pm1"><a href="<?/*=$CODE_INPUT['PATH']*/?>/hotels/" title="Отели">Отели</a></td>
 							<td class="vert_pm"></td>
-							<td class="vert_pm1"><a href="<?/*=$CODE_INPUT['PATH']*/?>/items/" title="Статьи">Статьи</a></td>
+							<td class="vert_pm1"><a href="{{route('items')}}" title="Статьи">Статьи</a></td>
 						</tr>
 					</table>
 				</td>
