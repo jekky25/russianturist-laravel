@@ -13,7 +13,7 @@ class Country extends Model
 
     public function getAll()
     {
-        $countries = self::select('*')->get();
+        $countries = self::select('*')->orderBy('countries_name')->get();
         foreach ($countries as &$row) 
 		{
 		
