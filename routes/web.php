@@ -23,6 +23,9 @@ Route::get('/towns/', 'TownController@index')->name('towns');
 Route::get('/items/item_{id}.html', 'ItemController@getItem')->where('id', '[0-9]+')->name('item_id');
 Route::get('/items/', 'ItemController@index')->name('items');
 
+Route::get('/hotels/{name}.html', 'HotelController@getHotel')->name('hotel_name');
+Route::get('/hotels/', 'HotelController@index')->name('hotels');
+
 
 
 if (!function_exists('pr')) {
