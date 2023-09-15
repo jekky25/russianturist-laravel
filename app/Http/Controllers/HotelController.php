@@ -68,6 +68,35 @@ class HotelController extends Controller
 		->with(compact('countries'));
 	}
 
+	public function getHotel (Request $request, $name)
+	{
+		$boardConfig 				= $this->boardConfig;
+		$arMeta 					= [];
+
+		$hotel						= Hotel::getByName($name);
+		$countries					= Country::select('*')->orderBy('countries_name')->get();
+
+		$hotel->hotel_fotos_enter 	= !empty($hotel->fotos) ? '<a href="' . '/hotels/' . $hotel['hotels_eng_name'] . '_foto.html" alt="' . $hotel['hotels_name'] . '" title="' . $hotel['hotels_name'] . '">Фотографии отеля</a>' : '';
 
 	
+		foreach ($hotel->fotos as $k => &$row)
+		{
+			$row['f_act']	 = ($k == 0) ? 'class="f_act"' : '';
+			$row['foto_out'] = asset ('/fotos/hotels/' . $row['foto_id'] . '.jpg');
+		}
+		
+
+		$title = $hotel['hotels_name'] . ', отель ' . $hotel['hotels_name'] . ', русский турист, сайт про туризм и путешествия';
+		$arMeta = [
+			'title' => $title
+		];
+
+		return view('hotel_id')
+		->with(compact('boardConfig'))
+		->with(compact('arMeta'))
+		->with(compact('hotel'))
+		->with(compact('countries'))
+;
+	}
+
 }
