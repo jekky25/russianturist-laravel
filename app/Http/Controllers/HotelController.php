@@ -75,6 +75,9 @@ class HotelController extends Controller
 
 		$hotel						= Hotel::getByName($name);
 		$countries					= Country::select('*')->orderBy('countries_name')->get();
+		$town						= Town::select('*')->where('towns_id', $hotel['towns_id'])->first();
+		
+		$hotel->town				= $town;
 
 		$hotel->hotel_fotos_enter 	= !empty($hotel->fotos) ? '<a href="' . '/hotels/' . $hotel['hotels_eng_name'] . '_foto.html" alt="' . $hotel['hotels_name'] . '" title="' . $hotel['hotels_name'] . '">Фотографии отеля</a>' : '';
 
