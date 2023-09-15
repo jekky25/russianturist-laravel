@@ -16,7 +16,7 @@ class Hotel extends Model
 		return $this->hasMany(
 			Foto::class,
 			'foto_parent_id',
-		'hotels_id');
+			'hotels_id');
 	}
 
 	public function town()
@@ -30,6 +30,8 @@ class Hotel extends Model
 			->where('hotels_eng_name', $name)
 			->first();
   
+		if (empty($hotel)) return;
+
 		$hotel->hotels_description 	= str_replace("\n", "\n<br />\n", $hotel->hotels_description);
 		$hotel->town 				= $hotel->town()->first();
 		$fotos   					= $hotel->fotos()

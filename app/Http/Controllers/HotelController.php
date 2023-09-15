@@ -74,6 +74,9 @@ class HotelController extends Controller
 		$arMeta 					= [];
 
 		$hotel						= Hotel::getByName($name);
+
+		if (empty ($hotel)) abort(404);
+
 		$countries					= Country::select('*')->orderBy('countries_name')->get();
 		$town						= Town::select('*')->where('towns_id', $hotel['towns_id'])->first();
 		
@@ -100,6 +103,87 @@ class HotelController extends Controller
 		->with(compact('hotel'))
 		->with(compact('countries'))
 ;
+	}
+
+	public function getHotelFotos (Request $request, $name, $foto, $id=0)
+	{
+		$boardConfig 				= $this->boardConfig;
+		$arMeta 					= [];
+
+		$hotel						= Hotel::getByName($name);
+		$countries					= Country::select('*')->orderBy('countries_name')->get();
+		$town						= Town::select('*')->where('towns_id', $hotel['towns_id'])->first();
+		
+		$hotel->town				= $town;
+
+		$hotel->hotel_fotos_enter 	= !empty($hotel->fotos) ? '<a href="' . '/hotels/' . $hotel['hotels_eng_name'] . '_foto.html" alt="' . $hotel['hotels_name'] . '" title="' . $hotel['hotels_name'] . '">Фотографии отеля</a>' : '';
+
+	
+		foreach ($hotel->fotos as $k => &$row)
+		{
+			$row['f_act'] = '';
+			if ( ($id == 0 && $k == 0) || $id > 0 && $id == $row['foto_id'])
+			{
+				$row['f_act']	 		= 'class="f_act"';
+				$hotel->selFoto 		= $row;
+				$hotel->prevFoto		= $k > 0 ? $hotel->fotos[($k-1)] : [];
+				$hotel->nextFoto		= ($k + 1) < count (($hotel->fotos) ) ? $hotel->fotos[($k+1)] : [];
+				$hotel->positionFoto	= ($k + 1);
+			}
+			$row['foto_out'] = asset ('/fotos/hotels/' . $row['foto_id'] . '.jpg');
+		}
+		$hotel->countFoto	= count ($hotel->fotos);
+		
+		
+		//draw width and height of the picture
+
+		$img = asset ('/fotos/hotels/' . $hotel->selFoto['foto_id'] . '.jpg');
+
+		$im = imagecreatefromjpeg( $img );
+
+		$resultX_im =imageSX($im);
+		$resultY_im =imageSY($im);
+		$img_koefficient = $resultX_im / $resultY_im;
+
+		$img_width = $boardConfig['max_foto_width_big'];
+
+		if ($resultX_im > $img_width)
+		{
+			$resultX_im = $img_width;
+  			$resultY_im = $resultX_im / $img_koefficient;
+		}
+
+		imageDestroy($im);
+
+		$resultX_im_l = $resultX_im - 3;
+		if ($resultX_im_l < 0)
+			$resultX_im_l = 0;
+
+		$resultY_im_l = $resultY_im - 3;
+		if ($resultY_im_l < 0)
+  			$resultY_im_l = 0;
+
+
+
+		$title = $hotel['hotels_name'] . ', отель ' . $hotel['hotels_name'] . ', русский турист, сайт про туризм и путешествия';
+		$arMeta = [
+			'title' => $title
+		];
+
+
+		$prev 	= 	!empty ($prev) 		?		$prev 	:	'';
+		$next 	= 	!empty ($next) 		?		$next 	:	'';
+
+
+
+		return view('hotel_foto')
+		->with(compact('boardConfig'))
+		->with(compact('hotel'))
+		->with(compact('resultX_im'))
+		->with(compact('resultY_im'))
+		->with(compact('arMeta'))
+		->with(compact('countries'))
+		;
 	}
 
 }
