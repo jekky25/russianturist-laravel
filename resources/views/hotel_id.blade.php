@@ -10,7 +10,7 @@
 				@foreach ($hotel->fotos as $item)
 					<div class="foto1" style="height:{{$boardConfig['foto_height_hotel_prew']}}px;">
 						<div style="width:{{$boardConfig['foto_width_hotel_prew']}}px; padding:0;">
-							<a href="CODE_INPUT['PATH']/hotels/{{$hotel['hotels_eng_name']}}_foto_{{$item['foto_id']}}.html" alt="{{$hotel['hotels_name']}}" title="{{$hotel['hotels_name']}}" class="prew">
+							<a href="{{route('hotel_fotos_id',[$hotel['hotels_eng_name'],'_foto_',$item['foto_id']])}}" alt="{{$hotel['hotels_name']}}" title="{{$hotel['hotels_name']}}" class="prew">
 								<img title="{{$hotel['hotels_name']}}" alt="{{$hotel['hotels_name']}}" src="{{$item['foto_out']}}" width="{{$boardConfig['foto_width_hotel_prew']}}" height="{{$boardConfig['foto_height_hotel_prew']}}" {!!$item['f_act']!!}>
 							</a>
 						</div>

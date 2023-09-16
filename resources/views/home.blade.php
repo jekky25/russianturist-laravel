@@ -2,7 +2,7 @@
 @section('title', $arMeta['title'])
 @section('main_body')
 <div class="main_l">
-Здравствуйте! Вы попали на сайт <a href="http://www.russianturist.ru">www.russianturist.ru</a>. Все самое интересное для русского туриста. Статьи, информация о странах, отелях.<br>
+Здравствуйте! Вы попали на сайт <a href="{{route('home')}}">www.russianturist.ru</a>. Все самое интересное для русского туриста. Статьи, информация о странах, отелях.<br>
 Слово турист возникло от французского слова tourisme, что означает поездка или путешествие. Еще издревна людей манили разные экзотические страны. Многие из-них открывали новые моря, острова и целые континенты. Многие погибали от рук туземцев. Но это в прошлом.<br>
 Сейчас же туризм вырос в целую отдельную область. Теперишние туристы желают прежде всего отдохнуть под лучами жаркого южного солнца, поплавать с аквалангом в Красном море или пройтись с рюкзаком по каким-нибудь горным хребтам.<br>
  Различные туроператоры сейчас предлагают огромное количество всевозможных путевок и туристических маршрутов. Очень востребованными являются сейчас горящие путевки.<br>
@@ -24,11 +24,11 @@ google_ad_height = 250;
 							@if (!empty ($hotels))
 							@foreach ($hotels as $item)
 							<div class="hot_prew" style="height:{{ ($boardConfig['foto_height_hotel'] + 10)}}px;">
-							<a href="/hotels/{{$item['hotels_eng_name']}}.html" title="{{$item['hotels_name']}}" class="prew">
+							<a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}" class="prew">
 								<img title="{{$item['hotels_name']}}" alt="{{$item['hotels_name']}}" src="{{$item['fotoStr']}}" width="{{$boardConfig['foto_width_hotel']}}" height="{{$boardConfig['foto_height_hotel']}}">
 							</a>
-							<h3 class="tit_hot" style="margin-left:{{($boardConfig['foto_width_hotel'] + 10)}}px;"><a href="/hotels/{{$item['hotels_eng_name']}}.html" title="{{$item['hotels_name']}}">{{cutText($item['hotels_name'],40)}} {!!$item['starsStr']!!}</a></h3>
-							<p>{{cutText($item['hotels_description'],300)}}<a href="/hotels/{{$item['hotels_eng_name']}}.html" title="{{$item['hotels_name']}}"> »»</a></p>
+							<h3 class="tit_hot" style="margin-left:{{($boardConfig['foto_width_hotel'] + 10)}}px;"><a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}">{{cutText($item['hotels_name'],40)}} {!!$item['starsStr']!!}</a></h3>
+							<p>{{cutText($item['hotels_description'],300)}}<a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}"> »»</a></p>
 						</div>
   							@endforeach
 							@endif

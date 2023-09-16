@@ -82,9 +82,8 @@ class HotelController extends Controller
 		
 		$hotel->town				= $town;
 
-		$hotel->hotel_fotos_enter 	= !empty($hotel->fotos) ? '<a href="' . '/hotels/' . $hotel['hotels_eng_name'] . '_foto.html" alt="' . $hotel['hotels_name'] . '" title="' . $hotel['hotels_name'] . '">Фотографии отеля</a>' : '';
-
-	
+		$hotel->hotel_fotos_enter 	= !empty($hotel->fotos) ? '<a href="' . route('hotel_fotos',[$hotel['hotels_eng_name'],'_foto']) . '" alt="' . $hotel['hotels_name'] . '" title="' . $hotel['hotels_name'] . '">Фотографии отеля</a>' : '';
+			
 		foreach ($hotel->fotos as $k => &$row)
 		{
 			$row['f_act']	 = ($k == 0) ? 'class="f_act"' : '';
@@ -116,7 +115,7 @@ class HotelController extends Controller
 		
 		$hotel->town				= $town;
 
-		$hotel->hotel_fotos_enter 	= !empty($hotel->fotos) ? '<a href="' . '/hotels/' . $hotel['hotels_eng_name'] . '_foto.html" alt="' . $hotel['hotels_name'] . '" title="' . $hotel['hotels_name'] . '">Фотографии отеля</a>' : '';
+		$hotel->hotel_fotos_enter 	= !empty($hotel->fotos) ? '<a href="' . route('hotel_fotos',[$hotel['hotels_eng_name'],'_foto']) . '" alt="' . $hotel['hotels_name'] . '" title="' . $hotel['hotels_name'] . '">Фотографии отеля</a>' : '';
 
 	
 		foreach ($hotel->fotos as $k => &$row)
