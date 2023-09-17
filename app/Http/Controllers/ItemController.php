@@ -82,7 +82,7 @@ class ItemController extends Controller
 		
 		$foto_out = asset('fotos/items/'. $item['foto']['foto_id'] . '.jpg');
 		$item['items_img'] = !empty($foto_out) ? '<img title="' . $item['items_name'] . '" alt="' . $item['items_name'] . '" src="' . $foto_out . '" width="' . $boardConfig['foto_width_item_id'] . '" height="' . $boardConfig['foto_height_item_id'] . '">' : '';
-
+		$item['items_description'] = str_replace("\n", "\n<br />\n", $item['items_description']);
 		return view('item_id')
 		->with(compact('item'))
 		->with(compact('countries'))
