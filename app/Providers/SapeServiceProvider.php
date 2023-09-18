@@ -54,6 +54,8 @@ class SapeServiceProvider extends ServiceProvider
 		global $code_sape, $sape_context;
 		for ($i = 0; $i < count ($code_sape) ; $i++) {
 	  
+			$sapeCodeEmpt = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $code_sape[$i]);
+			if (empty ($sapeCodeEmpt)) continue;
 			$countStr = 0;
 			$countStr = strpos ($text, '{sape_links}');
 	
