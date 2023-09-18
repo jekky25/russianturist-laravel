@@ -11,7 +11,7 @@ class Country extends Model
 {
     use HasFactory;
 
-    public function getAll()
+    public static function getAll()
     {
         $countries = self::select('*')->orderBy('countries_name')->get();
         foreach ($countries as &$row) 
@@ -28,7 +28,7 @@ class Country extends Model
         return $countries;
     }
 
-	public function getByName($name)
+	public static function getByName($name)
 	{
 		$country = self::select('*')
 				->where('countries_eng_name', $name)

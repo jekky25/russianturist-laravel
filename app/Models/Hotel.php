@@ -24,7 +24,7 @@ class Hotel extends Model
 		return $this->belongsTo(Town::class, 'towns_id', 'towns_id');
 	}
 
-	public function getByName($name)
+	public static function getByName($name)
 	{
 		$hotel = self::select('*')
 			->where('hotels_eng_name', $name)

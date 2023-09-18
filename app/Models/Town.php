@@ -24,7 +24,7 @@ class Town extends Model
 		return $this->belongsTo(Country::class, 'countries_id', 'countries_id');
 	}
 
-	public function getByName($name)
+	public static function getByName($name)
 	{
 		$town = self::select('*')
 				->where('towns_eng_name', $name)

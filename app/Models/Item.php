@@ -11,7 +11,7 @@ class Item extends Model
 {
     use HasFactory;
 
-    public function getById($id)
+    public static function getById($id)
     {
       $item = self::select('*')
           ->where('items_id', $id)

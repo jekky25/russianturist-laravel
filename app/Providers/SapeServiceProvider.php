@@ -49,7 +49,7 @@ class SapeServiceProvider extends ServiceProvider
 	* @param string $text
 	* @return void
 	*/
-	public function replaceSapeCode($text)
+	public static function replaceSapeCode($text)
     {
 		global $code_sape, $sape_context;
 		for ($i = 0; $i < count ($code_sape) ; $i++) {
