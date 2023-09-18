@@ -65,15 +65,15 @@ class TownController extends Controller
 
 	public function getTown (Request $request, $name)
 	{
-		$boardConfig 		= $this->boardConfig;
-		$arMeta 			= [];
+		$boardConfig 				= $this->boardConfig;
+		$arMeta 					= [];
 
-		$town				= Town::getByName($name);
-		$countries			= Country::select('*')->orderBy('countries_name')->get();
+		$town						= Town::getByName($name);
+		$countries					= Country::select('*')->orderBy('countries_name')->get();
 
-		$foto_out 			= !empty ($town->foto) ? asset('/fotos/towns/' . $town->foto['foto_id'] . '.jpg') : '';
-
-		$town->towns_img 	= !empty($foto_out) ? '<img title="' . $town->towns_name . '" alt="' . $town->towns_name . '" src="' . $foto_out . '" width="' . $boardConfig['foto_width_town_id'] . '" height="' . $boardConfig['foto_height_town_id'] . '">' : '';
+		$foto_out 					= !empty ($town->foto) ? asset('/fotos/towns/' . $town->foto['foto_id'] . '.jpg') : '';
+		$town->towns_img 			= !empty($foto_out) ? '<img title="' . $town->towns_name . '" alt="' . $town->towns_name . '" src="' . $foto_out . '" width="' . $boardConfig['foto_width_town_id'] . '" height="' . $boardConfig['foto_height_town_id'] . '">' : '';
+		$town->towns_description 	= \App\Providers\SapeServiceProvider::replaceSapeCode($town->towns_description);
 
 		$hotels 			= Hotel::select('*')
 		->where('towns_id', $town->towns_id)
