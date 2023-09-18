@@ -83,6 +83,7 @@ class HotelController extends Controller
 		$hotel->town				= $town;
 
 		$hotel->hotel_fotos_enter 	= !empty($hotel->fotos) ? '<a href="' . route('hotel_fotos',[$hotel['hotels_eng_name'],'_foto']) . '" alt="' . $hotel['hotels_name'] . '" title="' . $hotel['hotels_name'] . '">Фотографии отеля</a>' : '';
+		$hotel->hotels_description 	= \App\Providers\SapeServiceProvider::replaceSapeCode($hotel->hotels_description);
 			
 		foreach ($hotel->fotos as $k => &$row)
 		{
@@ -90,6 +91,7 @@ class HotelController extends Controller
 			$row['foto_out'] = asset ('/fotos/hotels/' . $row['foto_id'] . '.jpg');
 		}
 		
+
 
 		$title = $hotel['hotels_name'] . ', отель ' . $hotel['hotels_name'] . ', русский турист, сайт про туризм и путешествия';
 		$arMeta = [
@@ -168,7 +170,7 @@ class HotelController extends Controller
 		$arMeta = [
 			'title' => $title
 		];
-
+		
 
 		$prev 	= 	!empty ($prev) 		?		$prev 	:	'';
 		$next 	= 	!empty ($next) 		?		$next 	:	'';
