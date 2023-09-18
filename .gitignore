@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/fotos
+/public/2985ac2e5fba128e432d8e4c54a11c6f
 /storage/*.key
 /vendor
 .env
