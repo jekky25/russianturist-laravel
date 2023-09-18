@@ -18,7 +18,7 @@ Route::get('/countries/{name}.html', 'CountryController@getCountry')->name('coun
 Route::get('/countries/', 'CountryController@index')->name('countries');
 
 Route::get('/towns/{name}.html', 'TownController@getTown')->name('town_name');
-Route::get('/towns/', 'TownController@index')->name('towns');
+Route::get('/towns/', 'TownController@index')->name('towns')->middleware('slashes');
 
 Route::get('/items/item_{id}.html', 'ItemController@getItem')->where('id', '[0-9]+')->name('item_id');
 Route::get('/items/', 'ItemController@index')->name('items');
