@@ -66,7 +66,7 @@ class HomeController extends Controller
 		];
 
 		$boardConfig = $this->boardConfig;
-		
+
 		return view('home')
 		->with(compact('arMeta'))
 		->with(compact('boardConfig'))
