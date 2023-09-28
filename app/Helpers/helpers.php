@@ -22,12 +22,3 @@ if (!function_exists('cutText')) {
         return $txt;
     }
 }
-
-//$GLOBALS['board_config'] = Config::select('*')->get();
-/*
-$row = DB::table('vars') 
-		->select('*')
-		->get()
-		->toArray();
-*/
-//dd ($GLOBALS['board_config']);
