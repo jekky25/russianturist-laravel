@@ -20,10 +20,10 @@ Route::get('/countries/', 'CountryController@index')->name('countries');
 Route::get('/towns/{name}.html', 'TownController@getTown')->name('town_name');
 Route::get('/towns/', 'TownController@index')->name('towns')->middleware('slashes');
 
-Route::get('/items/item_{id}.html', 'ItemController@getItem')->where('id', '[0-9]+')->name('item_id');
+Route::get('/items/item_{id}.html', 'ItemController@getItem')->whereNumber('id')->name('item_id');
 Route::get('/items/', 'ItemController@index')->name('items');
 
-Route::get('/hotels/{name}{foto}{id}.html', 'HotelController@getHotelFotos')->where('foto', '_foto_')->where('id', '[0-9]+')->name('hotel_fotos_id');
+Route::get('/hotels/{name}{foto}{id}.html', 'HotelController@getHotelFotos')->where('foto', '_foto_')->whereNumber('id')->name('hotel_fotos_id');
 Route::get('/hotels/{name}{foto}.html', 'HotelController@getHotelFotos')->where('foto', '_foto')->name('hotel_fotos');
 Route::get('/hotels/{name}.html', 'HotelController@getHotel')->name('hotel_name');
 Route::get('/hotels/', 'HotelController@index')->name('hotels');
