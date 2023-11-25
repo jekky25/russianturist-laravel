@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Config;
+use \Illuminate\Support\Str;
 
 if (!function_exists('getBoardConfig')) {
 	function getBoardConfig() {
@@ -18,7 +19,7 @@ if (!function_exists('getBoardConfig')) {
 
 if (!function_exists('cutText')) {
 	function cutText($txt, $lenght = 0) {
-        $txt = strlen($txt) > $lenght ? (mb_substr($txt, 0, $lenght, 'UTF-8') . ' ...') : $txt;
+        $txt = Str::limit($txt, $lenght, $end='...');
         return $txt;
     }
 }
