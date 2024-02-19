@@ -33,7 +33,20 @@
 				</div>
 			</div>
 			@endif
-			<?/*=$CODE_INPUT['code_vivod_sape']*/?>
+			@if (!empty ($outSape))
+			<div class="lm_fri_h">Наши друзья</div>
+			<div class="lm_fri_b">
+				<div class="lm_fri1">
+					<div>
+						<ul>
+							@foreach ($outSape as $item)
+							<li>{!! $item !!}</li>
+							@endforeach
+						</ul><br>
+					</div>
+				</div>
+			</div>
+			@endif
 			<div class="lm_foot"></div>
 		</td>
 		<td class="c_main">

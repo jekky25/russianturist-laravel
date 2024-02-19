@@ -98,6 +98,8 @@ class HotelController extends Controller
 			'title' => $title
 		];
 
+		\App\Providers\SapeServiceProvider::getSapeCode();
+		
 		return view('hotel_id')
 		->with(compact('boardConfig'))
 		->with(compact('arMeta'))

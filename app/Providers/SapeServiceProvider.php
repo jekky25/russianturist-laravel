@@ -2,6 +2,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class SapeServiceProvider extends ServiceProvider
 {
@@ -25,7 +26,6 @@ class SapeServiceProvider extends ServiceProvider
 		global $view, $code_sape, $sape, $sape_context;
 
 		$code_sape = [];
-        
 		if (!defined('_SAPE_USER')) define('_SAPE_USER', '2985ac2e5fba128e432d8e4c54a11c6f');
 		require_once($_SERVER['DOCUMENT_ROOT'] . '/' . _SAPE_USER . '/sape.php');
 		$o = [];
@@ -73,4 +73,15 @@ class SapeServiceProvider extends ServiceProvider
 		return $text;
 	}
 
+	/**
+	* Making sape code in the left block of the page
+	* @return void
+	*/
+	public static function getSapeCode()
+	{
+		global $code_sape, $sape_context;
+		View::composer('*', function($view) use ($code_sape,$sape_context) {
+			$view->with(['outSape' => $code_sape]);
+		});
+	}
 }

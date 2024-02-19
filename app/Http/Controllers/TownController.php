@@ -55,6 +55,9 @@ class TownController extends Controller
 			$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/towns/' . $row['fotos']['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
 		}
 
+		$sapeCode 	= \App\Providers\SapeServiceProvider::getSapeCode();
+
+
 		return view('towns')
 		->with(compact('boardConfig'))
 		->with(compact('arMeta'))
