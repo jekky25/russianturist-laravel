@@ -15,18 +15,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/countries/{name}.html', 'CountryController@getCountry')->name('country_name');
-Route::get('/countries/', 'CountryController@index')->name('countries')->middleware('slashes');
+
+Route::middleware('slashes')->group(function () {
+	Route::get('/countries/', 		'CountryController@index')	->name('countries');
+	Route::get('/towns/', 			'TownController@index')		->name('towns');
+	Route::get('/items/', 			'ItemController@index')		->name('items');
+	Route::get('/hotels/', 			'HotelController@index')	->name('hotels');
+});
 
 Route::get('/towns/{name}.html', 'TownController@getTown')->name('town_name');
-Route::get('/towns/', 'TownController@index')->name('towns')->middleware('slashes');
-
 Route::get('/items/item_{id}.html', 'ItemController@getItem')->whereNumber('id')->name('item_id');
-Route::get('/items/', 'ItemController@index')->name('items')->middleware('slashes');
 
 Route::get('/hotels/{name}{foto}{id}.html', 'HotelController@getHotelFotos')->where('foto', '_foto_')->whereNumber('id')->name('hotel_fotos_id');
 Route::get('/hotels/{name}{foto}.html', 'HotelController@getHotelFotos')->where('foto', '_foto')->name('hotel_fotos');
 Route::get('/hotels/{name}.html', 'HotelController@getHotel')->name('hotel_name');
-Route::get('/hotels/', 'HotelController@index')->name('hotels')->middleware('slashes');
+
 
 
 if (!function_exists('pr')) {
