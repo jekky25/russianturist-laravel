@@ -19,13 +19,13 @@ class DontEndSlash
   */
   public function handle($request, Closure $next)
   {
-	/*
-    if (!preg_match('/.+\/$/', $request->getRequestUri()))
-    {
+		//check url for the presence of a trailing slash
+		if (!preg_match('/.+\/$/', $request->getRequestUri()))
+		{            
 		$base_url = Config::get('app.url');
 		return Redirect::to($base_url.$request->getRequestUri().'/');
-    }
-	*/
+	}
+
 	/*
 	if (!str_ends_with($request->getPathInfo(), '/')) {
 		$newval =$request->getPathInfo().'/';
@@ -33,9 +33,10 @@ class DontEndSlash
 		header("Location:$newval");
 		exit();
 	}
-*/
+	*/
 
-    return $next($request);
-  }
+	return $next($request);
+    
+	}
 }
 
