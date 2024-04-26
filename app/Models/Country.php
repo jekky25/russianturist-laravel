@@ -11,6 +11,11 @@ class Country extends Model
 {
     use HasFactory;
 
+    /**
+     * get all countries
+
+     * @return \Illuminate\Database\Eloquent\Collection 
+     */
     public static function getAll()
     {
         $countries = self::select('*')->orderBy('countries_name')->get();
@@ -28,6 +33,11 @@ class Country extends Model
         return $countries;
     }
 
+    /**
+     * get country by name
+     * @param  string  $name
+     * @return \Illuminate\Database\Eloquent\Collection 
+     */
 	public static function getByName($name)
 	{
 		$country = self::select('*')
@@ -46,6 +56,9 @@ class Country extends Model
         return $country;
     }
 
+    /**
+     * get fotos
+     */
     public function fotos()
     {
       return $this->hasMany(

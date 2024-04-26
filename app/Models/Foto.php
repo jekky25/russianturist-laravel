@@ -9,6 +9,9 @@ class Foto extends Model
 {
     use HasFactory;
 
+    /**
+    * get hotel
+    */
     public function hotel()
     {
         return $this->belongsTo(Hotel::class);

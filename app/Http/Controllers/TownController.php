@@ -26,7 +26,7 @@ class TownController extends Controller
 
     /**
      * Show the application dashboard.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
 	public function index(Request $request)
@@ -65,7 +65,12 @@ class TownController extends Controller
 		->with(compact('countries'));
 	}
 
-
+	/**
+     * Show a town page
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  string  $name
+     * @return \Illuminate\Http\Response
+     */
 	public function getTown (Request $request, $name)
 	{
 		$boardConfig 				= $this->boardConfig;

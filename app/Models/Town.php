@@ -11,19 +11,11 @@ class Town extends Model
 {
 	use HasFactory;
 
-	public function fotos()
-	{
-		return $this->hasMany(
-			Foto::class,
-			'foto_parent_id',
-			'towns_id');
-	}
-
-	public function country()
-	{
-		return $this->belongsTo(Country::class, 'countries_id', 'countries_id');
-	}
-
+	/**
+     * get town by name
+     * @param  string  $name
+     * @return \Illuminate\Database\Eloquent\Collection 
+     */
 	public static function getByName($name)
 	{
 		$town = self::select('*')
@@ -44,4 +36,23 @@ class Town extends Model
   
 		return $town;
     }
+
+	/**
+     * get fotos
+     */
+	public function fotos()
+	{
+		return $this->hasMany(
+			Foto::class,
+			'foto_parent_id',
+			'towns_id');
+	}
+
+	/**
+     * get country
+     */
+	public function country()
+	{
+		return $this->belongsTo(Country::class, 'countries_id', 'countries_id');
+	}
 }

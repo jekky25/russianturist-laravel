@@ -11,19 +11,11 @@ class Hotel extends Model
 
 	public $fotos = [];
 
-	public function fotos()
-	{
-		return $this->hasMany(
-			Foto::class,
-			'foto_parent_id',
-			'hotels_id');
-	}
-
-	public function town()
-	{
-		return $this->belongsTo(Town::class, 'towns_id', 'towns_id');
-	}
-
+	/**
+     * get hotel by name
+     * @param  string  $name
+     * @return \Illuminate\Database\Eloquent\Collection 
+     */
 	public static function getByName($name)
 	{
 		$hotel = self::select('*')
@@ -42,5 +34,24 @@ class Hotel extends Model
       
 		$hotel->fotos	= $fotos;
 		return $hotel;
+	}
+
+	/**
+     * get fotos
+     */
+	public function fotos()
+	{
+		return $this->hasMany(
+			Foto::class,
+			'foto_parent_id',
+			'hotels_id');
+	}
+
+	/**
+     * get town
+     */
+	public function town()
+	{
+		return $this->belongsTo(Town::class, 'towns_id', 'towns_id');
 	}
 }

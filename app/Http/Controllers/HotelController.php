@@ -26,7 +26,7 @@ class HotelController extends Controller
 
     /**
      * Show the application dashboard.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
 	public function index(Request $request)
@@ -68,6 +68,12 @@ class HotelController extends Controller
 		->with(compact('countries'));
 	}
 
+	/**
+     * Show a hotel page
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  string  $name
+     * @return \Illuminate\Http\Response
+     */
 	public function getHotel (Request $request, $name)
 	{
 		$boardConfig 				= $this->boardConfig;
@@ -108,6 +114,14 @@ class HotelController extends Controller
 ;
 	}
 
+	/**
+     * Show a photos of hotel page
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  string  $name
+	 * @param  string  $foto
+	 * @param  int     $id
+     * @return \Illuminate\Http\Response
+     */
 	public function getHotelFotos (Request $request, $name, $foto, $id=0)
 	{
 		$boardConfig 				= $this->boardConfig;

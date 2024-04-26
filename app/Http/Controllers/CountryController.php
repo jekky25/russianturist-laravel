@@ -25,7 +25,7 @@ class CountryController extends Controller
 
     /**
      * Show the application dashboard.
-     *
+	 * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
 	public function index(Request $request)
@@ -47,6 +47,12 @@ class CountryController extends Controller
 		->with(compact('countries'));
 	}
 
+	/**
+     * Show a country page
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  string  $name
+     * @return \Illuminate\Http\Response
+     */
 	public function getCountry (Request $request, $name)
 	{
 		$boardConfig = $this->boardConfig;

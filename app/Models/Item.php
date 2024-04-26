@@ -11,6 +11,11 @@ class Item extends Model
 {
     use HasFactory;
 
+    /**
+     * get article by id
+     * @param  integer  $id
+     * @return \Illuminate\Database\Eloquent\Collection 
+     */
     public static function getById($id)
     {
       $item = self::select('*')
@@ -29,6 +34,9 @@ class Item extends Model
           return $item;
       }
 
+    /**
+     * get fotos
+     */
     public function fotos()
     {
       return $this->hasMany(
