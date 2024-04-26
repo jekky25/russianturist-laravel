@@ -24,8 +24,9 @@ class SapeServiceProvider extends ServiceProvider
 	public function boot()
 	{
 		global $view, $code_sape, $sape, $sape_context;
-
 		$code_sape = [];
+		$_SERVER['DOCUMENT_ROOT'] = !empty($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : dirname(dirname(dirname(__FILE__))) . '/public';
+
 		if (!defined('_SAPE_USER')) define('_SAPE_USER', '2985ac2e5fba128e432d8e4c54a11c6f');
 		require_once($_SERVER['DOCUMENT_ROOT'] . '/' . _SAPE_USER . '/sape.php');
 		$o = [];
