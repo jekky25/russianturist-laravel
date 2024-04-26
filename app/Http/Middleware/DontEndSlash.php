@@ -26,15 +26,6 @@ class DontEndSlash
 		return Redirect::to($base_url.$request->getRequestUri().'/');
 	}
 
-	/*
-	if (!str_ends_with($request->getPathInfo(), '/')) {
-		$newval =$request->getPathInfo().'/';
-		header("HTTP/1.1 301 Moved Permanently");
-		header("Location:$newval");
-		exit();
-	}
-	*/
-
 	return $next($request);
     
 	}
