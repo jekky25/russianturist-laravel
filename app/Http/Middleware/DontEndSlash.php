@@ -19,15 +19,17 @@ class DontEndSlash
   */
   public function handle($request, Closure $next)
   {
+		//do it for phpUnit tests
+		$requesUri = $request->getRequestUri();
+		$requesUri = $requesUri != $_SERVER['REQUEST_URI'] && !empty($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $requesUri;
+
 		//check url for the presence of a trailing slash
-		if (!preg_match('/.+\/$/', $request->getRequestUri()))
-		{            
+		if (!preg_match('/.+\/$/', $requesUri))
+		{
 		$base_url = Config::get('app.url');
 		return Redirect::to($base_url.$request->getRequestUri().'/');
-	}
-
-	return $next($request);
-    
+		}
+		return $next($request);
 	}
 }
 
