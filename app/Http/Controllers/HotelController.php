@@ -5,13 +5,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Traits\BaseConfig;
 use App\Models\Hotel;
 use App\Models\Country;
 use App\Models\Town;
 
 class HotelController extends Controller
 {
+	use BaseConfig;
 	public $boardingConfig = [];
     /**
      * Create a new controller instance.
@@ -21,7 +22,7 @@ class HotelController extends Controller
 	public function __construct()
 	{
 		// $this->middleware('auth');
-		$this->boardConfig = getBoardConfig();
+		$this->boardConfig = $this->getBoardConfig();
 	}
 
     /**

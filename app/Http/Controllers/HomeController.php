@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\Authenticatable;
+use App\Traits\BaseConfig;
 
 use App\Models\User;
 use App\Models\Hotel;
@@ -17,6 +18,7 @@ use App\Models\Country;
 
 class HomeController extends Controller
 {
+	use BaseConfig;
 	public $boardingConfig = [];
     /**
      * Create a new controller instance.
@@ -26,7 +28,7 @@ class HomeController extends Controller
 	public function __construct()
 	{
 		// $this->middleware('auth');
-		$this->boardConfig = getBoardConfig();
+		$this->boardConfig = $this->getBoardConfig();
 	}
 
     /**
