@@ -6,28 +6,28 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class CountryTest extends TestCase
+class HotelTest extends TestCase
 {
     /**
-     * A basic feature test country.
+     * A basic feature test hotel.
      */
-    public function test_country_page(): void
+    public function test_hotel_page(): void
     {
-        $_SERVER['REQUEST_URI'] = '/countries/';
+        $_SERVER['REQUEST_URI'] = '/hotels/';
         $response = $this->get($_SERVER['REQUEST_URI']);
         $response->assertStatus(200);
     }
 
     /**
-    * A basic feature test country_name.
+    * A basic feature test hotel_name.
     */
-    public function test_country_id_page(): void
+    public function test_hotel_id_page(): void
     {
-        $_SERVER['REQUEST_URI'] = '/countries/bulgary.html';
+        $_SERVER['REQUEST_URI'] = '/hotels/3s_beach_club.html';
         $response = $this->get($_SERVER['REQUEST_URI']);
         $response->assertStatus(200);
 
-        $_SERVER['REQUEST_URI'] = '/countries/egypt.html';
+        $_SERVER['REQUEST_URI'] = '/hotels/a_one_bangkok.html';
         $response = $this->get($_SERVER['REQUEST_URI']);
         $response->assertStatus(200);
     }
