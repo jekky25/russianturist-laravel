@@ -11,7 +11,7 @@
 <h3 class="tit_hot" style="margin-left:{{ ($boardConfig['foto_width_town'] + 10) }}px;">
 <a href="{{route('hotel_name',$item['hotels_eng_name'])}}" alt="{{$item['hotels_name']}}" title="{{$item['hotels_name']}}">{{$item['hotels_name']}} {!!$item['stars']!!}</a>
 </h3>
-<p>{!!cutText($item['hotels_description'], 300)!!}<a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}"> »»</a></p>
+<p>{!!App\Helpers\Helper::cutText($item['hotels_description'], 300)!!}<a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}"> »»</a></p>
 </div>
 	@endforeach
 @endif

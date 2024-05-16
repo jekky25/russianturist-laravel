@@ -27,8 +27,8 @@ google_ad_height = 250;
 							<a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}" class="prew">
 								<img title="{{$item['hotels_name']}}" alt="{{$item['hotels_name']}}" src="{{$item['fotoStr']}}" width="{{$boardConfig['foto_width_hotel']}}" height="{{$boardConfig['foto_height_hotel']}}">
 							</a>
-							<h3 class="tit_hot" style="margin-left:{{($boardConfig['foto_width_hotel'] + 10)}}px;"><a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}">{{cutText($item['hotels_name'],40)}} {!!$item['starsStr']!!}</a></h3>
-							<p>{{cutText($item['hotels_description'],300)}}<a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}"> »»</a></p>
+							<h3 class="tit_hot" style="margin-left:{{($boardConfig['foto_width_hotel'] + 10)}}px;"><a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}">{{App\Helpers\Helper::cutText($item['hotels_name'],40)}} {!!$item['starsStr']!!}</a></h3>
+							<p>{{App\Helpers\Helper::cutText($item['hotels_description'],300)}}<a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}"> »»</a></p>
 						</div>
   							@endforeach
 							@endif

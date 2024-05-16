@@ -11,7 +11,7 @@
 <h3 class="tit_hot" style="margin-left:{{ ($boardConfig['foto_width_item'] + 10) }}px;">
 <a href="{{route('item_id',$item['items_id'])}}" alt="{{$item['items_name']}}" title="{{$item['items_name']}}">{{$item['items_name']}}</a>
 </h3>
-<p>{!!cutText(strip_tags($item['items_description'],"<b><strong><i>"), 300)!!}<a href="{{route('item_id',$item['items_id'])}}" title="{{$item['items_name']}}"> »»</a></p>
+<p>{!!App\Helpers\Helper::cutText(strip_tags($item['items_description'],"<b><strong><i>"), 300)!!}<a href="{{route('item_id',$item['items_id'])}}" title="{{$item['items_name']}}"> »»</a></p>
 </div>
 	@endforeach
 @endif
