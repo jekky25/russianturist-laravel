@@ -20,11 +20,10 @@ class CountryController extends Controller
      * @return void
      */
 	public function __construct(
-		public CountryService $countryService,
-		public HotelService $hotelService
+		public CountryService 	$countryService,
+		public HotelService 	$hotelService
 	)
 	{
-		// $this->middleware('auth');
 		$this->boardConfig = $this->getBoardConfig();
 	}
 
