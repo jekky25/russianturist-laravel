@@ -45,13 +45,13 @@ class CountryController extends Controller
 		$arMeta = [
 			'title' => $title
 		];
-
-		$countries	= Country::getAll();
-
-		return view('countries')
-		->with(compact('boardConfig'))
-		->with(compact('arMeta'))
-		->with(compact('countries'));
+		$countries	= $this->countryService->getAll();
+		$data = [
+			'boardConfig'	=> $boardConfig,
+			'arMeta'		=> $arMeta,
+			'countries'		=> $countries,
+		];
+		return response()->view('countries', $data);
 	}
 
 	/**
