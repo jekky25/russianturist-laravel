@@ -12,32 +12,6 @@ class Town extends Model
 	use HasFactory;
 
 	/**
-     * get town by name
-     * @param  string  $name
-     * @return \Illuminate\Database\Eloquent\Collection 
-     */
-	public static function getByName($name)
-	{
-		$town = self::select('*')
-				->where('towns_eng_name', $name)
-				->first();
-
-		$town->towns_description = str_replace("\n", "\n<br />\n", $town->towns_description);
-
-		$town->country = $town->country()->first();
-
-		$foto   = $town->fotos()
-				->where('foto_type','town')
-				->orderBy('foto_position')
-				->first()
-				->toArray();
-		
-		$town->foto	= $foto;
-  
-		return $town;
-    }
-
-	/**
      * get fotos
      */
 	public function fotos()

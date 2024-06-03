@@ -25,6 +25,25 @@ class HotelService
 	}
 
 	/**
+	 * get hotel of the town
+	 * @param  int  $townId
+	 * @param  int  $offset
+	 * @param  int  $limit
+	 * @return \Illuminate\Database\Eloquent\Collection 
+	*/
+	public function getOfTown($townId, $offset, $limit)
+	{
+		$this->hotels = Hotel::select('*')
+		->where('towns_id', $townId)
+		->orderBy('hotels_time','desc')
+		->offset($offset)
+		->limit($limit)
+		->get();
+		$this->addFotos();		
+		return $this->hotels;
+	}
+
+	/**
 	 * add fotos to the object
 	 * @return void
 	*/

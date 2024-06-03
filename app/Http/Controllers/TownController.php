@@ -6,10 +6,9 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\CountryService;
+use App\Services\TownService;
+use App\Services\HotelService;
 use App\Traits\BaseConfig;
-use App\Models\Hotel;
-use App\Models\Country;
-use App\Models\Town;
 
 class TownController extends Controller
 {
@@ -21,10 +20,11 @@ class TownController extends Controller
      * @return void
      */
 	public function __construct(
-		public CountryService $countryService
+		public CountryService 	$countryService,
+		public TownService 		$townService,
+		public HotelService		$hotelService
 	)
 	{
-		// $this->middleware('auth');
 		$this->boardConfig = $this->getBoardConfig();
 	}
 
@@ -35,7 +35,9 @@ class TownController extends Controller
      */
 	public function index(Request $request)
 	{
-		$boardConfig = $this->boardConfig;
+		$boardConfig 				= $this->boardConfig;
+		$countries					= $this->countryService->getAll();
+		$towns						= $this->townService->getAll();
 		$arMeta = [];
 
 		$title 		= 'Города, русский турист, сайт про туризм и путешествия';
@@ -44,29 +46,15 @@ class TownController extends Controller
 			'title' => $title
 		];
 
-		$countries		= $this->countryService->getAll();
-		$towns		= Town::select('*')->orderBy('towns_name')->get();
-
-		foreach ($towns as &$row) 
-		{
-			$foto = $row->fotos()
-				->where('foto_type','town')
-				->orderBy('foto_position')
-				->first();
-			$row['fotos'] = $foto;
-		
-			$stars = '';
-			$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/towns/' . $row['fotos']['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
-		}
-
 		$sapeCode 	= \App\Providers\SapeServiceProvider::getSapeCode();
 
-
-		return view('towns')
-		->with(compact('boardConfig'))
-		->with(compact('arMeta'))
-		->with(compact('towns'))
-		->with(compact('countries'));
+		$data = [
+			'boardConfig'	=> $boardConfig,
+			'arMeta'		=> $arMeta,
+			'towns'			=> $towns,
+			'countries'		=> $countries,
+		];
+		return response()->view('towns', $data);
 	}
 
 	/**
@@ -78,54 +66,26 @@ class TownController extends Controller
 	public function getTown (Request $request, $name)
 	{
 		$boardConfig 				= $this->boardConfig;
-		$arMeta 					= [];
-
-		$town						= Town::getByName($name);
-		$countries					= Country::select('*')->orderBy('countries_name')->get();
-
-		$foto_out 					= !empty ($town->foto) ? asset('/fotos/towns/' . $town->foto['foto_id'] . '.jpg') : '';
-		$town->towns_img 			= !empty($foto_out) ? '<img title="' . $town->towns_name . '" alt="' . $town->towns_name . '" src="' . $foto_out . '" width="' . $boardConfig['foto_width_town_id'] . '" height="' . $boardConfig['foto_height_town_id'] . '">' : '';
+		$town						= $this->townService->getByName($name);
+		$town						= $this->townService->getPictureLink($town, $boardConfig['foto_width_town_id'], $boardConfig['foto_height_town_id']);
 		$town->towns_description 	= \App\Providers\SapeServiceProvider::replaceSapeCode($town->towns_description);
+		$countries					= $this->countryService->getAll();
+		$hotels 					= $this->hotelService->getOfTown($town->towns_id, 0, $boardConfig['limit_out_hotels']);
 
-		$hotels 			= Hotel::select('*')
-		->where('towns_id', $town->towns_id)
-		->orderBy('hotels_time','desc')
-		->offset(0)
-		->limit($boardConfig['limit_out_hotels'])
-		->get();
-
-		foreach ($hotels as &$row) 
-		{
-		
-			$foto = $row->fotos()
-				->where('foto_type','hotel')
-				->orderBy('foto_position')
-				->limit(1)
-				->get();
-			$row['fotos'] = $foto;
-		
-			$stars = '';
-			$row['stars'] = intval ($row['stars']);
-			for ($j = 0; $j < $row['stars']; $j++) {
-				$stars .= '<img alt="" src="' . asset('image/star.png') . '" />';
-			}
-			$row['starsStr'] 	= $stars;
-			$row['fotoStr'] 	= !empty ($row['fotos']) ? asset('fotos/hotels/' . $row['fotos'][0]['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
-		}
-
+		$arMeta 					= [];
 
 		$title = $town['towns_name'] . ', ' . $town->country['countries_name'] . ', информация про город, сайт про туризм и путешествия';
 		$arMeta = [
 			'title' => $title
 		];
 
-		return view('town_id')
-		->with(compact('boardConfig'))
-		->with(compact('arMeta'))
-		->with(compact('town'))
-		->with(compact('countries'))
-		->with(compact('hotels'))
-;
+		$data = [
+			'boardConfig'	=> $boardConfig,
+			'arMeta'		=> $arMeta,
+			'town'			=> $town,
+			'countries'		=> $countries,
+			'hotels'		=> $hotels,
+		];
+		return response()->view('town_id', $data);
 	}
-
 }
