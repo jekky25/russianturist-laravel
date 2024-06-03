@@ -34,29 +34,6 @@ class Country extends Model
     }
 
     /**
-     * get country by name
-     * @param  string  $name
-     * @return \Illuminate\Database\Eloquent\Collection 
-     */
-	public static function getByName($name)
-	{
-		$country = self::select('*')
-				->where('countries_eng_name', $name)
-				->first();
-
-
-		$foto   = $country->fotos()
-				->where('foto_type','country')
-				->orderBy('foto_position')
-				->first()
-				->toArray();
-		
-		$country['foto']	= $foto;
-                
-        return $country;
-    }
-
-    /**
      * get fotos
      */
     public function fotos()
