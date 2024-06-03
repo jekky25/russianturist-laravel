@@ -39,7 +39,7 @@ class HotelService
 		->offset($offset)
 		->limit($limit)
 		->get();
-		$this->addFotos();		
+		$this->getFotos();
 		return $this->hotels;
 	}
 
@@ -47,7 +47,7 @@ class HotelService
 	 * add fotos to the object
 	 * @return void
 	*/
-	public function addFotos()
+	public function getFotos()
 	{
 		foreach ($this->hotels as &$row)
 		{

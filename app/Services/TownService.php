@@ -13,7 +13,7 @@ class TownService
 	public function getAll()
 	{
 		$this->towns = Town::select('*')->orderBy('towns_name')->get();
-		$this->addFotos();
+		$this->getFotos();
 		return $this->towns;
 	}
 
@@ -21,7 +21,7 @@ class TownService
 	 * add pictures of the towns to the object
 	 * @return void
 	 */
-	public function addFotos()
+	public function getFotos()
 	{
 		foreach ($this->towns as &$row) 
 		{
