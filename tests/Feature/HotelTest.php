@@ -31,4 +31,17 @@ class HotelTest extends TestCase
         $response = $this->get($_SERVER['REQUEST_URI']);
         $response->assertStatus(200);
     }
+
+
+    
+    /**
+    * A basic feature test hotel_picture.
+    */
+    public function test_hotel_picture_page(): void
+    {
+        $_SERVER['REQUEST_URI'] = '/hotels/3s_beach_club_foto_212.html';
+        $response = $this->get($_SERVER['REQUEST_URI']);
+        $response->assertStatus(200);
+
+    }
 }
