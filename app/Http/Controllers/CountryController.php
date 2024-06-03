@@ -9,8 +9,6 @@ use App\Services\HotelService;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Traits\BaseConfig;
-use App\Models\Country;
-use App\Models\Hotel;
 
 class CountryController extends Controller
 {

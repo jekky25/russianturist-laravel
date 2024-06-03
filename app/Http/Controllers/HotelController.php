@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Services\CountryService;
 use App\Traits\BaseConfig;
 use App\Models\Hotel;
 use App\Models\Country;
@@ -19,7 +20,9 @@ class HotelController extends Controller
      *
      * @return void
      */
-	public function __construct()
+	public function __construct(
+		public CountryService $countryService
+	)
 	{
 		// $this->middleware('auth');
 		$this->boardConfig = $this->getBoardConfig();
@@ -41,7 +44,7 @@ class HotelController extends Controller
 			'title' => $title
 		];
 
-		$countries	= Country::getAll();
+		$countries		= $this->countryService->getAll();
 		$hotels		= Hotel::select('*')->orderBy('hotels_name')->get();
 
 		foreach ($hotels as &$row) 
