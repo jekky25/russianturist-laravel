@@ -9,9 +9,6 @@ use App\Services\ItemService;
 use App\Services\CountryService;
 use App\Traits\BaseConfig;
 use App\Traits\Pagination;
-use App\Models\Country;
-use App\Models\Hotel;
-use App\Models\Item;
 
 class ItemController extends Controller
 {
