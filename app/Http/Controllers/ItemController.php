@@ -72,10 +72,7 @@ class ItemController extends Controller
 		$boardConfig 	= $this->boardConfig;
 		$item			= $this->itemService->getById($id);
 		$countries		= $this->countryService->getAll();
-
-
 		$arMeta 		= [];
-		
 		
 		$title 		= $item['items_name'] . ', статья ' . $item['items_name'] . ', русский турист, сайт про туризм и путешествия';
 		$arMeta 	= [
@@ -83,7 +80,6 @@ class ItemController extends Controller
 		];
 		
 		$item['items_description'] = \App\Providers\SapeServiceProvider::replaceSapeCode($item['items_description']);
-
 		$data = [
 			'boardConfig'	=> $boardConfig,
 			'arMeta'		=> $arMeta,
