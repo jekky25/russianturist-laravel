@@ -26,6 +26,22 @@ class HotelService
 	}
 
 	/**
+     * get hotels by limit
+     * @param  int  $limit
+     * @return \Illuminate\Database\Eloquent\Collection 
+     */
+	public function getByLimit ($limit)
+	{
+		$this->hotels = Hotel::select('*')->orderBy('hotels_time','desc')->limit($limit)->get();
+		foreach ($this->hotels as &$row)
+		{
+			$this->getFotos($row);
+		}
+		unset ($row);
+		return $this->hotels;
+	}
+
+	/**
      * get hotel by name
      * @param  string  $name
      * @return \Illuminate\Database\Eloquent\Collection 

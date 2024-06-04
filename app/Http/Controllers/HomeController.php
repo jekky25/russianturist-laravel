@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Services\HotelService;
+use App\Services\CountryService;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
@@ -19,15 +21,18 @@ use App\Models\Country;
 class HomeController extends Controller
 {
 	use BaseConfig;
-	public $boardingConfig = [];
+	public $boardingConfig 	= [];
+	private $countHotels 	= 5;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-	public function __construct()
+	public function __construct(
+		public CountryService $countryService,
+		public HotelService $hotelService
+	)
 	{
-		// $this->middleware('auth');
 		$this->boardConfig = $this->getBoardConfig();
 	}
 
@@ -39,41 +44,24 @@ class HomeController extends Controller
      */
 	public function index(Request $request)
 	{
+		$hotels			= $this->hotelService->getByLimit($this->countHotels);
+		$countries		= $this->countryService->getAll();
+		
 		$arMeta = [];
 
 		$title 		= 'Страны, русский турист, сайт про туризм и путешествия';
-		$hotels 	= Hotel::select('*')->orderBy('hotels_time','desc')->limit(5)->get();
-		$countries	= Country::select('*')->orderBy('countries_name')->get();
-
-		foreach ($hotels as &$row) 
-		{
-		
-			$foto = $row->fotos()
-				->where('foto_type','hotel')
-				->orderBy('foto_position')
-				->limit(1)
-				->get();
-			$row['fotos'] = $foto;
-
-			$stars = '';
-			$row['stars'] = intval ($row['stars']);
-      		for ($j = 0; $j < $row['stars']; $j++) {
-				$stars .= '<img alt="" src="' . asset('image/star.png') . '" />';
-			}
-			$row['starsStr'] 	= $stars;
-			$row['fotoStr'] 	= !empty ($row['fotos']) ? asset('fotos/hotels/' . $row['fotos'][0]['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
-		}
-
 		$arMeta = [
 			'title' => $title
 		];
 
 		$boardConfig = $this->boardConfig;
 
-		return view('home')
-		->with(compact('arMeta'))
-		->with(compact('boardConfig'))
-		->with(compact('countries'))
-		->with(compact('hotels'));
+		$data = [
+			'boardConfig'	=> $boardConfig,
+			'arMeta'		=> $arMeta,
+			'countries'		=> $countries,
+			'hotels'		=> $hotels,
+		];
+		return response()->view('home', $data);
 	}
 }
