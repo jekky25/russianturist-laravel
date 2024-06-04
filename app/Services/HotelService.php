@@ -1,11 +1,54 @@
 <?php
 namespace App\Services;
 
+use App\Traits\Tstr;
 use App\Models\Hotel;
 
 class HotelService
 {
+	use Tstr;
 	public $hotels = [];
+	public $selectedPicture = 0;
+
+	/**
+	 * get all hotels
+	 * @return \Illuminate\Database\Eloquent\Collection 
+	*/
+	public function getAll()
+	{
+		$this->hotels = Hotel::select('*')->orderBy('hotels_name')->get();
+		foreach ($this->hotels as &$row)
+		{
+			$this->getFotos($row);
+		}
+		unset ($row);
+		return $this->hotels;
+	}
+
+	/**
+     * get hotel by name
+     * @param  string  $name
+     * @return \Illuminate\Database\Eloquent\Collection 
+     */
+	public function getByName($name)
+	{
+		$hotel = Hotel::select('*')
+			->where('hotels_eng_name', $name)
+			->first();
+		if (empty($hotel)) return;
+
+		$hotel->hotels_description 	= $this->replaceSpaces($hotel->hotels_description);
+		$hotel->town 				= $hotel->town()->first();
+
+		$this->hotels = $hotel;
+		$this->getFotos($this->hotels, 3);
+		$this->getPicturesBlockLink();
+		$this->getPictureParams();
+		$this->getSliderParams();
+
+
+		return $this->hotels;
+    }
 
 	/**
 	 * get hotel of the country
@@ -16,12 +59,19 @@ class HotelService
 	*/
 	public function getOfCountry($countryId, $offset, $limit)
 	{
-		return Hotel::select('*')
+		$this->hotels = Hotel::select('*')
 		->where('countries_id', $countryId)
 		->orderBy('hotels_time','desc')
 		->offset($offset)
 		->limit($limit)
 		->get();
+
+		foreach ($this->hotels as &$row)
+		{
+			$this->getFotos($row);
+		}
+		unset ($row);
+		return $this->hotels;
 	}
 
 	/**
@@ -39,32 +89,98 @@ class HotelService
 		->offset($offset)
 		->limit($limit)
 		->get();
-		$this->getFotos();
-		return $this->hotels;
 	}
 
 	/**
 	 * add fotos to the object
 	 * @return void
 	*/
-	public function getFotos()
+	public function getFotos(&$row, $limit = 1)
 	{
-		foreach ($this->hotels as &$row)
+		$foto = $row->fotos()
+			->where('foto_type','hotel')
+			->orderBy('foto_position')
+			->limit($limit)
+			->get();
+		if ($limit > 1)	
 		{
-			$foto = $row->fotos()
-				->where('foto_type','hotel')
-				->orderBy('foto_position')
-				->limit(1)
-				->get();
-			$row['fotos'] = $foto;
-		
-			$stars = '';
-			$row['stars'] = intval ($row['stars']);
+			$row->fotos	= $foto;
+			return;
+		}
+		$row['fotos'] = $foto;
+		$stars = '';
+		$row['stars'] = intval ($row['stars']);
 			for ($j = 0; $j < $row['stars']; $j++) {
 				$stars .= '<img alt="" src="' . asset('image/star.png') . '" />';
 			}
-			$row['starsStr'] 	= $stars;
+			$row['starsStr'] 	= $row['stars'] = $stars;
 			$row['fotoStr'] 	= !empty ($row['fotos']) ? asset('fotos/hotels/' . $row['fotos'][0]['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
+	}
+
+	/**
+	 * get a link of the pictures block
+	 * @return void
+	*/
+	private function getPicturesBlockLink()
+	{
+		$hotel = &$this->hotels;
+		$hotel->hotel_fotos_enter = !empty($hotel->fotos) ? '<a href="' . route('hotel_fotos',[$hotel->hotels_eng_name,'_foto']) . '" alt="' . $hotel->hotels_name . '" title="' . $hotel->hotels_name . '">Фотографии отеля</a>' : '';
+		unset ($hotel);
+	}
+
+	/**
+	 * get a link of the picture 
+	 * @param  int  $pictureId
+	 * @return string
+	*/
+	private function getPictureLink($pictureId)
+	{
+		return asset ('/fotos/hotels/' . $pictureId . '.jpg');
+	}
+	/**
+	 * get picture params
+	 * @return void
+	*/
+	private function getPictureParams()
+	{	
+		foreach ($this->hotels->fotos as $k => &$row)
+		{
+			$row['f_act']	 = $this->getPictureActiveClass($k);
+			$row['foto_out'] = $this->getPictureLink ($row['foto_id']);
 		}
+	}
+
+
+	/**
+	 * get slider of the pictures params
+	 * @return void
+	*/
+	private function getSliderParams()
+	{
+		$id = $this->selectedPicture;
+		foreach ($this->hotels->fotos as $k => &$row)
+		{
+			$row['f_act'] = '';
+			if ( ($id == 0 && $k == 0) || $id > 0 && $id == $row['foto_id'])
+			{
+				$row['f_act']	 		= 'class="f_act"';
+				$this->hotels->selFoto 		= $row;
+				$this->hotels->prevFoto		= $k > 0 ? $this->hotels->fotos[($k-1)] : [];
+				$this->hotels->nextFoto		= ($k + 1) < count (($this->hotels->fotos) ) ? $this->hotels->fotos[($k+1)] : [];
+				$this->hotels->positionFoto	= ($k + 1);
+			}
+			$row['foto_out'] = asset ('/fotos/hotels/' . $row['foto_id'] . '.jpg');
+		}
+		$this->hotels->countFoto	= count ($this->hotels->fotos);
+	}
+
+	/**
+	 * get a class of the active picture
+	 * @param  int  $iteration
+	 * @return string
+	*/
+	private function getPictureActiveClass($iteration)
+	{
+		return ($iteration == 0) ? 'class="f_act"' : '';
 	}
 }

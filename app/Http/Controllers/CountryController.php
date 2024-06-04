@@ -66,7 +66,6 @@ class CountryController extends Controller
 		$orderBy					= 'countries_name';
 		$countries					= $this->countryService->getAll($orderBy);
 		$this->hotelService->hotels	= $this->hotelService->getOfCountry($country['countries_id'], 0, $boardConfig['limit_out_hotels']);
-		$this->hotelService->getFotos();
 		
 		$title		= $country['countries_name'] . ', страна ' . $country['countries_name'] . ', русский турист, сайт про туризм и путешествия';
 		$arMeta = [

@@ -6,14 +6,13 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\CountryService;
+use App\Services\HotelService;
 use App\Traits\BaseConfig;
-use App\Models\Hotel;
-use App\Models\Country;
-use App\Models\Town;
+use App\Traits\Picture;
 
 class HotelController extends Controller
 {
-	use BaseConfig;
+	use BaseConfig, Picture;
 	public $boardingConfig = [];
     /**
      * Create a new controller instance.
@@ -21,10 +20,10 @@ class HotelController extends Controller
      * @return void
      */
 	public function __construct(
-		public CountryService $countryService
+		public CountryService $countryService,
+		public HotelService $hotelService,
 	)
 	{
-		// $this->middleware('auth');
 		$this->boardConfig = $this->getBoardConfig();
 	}
 
@@ -35,7 +34,10 @@ class HotelController extends Controller
      */
 	public function index(Request $request)
 	{
-		$boardConfig = $this->boardConfig;
+		$boardConfig 	= $this->boardConfig;
+		$countries		= $this->countryService->getAll();
+		$hotels			= $this->hotelService->getAll();
+
 		$arMeta = [];
 
 		$title 		= 'Отели, русский турист, сайт про туризм и путешествия';
@@ -44,32 +46,13 @@ class HotelController extends Controller
 			'title' => $title
 		];
 
-		$countries		= $this->countryService->getAll();
-		$hotels		= Hotel::select('*')->orderBy('hotels_name')->get();
-
-		foreach ($hotels as &$row) 
-		{
-			$foto = $row->fotos()
-				->where('foto_type','hotel')
-				->orderBy('foto_position')
-				->first();
-			$row['fotos'] = $foto;
-
-			$stars = '';
-			$row['stars'] = intval ($row['stars']);
-			for ($j = 0; $j < $row['stars']; $j++) {
-				$stars .= '<img alt="" src="' . asset('image/star.png') . '" />';
-			}
-			$row['stars'] = $stars;
-
-			$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/hotels/' . $row['fotos']['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
-		}
-
-		return view('hotels')
-		->with(compact('boardConfig'))
-		->with(compact('arMeta'))
-		->with(compact('hotels'))
-		->with(compact('countries'));
+		$data = [
+			'boardConfig'	=> $boardConfig,
+			'arMeta'		=> $arMeta,
+			'hotels'		=> $hotels,
+			'countries'		=> $countries,
+		];
+		return response()->view('hotels', $data);
 	}
 
 	/**
@@ -81,41 +64,27 @@ class HotelController extends Controller
 	public function getHotel (Request $request, $name)
 	{
 		$boardConfig 				= $this->boardConfig;
-		$arMeta 					= [];
-
-		$hotel						= Hotel::getByName($name);
-
+		$hotel						= $this->hotelService->getByName($name);
+		$countries					= $this->countryService->getAll();
 		if (empty ($hotel)) abort(404);
-
-		$countries					= Country::select('*')->orderBy('countries_name')->get();
-		$town						= Town::select('*')->where('towns_id', $hotel['towns_id'])->first();
 		
-		$hotel->town				= $town;
-
-		$hotel->hotel_fotos_enter 	= !empty($hotel->fotos) ? '<a href="' . route('hotel_fotos',[$hotel['hotels_eng_name'],'_foto']) . '" alt="' . $hotel['hotels_name'] . '" title="' . $hotel['hotels_name'] . '">Фотографии отеля</a>' : '';
 		$hotel->hotels_description 	= \App\Providers\SapeServiceProvider::replaceSapeCode($hotel->hotels_description);
-			
-		foreach ($hotel->fotos as $k => &$row)
-		{
-			$row['f_act']	 = ($k == 0) ? 'class="f_act"' : '';
-			$row['foto_out'] = asset ('/fotos/hotels/' . $row['foto_id'] . '.jpg');
-		}
-		
 
-
-		$title = $hotel['hotels_name'] . ', отель ' . $hotel['hotels_name'] . ', русский турист, сайт про туризм и путешествия';
+		$arMeta 					= [];
+		$title 						= $hotel['hotels_name'] . ', отель ' . $hotel['hotels_name'] . ', русский турист, сайт про туризм и путешествия';
 		$arMeta = [
 			'title' => $title
 		];
 
 		\App\Providers\SapeServiceProvider::getSapeCode();
 		
-		return view('hotel_id')
-		->with(compact('boardConfig'))
-		->with(compact('arMeta'))
-		->with(compact('hotel'))
-		->with(compact('countries'))
-;
+		$data = [
+			'boardConfig'	=> $boardConfig,
+			'arMeta'		=> $arMeta,
+			'hotel'			=> $hotel,
+			'countries'		=> $countries,
+		];
+		return response()->view('hotel_id', $data);
 	}
 
 	/**
@@ -128,83 +97,29 @@ class HotelController extends Controller
      */
 	public function getHotelFotos (Request $request, $name, $foto, $id=0)
 	{
-		$boardConfig 				= $this->boardConfig;
-		$arMeta 					= [];
+		$boardConfig 							= $this->boardConfig;
+		$this->hotelService->selectedPicture	= $id;
+		$hotel									= $this->hotelService->getByName($name);
+		$countries								= $this->countryService->getAll();
 
-		$hotel						= Hotel::getByName($name);
-		$countries					= Country::select('*')->orderBy('countries_name')->get();
-		$town						= Town::select('*')->where('towns_id', $hotel['towns_id'])->first();
-		
-		$hotel->town				= $town;
-
-		$hotel->hotel_fotos_enter 	= !empty($hotel->fotos) ? '<a href="' . route('hotel_fotos',[$hotel['hotels_eng_name'],'_foto']) . '" alt="' . $hotel['hotels_name'] . '" title="' . $hotel['hotels_name'] . '">Фотографии отеля</a>' : '';
-
-	
-		foreach ($hotel->fotos as $k => &$row)
-		{
-			$row['f_act'] = '';
-			if ( ($id == 0 && $k == 0) || $id > 0 && $id == $row['foto_id'])
-			{
-				$row['f_act']	 		= 'class="f_act"';
-				$hotel->selFoto 		= $row;
-				$hotel->prevFoto		= $k > 0 ? $hotel->fotos[($k-1)] : [];
-				$hotel->nextFoto		= ($k + 1) < count (($hotel->fotos) ) ? $hotel->fotos[($k+1)] : [];
-				$hotel->positionFoto	= ($k + 1);
-			}
-			$row['foto_out'] = asset ('/fotos/hotels/' . $row['foto_id'] . '.jpg');
-		}
-		$hotel->countFoto	= count ($hotel->fotos);
-		
-		
 		//draw width and height of the picture
+		$resultIm								= $this->getSizeParams($hotel->selFoto['foto_id'], $boardConfig['max_foto_width_big']);
 
-		$img = asset ('/fotos/hotels/' . $hotel->selFoto['foto_id'] . '.jpg');
-
-		$im = imagecreatefromjpeg( $img );
-
-		$resultX_im =imageSX($im);
-		$resultY_im =imageSY($im);
-		$img_koefficient = $resultX_im / $resultY_im;
-
-		$img_width = $boardConfig['max_foto_width_big'];
-
-		if ($resultX_im > $img_width)
-		{
-			$resultX_im = $img_width;
-  			$resultY_im = $resultX_im / $img_koefficient;
-		}
-
-		imageDestroy($im);
-
-		$resultX_im_l = $resultX_im - 3;
-		if ($resultX_im_l < 0)
-			$resultX_im_l = 0;
-
-		$resultY_im_l = $resultY_im - 3;
-		if ($resultY_im_l < 0)
-  			$resultY_im_l = 0;
-
-
-
+		$arMeta 					= [];
 		$title = $hotel['hotels_name'] . ', отель ' . $hotel['hotels_name'] . ', русский турист, сайт про туризм и путешествия';
 		$arMeta = [
 			'title' => $title
 		];
 		
-
-		$prev 	= 	!empty ($prev) 		?		$prev 	:	'';
-		$next 	= 	!empty ($next) 		?		$next 	:	'';
-
-
-
-		return view('hotel_foto')
-		->with(compact('boardConfig'))
-		->with(compact('hotel'))
-		->with(compact('resultX_im'))
-		->with(compact('resultY_im'))
-		->with(compact('arMeta'))
-		->with(compact('countries'))
-		;
+		$data = [
+			'boardConfig'	=> $boardConfig,
+			'arMeta'		=> $arMeta,
+			'hotel'			=> $hotel,
+			'countries'		=> $countries,
+			'resultX_im'	=> $resultIm['resultX_im_l'],
+			'resultY_im'	=> $resultIm['resultY_im_l']
+		];
+		return response()->view('hotel_foto', $data);
 	}
 
 }
