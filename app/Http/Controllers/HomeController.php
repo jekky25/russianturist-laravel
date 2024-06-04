@@ -54,10 +54,8 @@ class HomeController extends Controller
 			'title' => $title
 		];
 
-		$boardConfig = $this->boardConfig;
-
 		$data = [
-			'boardConfig'	=> $boardConfig,
+			'boardConfig'	=> $this->boardConfig,
 			'arMeta'		=> $arMeta,
 			'countries'		=> $countries,
 			'hotels'		=> $hotels,

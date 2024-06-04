@@ -34,12 +34,9 @@ class HotelController extends Controller
      */
 	public function index(Request $request)
 	{
-		$boardConfig 	= $this->boardConfig;
 		$countries		= $this->countryService->getAll();
 		$hotels			= $this->hotelService->getAll();
-
 		$arMeta = [];
-
 		$title 		= 'Отели, русский турист, сайт про туризм и путешествия';
 
 		$arMeta = [
@@ -47,7 +44,7 @@ class HotelController extends Controller
 		];
 
 		$data = [
-			'boardConfig'	=> $boardConfig,
+			'boardConfig'	=> $this->boardConfig,
 			'arMeta'		=> $arMeta,
 			'hotels'		=> $hotels,
 			'countries'		=> $countries,
@@ -63,7 +60,6 @@ class HotelController extends Controller
      */
 	public function getHotel (Request $request, $name)
 	{
-		$boardConfig 				= $this->boardConfig;
 		$hotel						= $this->hotelService->getByName($name);
 		$countries					= $this->countryService->getAll();
 		if (empty ($hotel)) abort(404);
@@ -79,7 +75,7 @@ class HotelController extends Controller
 		\App\Providers\SapeServiceProvider::getSapeCode();
 		
 		$data = [
-			'boardConfig'	=> $boardConfig,
+			'boardConfig'	=> $this->boardConfig,
 			'arMeta'		=> $arMeta,
 			'hotel'			=> $hotel,
 			'countries'		=> $countries,
@@ -97,13 +93,12 @@ class HotelController extends Controller
      */
 	public function getHotelFotos (Request $request, $name, $foto, $id=0)
 	{
-		$boardConfig 							= $this->boardConfig;
 		$this->hotelService->selectedPicture	= $id;
 		$hotel									= $this->hotelService->getByName($name);
 		$countries								= $this->countryService->getAll();
 
 		//draw width and height of the picture
-		$resultIm								= $this->getSizeParams($hotel->selFoto['foto_id'], $boardConfig['max_foto_width_big']);
+		$resultIm								= $this->getSizeParams($hotel->selFoto['foto_id'], $this->boardConfig['max_foto_width_big']);
 
 		$arMeta 					= [];
 		$title = $hotel['hotels_name'] . ', отель ' . $hotel['hotels_name'] . ', русский турист, сайт про туризм и путешествия';
@@ -112,7 +107,7 @@ class HotelController extends Controller
 		];
 		
 		$data = [
-			'boardConfig'	=> $boardConfig,
+			'boardConfig'	=> $this->boardConfig,
 			'arMeta'		=> $arMeta,
 			'hotel'			=> $hotel,
 			'countries'		=> $countries,
@@ -121,5 +116,4 @@ class HotelController extends Controller
 		];
 		return response()->view('hotel_foto', $data);
 	}
-
 }

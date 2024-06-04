@@ -35,13 +35,11 @@ class TownController extends Controller
      */
 	public function index(Request $request)
 	{
-		$boardConfig 				= $this->boardConfig;
 		$countries					= $this->countryService->getAll();
 		$towns						= $this->townService->getAll();
 		$arMeta = [];
 
 		$title 		= 'Города, русский турист, сайт про туризм и путешествия';
-
 		$arMeta = [
 			'title' => $title
 		];
@@ -49,7 +47,7 @@ class TownController extends Controller
 		$sapeCode 	= \App\Providers\SapeServiceProvider::getSapeCode();
 
 		$data = [
-			'boardConfig'	=> $boardConfig,
+			'boardConfig'	=> $this->boardConfig,
 			'arMeta'		=> $arMeta,
 			'towns'			=> $towns,
 			'countries'		=> $countries,
@@ -65,12 +63,11 @@ class TownController extends Controller
      */
 	public function getTown (Request $request, $name)
 	{
-		$boardConfig 				= $this->boardConfig;
 		$town						= $this->townService->getByName($name);
-		$town						= $this->townService->getPictureLink($town, $boardConfig['foto_width_town_id'], $boardConfig['foto_height_town_id']);
+		$town						= $this->townService->getPictureLink($town, $this->boardConfig['foto_width_town_id'], $this->boardConfig['foto_height_town_id']);
 		$town->towns_description 	= \App\Providers\SapeServiceProvider::replaceSapeCode($town->towns_description);
 		$countries					= $this->countryService->getAll();
-		$hotels 					= $this->hotelService->getOfTown($town->towns_id, 0, $boardConfig['limit_out_hotels']);
+		$hotels 					= $this->hotelService->getOfTown($town->towns_id, 0, $this->boardConfig['limit_out_hotels']);
 
 		$arMeta 					= [];
 
@@ -80,7 +77,7 @@ class TownController extends Controller
 		];
 
 		$data = [
-			'boardConfig'	=> $boardConfig,
+			'boardConfig'	=> $this->boardConfig,
 			'arMeta'		=> $arMeta,
 			'town'			=> $town,
 			'countries'		=> $countries,

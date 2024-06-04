@@ -34,9 +34,7 @@ class CountryController extends Controller
      */
 	public function index(Request $request)
 	{
-		$boardConfig = $this->boardConfig;
 		$arMeta = [];
-
 		$title 		= 'Страны, русский турист, сайт про туризм и путешествия';
 
 		$arMeta = [
@@ -44,7 +42,7 @@ class CountryController extends Controller
 		];
 		$countries	= $this->countryService->getAll();
 		$data = [
-			'boardConfig'	=> $boardConfig,
+			'boardConfig'	=> $this->boardConfig,
 			'arMeta'		=> $arMeta,
 			'countries'		=> $countries,
 		];
@@ -59,13 +57,12 @@ class CountryController extends Controller
      */
 	public function getCountry (Request $request, $name)
 	{
-		$boardConfig = $this->boardConfig;
 		$arMeta = [];
 
 		$country					= $this->countryService->getByName($name);
 		$orderBy					= 'countries_name';
 		$countries					= $this->countryService->getAll($orderBy);
-		$this->hotelService->hotels	= $this->hotelService->getOfCountry($country['countries_id'], 0, $boardConfig['limit_out_hotels']);
+		$this->hotelService->hotels	= $this->hotelService->getOfCountry($country['countries_id'], 0, $this->boardConfig['limit_out_hotels']);
 		
 		$title		= $country['countries_name'] . ', страна ' . $country['countries_name'] . ', русский турист, сайт про туризм и путешествия';
 		$arMeta = [
@@ -74,11 +71,11 @@ class CountryController extends Controller
 		
 		$foto_out = asset('fotos/countries/'. $country['foto']['foto_id'] . '.jpg');
 
-		$country['countries_img'] = !empty($foto_out) ? '<img title="' . $country['countries_name'] . '" alt="' . $country['countries_name'] . '" src="' . $foto_out . '" width="' . $boardConfig['foto_width_country_id'] . '" height="' . $boardConfig['foto_height_country_id'] . '">' : '';
+		$country['countries_img'] = !empty($foto_out) ? '<img title="' . $country['countries_name'] . '" alt="' . $country['countries_name'] . '" src="' . $foto_out . '" width="' . $this->boardConfig['foto_width_country_id'] . '" height="' . $this->boardConfig['foto_height_country_id'] . '">' : '';
 		$country['countries_description'] = str_replace("\n", "\n<br />\n", $country['countries_description']);
 
 		$data = [
-			'boardConfig'	=> $boardConfig,
+			'boardConfig'	=> $this->boardConfig,
 			'arMeta'		=> $arMeta,
 			'country'		=> $country,
 			'countries'		=> $countries,

@@ -69,7 +69,6 @@ class ItemController extends Controller
 	{
 		global $code_sape, $sape, $sape_context;
 
-		$boardConfig 	= $this->boardConfig;
 		$item			= $this->itemService->getById($id);
 		$countries		= $this->countryService->getAll();
 		$arMeta 		= [];
@@ -81,7 +80,7 @@ class ItemController extends Controller
 		
 		$item['items_description'] = \App\Providers\SapeServiceProvider::replaceSapeCode($item['items_description']);
 		$data = [
-			'boardConfig'	=> $boardConfig,
+			'boardConfig'	=> $this->boardConfig,
 			'arMeta'		=> $arMeta,
 			'countries'		=> $countries,
 			'item'			=> $item
