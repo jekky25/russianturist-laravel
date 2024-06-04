@@ -12,29 +12,6 @@ class Item extends Model
     use HasFactory;
 
     /**
-     * get article by id
-     * @param  integer  $id
-     * @return \Illuminate\Database\Eloquent\Collection 
-     */
-    public static function getById($id)
-    {
-      $item = self::select('*')
-          ->where('items_id', $id)
-          ->first();
-  
-  
-      $foto   = $item->fotos()
-          ->where('foto_type','item')
-          ->orderBy('foto_position')
-          ->first()
-          ->toArray();
-      
-      $item['foto']	= $foto;
-                  
-          return $item;
-      }
-
-    /**
      * get fotos
      */
     public function fotos()
