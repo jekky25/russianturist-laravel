@@ -22,14 +22,14 @@ class DontEndSlash
 		//do it for phpUnit tests
 		$requesUri = $request->getRequestUri();
 		$requesUri = $requesUri != $_SERVER['REQUEST_URI'] && !empty($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : $requesUri;
+		$trailingSlash 	= (Str::contains($requesUri, ['#', '.html', '/?']) ? '' : '/');
 
 		//check url for the presence of a trailing slash
-		if (!preg_match('/.+\/$/', $requesUri))
+		if (!empty($trailingSlash) && !preg_match('/.+\/$/', $requesUri))
 		{
-		$base_url = Config::get('app.url');
-		return Redirect::to($base_url.$request->getRequestUri().'/');
+			$base_url = Config::get('app.url');
+			return Redirect::to($base_url.$request->getRequestUri().$trailingSlash);
 		}
 		return $next($request);
 	}
 }
-

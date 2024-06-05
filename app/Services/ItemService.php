@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Traits\BaseConfig;
 use App\Traits\Tstr;
 use App\Models\Item;
+use App\Services\LengthPager;
 
 class ItemService
 {
@@ -24,6 +25,7 @@ class ItemService
 	public function getAllByPaginate($count)
 	{
 		$items = Item::select('*')->orderBy('items_time')->paginate($count);
+		$items = LengthPager::makeLengthAware($items, $items->total(), $count);
 		foreach ($items as &$row) 
 		{
 			$this->getFotos($row);
