@@ -32,6 +32,12 @@ class DontEndSlash
 		return $next($request);
 	}
 
+	/**
+	* get uri by request
+	*
+	* @param  \Illuminate\Http\Request  $request
+	* @return string
+	*/
 	public function getUri($request)
 	{
 		$uri = $request->getRequestUri();
