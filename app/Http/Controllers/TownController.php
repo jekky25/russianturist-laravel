@@ -13,40 +13,33 @@ class TownController extends Controller
 	use BaseConfig;
 	public $boardingConfig = [];
 	/**
-    * Create a new controller instance.
-     *
-     * @return void
-     */
+	* Create a new controller instance.
+	*
+	* @return void
+	*/
 	public function __construct(
-		public CountryService 	$countryService,
-		public TownService 		$townService,
+		public CountryService	$countryService,
+		public TownService		$townService,
 		public HotelService		$hotelService
 	)
 	{
 		$this->boardConfig = $this->getBoardConfig();
 	}
 
-    /**
-     * Show the application dashboard.
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-	public function index(Request $request)
+	/**
+	* Show the application dashboard.
+	* @return \Illuminate\Http\Response
+	*/
+	public function index()
 	{
 		$countries					= $this->countryService->getAll();
 		$towns						= $this->townService->getAll();
-		$arMeta = [];
-
-		$title 		= 'Города, русский турист, сайт про туризм и путешествия';
-		$arMeta = [
-			'title' => $title
-		];
-
-		$sapeCode 	= \App\Providers\SapeServiceProvider::getSapeCode();
+		$title						= 'Города, русский турист, сайт про туризм и путешествия';
+		\App\Providers\SapeServiceProvider::getSapeCode();
 
 		$data = [
 			'boardConfig'	=> $this->boardConfig,
-			'arMeta'		=> $arMeta,
+			'arMeta'		=> ['title'	=>	$title],
 			'towns'			=> $towns,
 			'countries'		=> $countries,
 		];
@@ -54,29 +47,20 @@ class TownController extends Controller
 	}
 
 	/**
-     * Show a town page
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  string  $name
-     * @return \Illuminate\Http\Response
-     */
-	public function getTown (Request $request, $name)
+	* Show a town page
+	* @param  string  $name
+	* @return \Illuminate\Http\Response
+	*/
+	public function getTown ($name)
 	{
-		$town						= $this->townService->getByName($name);
-		$town						= $this->townService->getPictureLink($town, $this->boardConfig['foto_width_town_id'], $this->boardConfig['foto_height_town_id']);
-		$town->towns_description 	= \App\Providers\SapeServiceProvider::replaceSapeCode($town->towns_description);
-		$countries					= $this->countryService->getAll();
-		$hotels 					= $this->hotelService->getOfTown($town->towns_id, 0, $this->boardConfig['limit_out_hotels']);
-
-		$arMeta 					= [];
-
-		$title = $town['towns_name'] . ', ' . $town->country['countries_name'] . ', информация про город, сайт про туризм и путешествия';
-		$arMeta = [
-			'title' => $title
-		];
-
+		$town						=	$this->townService->getByName($name);
+		$town						=	$this->townService->getPictureLink($town, $this->boardConfig['foto_width_town_id'], $this->boardConfig['foto_height_town_id']);
+		$countries					=	$this->countryService->getAll();
+		$hotels						=	$this->hotelService->getOfTown($town->towns_id, 0, $this->boardConfig['limit_out_hotels']);
+		$title						=	$town['towns_name'] . ', ' . $town->country['countries_name'] . ', информация про город, сайт про туризм и путешествия';
 		$data = [
 			'boardConfig'	=> $this->boardConfig,
-			'arMeta'		=> $arMeta,
+			'arMeta'		=> ['title'	=>	$title],
 			'town'			=> $town,
 			'countries'		=> $countries,
 			'hotels'		=> $hotels,
