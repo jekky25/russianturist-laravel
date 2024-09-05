@@ -1,24 +1,20 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
 use App\Services\CountryService;
 use App\Services\HotelService;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Traits\BaseConfig;
 
 class CountryController extends Controller
 {
 	use BaseConfig;
-	public $boardingConfig = [];
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+	public $boardConfig = [];
+	/**
+	* Create a new controller instance.
+	*
+	* @return void
+	*/
 	public function __construct(
 		public CountryService 	$countryService,
 		public HotelService 	$hotelService
@@ -27,12 +23,11 @@ class CountryController extends Controller
 		$this->boardConfig = $this->getBoardConfig();
 	}
 
-    /**
-     * Show the application dashboard.
-	 * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-	public function index(Request $request)
+	/**
+	* Show the application dashboard.
+	* @return \Illuminate\Http\Response
+	*/
+	public function index()
 	{
 		$arMeta = [];
 		$title 		= 'Страны, русский турист, сайт про туризм и путешествия';
@@ -50,15 +45,13 @@ class CountryController extends Controller
 	}
 
 	/**
-     * Show a country page
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  string  $name
-     * @return \Illuminate\Http\Response
-     */
-	public function getCountry (Request $request, $name)
+	* Show a country page
+	* @param  string  $name
+	* @return \Illuminate\Http\Response
+	*/
+	public function getCountry ($name)
 	{
 		$arMeta = [];
-
 		$country					= $this->countryService->getByName($name);
 		$orderBy					= 'countries_name';
 		$countries					= $this->countryService->getAll($orderBy);
@@ -68,11 +61,6 @@ class CountryController extends Controller
 		$arMeta = [
 			'title' => $title
 		];
-		
-		$foto_out = asset('fotos/countries/'. $country['foto']['foto_id'] . '.jpg');
-
-		$country['countries_img'] = !empty($foto_out) ? '<img title="' . $country['countries_name'] . '" alt="' . $country['countries_name'] . '" src="' . $foto_out . '" width="' . $this->boardConfig['foto_width_country_id'] . '" height="' . $this->boardConfig['foto_height_country_id'] . '">' : '';
-		$country['countries_description'] = str_replace("\n", "\n<br />\n", $country['countries_description']);
 
 		$data = [
 			'boardConfig'	=> $this->boardConfig,
