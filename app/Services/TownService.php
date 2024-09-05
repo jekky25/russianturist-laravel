@@ -7,9 +7,9 @@ class TownService
 {
 	private $towns;
 	/**
-	 * get all towns
-	 * @return \Illuminate\Database\Eloquent\Collection 
-	 */
+	* get all towns
+	* @return \Illuminate\Database\Eloquent\Collection 
+	*/
 	public function getAll()
 	{
 		$this->towns = Town::select('*')->orderBy('towns_name')->get();
@@ -18,9 +18,9 @@ class TownService
 	}
 
 	/**
-	 * add pictures of the towns to the object
-	 * @return void
-	 */
+	* add pictures of the towns to the object
+	* @return void
+	*/
 	public function getFotos()
 	{
 		foreach ($this->towns as &$row) 
@@ -31,16 +31,15 @@ class TownService
 				->first();
 			$row['fotos'] = $foto;
 		
-			$stars = '';
 			$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/towns/' . $row['fotos']['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
-        }
+		}
 	}
 
 	/**
-     * get town by name
-     * @param  string  $name
-     * @return \Illuminate\Database\Eloquent\Collection 
-     */
+	* get town by name
+	* @param  string  $name
+	* @return \Illuminate\Database\Eloquent\Collection 
+	*/
 	public function getByName($name)
 	{
 		$town = Town::select('*')
@@ -58,13 +57,19 @@ class TownService
 		
 		$town->foto	= $foto;
 		return $town;
-    }
+	}
 
-
+	/**
+	* get a picture link
+	* @param  \Illuminate\Database\Eloquent\Collection $town
+	* @param  int $width
+	* @param  int $height
+	* @return \Illuminate\Database\Eloquent\Collection 
+	*/
 	public function getPictureLink($town, $width, $height)
 	{
 		$foto_out 					= !empty ($town->foto) ? asset('/fotos/towns/' . $town->foto['foto_id'] . '.jpg') : '';
 		$town->towns_img 			= !empty($foto_out) ? '<img title="' . $town->towns_name . '" alt="' . $town->towns_name . '" src="' . $foto_out . '" width="' . $width . '" height="' . $height . '">' : '';
-		return ($town);
+		return $town;
 	}
 }

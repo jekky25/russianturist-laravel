@@ -7,7 +7,7 @@ use App\Models\Hotel;
 class HotelService
 {
 	use Tstr;
-	public $hotels = [];
+	public $hotels;
 	public $selectedPicture = 0;
 
 	/**
@@ -26,10 +26,10 @@ class HotelService
 	}
 
 	/**
-     * get hotels by limit
-     * @param  int  $limit
-     * @return \Illuminate\Database\Eloquent\Collection 
-     */
+	* get hotels by limit
+	* @param  int  $limit
+	* @return \Illuminate\Database\Eloquent\Collection 
+	*/
 	public function getByLimit ($limit)
 	{
 		$this->hotels = Hotel::select('*')->orderBy('hotels_time','desc')->limit($limit)->get();
@@ -42,10 +42,10 @@ class HotelService
 	}
 
 	/**
-     * get hotel by name
-     * @param  string  $name
-     * @return \Illuminate\Database\Eloquent\Collection 
-     */
+	* get hotel by name
+	* @param  string  $name
+	* @return \Illuminate\Database\Eloquent\Collection 
+	*/
 	public function getByName($name)
 	{
 		$hotel = Hotel::select('*')
@@ -53,8 +53,8 @@ class HotelService
 			->first();
 		if (empty($hotel)) return;
 
-		$hotel->hotels_description 	= $this->replaceSpaces($hotel->hotels_description);
-		$hotel->town 				= $hotel->town()->first();
+		$hotel->hotels_description	= $this->replaceSpaces($hotel->hotels_description);
+		$hotel->town				= $hotel->town()->first();
 
 		$this->hotels = $hotel;
 		$this->getFotos($this->hotels, 3);
@@ -64,14 +64,14 @@ class HotelService
 
 
 		return $this->hotels;
-    }
+	}
 
 	/**
-	 * get hotel of the country
-	 * @param  int  $countryId
-	 * @param  int  $offset
-	 * @param  int  $limit
-	 * @return \Illuminate\Database\Eloquent\Collection 
+	* get hotel of the country
+	* @param  int  $countryId
+	* @param  int  $offset
+	* @param  int  $limit
+	* @return \Illuminate\Database\Eloquent\Collection 
 	*/
 	public function getOfCountry($countryId, $offset, $limit)
 	{
@@ -91,11 +91,11 @@ class HotelService
 	}
 
 	/**
-	 * get hotel of the town
-	 * @param  int  $townId
-	 * @param  int  $offset
-	 * @param  int  $limit
-	 * @return \Illuminate\Database\Eloquent\Collection 
+	* get hotel of the town
+	* @param  int  $townId
+	* @param  int  $offset
+	* @param  int  $limit
+	* @return \Illuminate\Database\Eloquent\Collection 
 	*/
 	public function getOfTown($townId, $offset, $limit)
 	{
@@ -105,11 +105,17 @@ class HotelService
 		->offset($offset)
 		->limit($limit)
 		->get();
+		foreach ($this->hotels as &$row)
+		{
+			$this->getFotos($row);
+		}
+		unset ($row);
+		return $this->hotels;
 	}
 
 	/**
-	 * add fotos to the object
-	 * @return void
+	* add fotos to the object
+	* @return void
 	*/
 	public function getFotos(&$row, $limit = 1)
 	{
@@ -129,13 +135,13 @@ class HotelService
 			for ($j = 0; $j < $row['stars']; $j++) {
 				$stars .= '<img alt="" src="' . asset('image/star.png') . '" />';
 			}
-			$row['starsStr'] 	= $row['stars'] = $stars;
-			$row['fotoStr'] 	= !empty ($row['fotos']) ? asset('fotos/hotels/' . $row['fotos'][0]['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
+			$row['starsStr']	= $row['stars'] = $stars;
+			$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/hotels/' . $row['fotos'][0]['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
 	}
 
 	/**
-	 * get a link of the pictures block
-	 * @return void
+	* get a link of the pictures block
+	* @return void
 	*/
 	private function getPicturesBlockLink()
 	{
@@ -145,31 +151,31 @@ class HotelService
 	}
 
 	/**
-	 * get a link of the picture 
-	 * @param  int  $pictureId
-	 * @return string
+	* get a link of the picture 
+	* @param  int  $pictureId
+	* @return string
 	*/
 	private function getPictureLink($pictureId)
 	{
 		return asset ('/fotos/hotels/' . $pictureId . '.jpg');
 	}
 	/**
-	 * get picture params
-	 * @return void
+	* get picture params
+	* @return void
 	*/
 	private function getPictureParams()
-	{	
+	{
 		foreach ($this->hotels->fotos as $k => &$row)
 		{
-			$row['f_act']	 = $this->getPictureActiveClass($k);
-			$row['foto_out'] = $this->getPictureLink ($row['foto_id']);
+			$row['f_act']		= $this->getPictureActiveClass($k);
+			$row['foto_out']	= $this->getPictureLink ($row['foto_id']);
 		}
 	}
 
 
 	/**
-	 * get slider of the pictures params
-	 * @return void
+	* get slider of the pictures params
+	* @return void
 	*/
 	private function getSliderParams()
 	{
@@ -191,9 +197,9 @@ class HotelService
 	}
 
 	/**
-	 * get a class of the active picture
-	 * @param  int  $iteration
-	 * @return string
+	* get a class of the active picture
+	* @param  int  $iteration
+	* @return string
 	*/
 	private function getPictureActiveClass($iteration)
 	{
