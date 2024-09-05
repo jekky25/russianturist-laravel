@@ -2,8 +2,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\ItemService;
 use App\Services\CountryService;
@@ -15,11 +13,11 @@ class ItemController extends Controller
 	use BaseConfig, Pagination;
 	public $boardingConfig 	= [];
 	public $countPerPage 	= 30;
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+	/**
+	* Create a new controller instance.
+	*
+	* @return void
+	*/
 	public function __construct(
 		public ItemService 		$itemService,
 		public CountryService 	$countryService
@@ -28,29 +26,21 @@ class ItemController extends Controller
 		$this->boardConfig = $this->getBoardConfig();
 	}
 
-    /**
-     * Show the application dashboard.
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-	public function index(Request $request)
+	/**
+	* Show the application dashboard.
+	* @param  \Illuminate\Http\Request  $request
+	* @return \Illuminate\Http\Response
+	*/
+	public function index()
 	{
-		$boardConfig 	= $this->boardConfig;
+		$boardConfig	= $this->boardConfig;
 		$items			= $this->itemService->getAllByPaginate($this->countPerPage);
 		$pagination		= $this->getPaginationLinks ($items);
 		$countries		= $this->countryService->getAll();
-
-		$arMeta = [];
-
 		$title 		= 'Статьи, русский турист, сайт про туризм и путешествия';
-
-		$arMeta = [
-			'title' => $title
-		];
-
 		$data = [
 			'boardConfig'	=> $boardConfig,
-			'arMeta'		=> $arMeta,
+			'arMeta'		=> ['title' => $title],
 			'countries'		=> $countries,
 			'items'			=> $items,
 			'pagination'	=> $pagination,
@@ -60,28 +50,18 @@ class ItemController extends Controller
 	}
 
 	/**
-     * Show an item page
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  int     $id
-     * @return \Illuminate\Http\Response
-     */
-	public function getItem (Request $request, $id)
+	* Show an item page
+	* @param  int     $id
+	* @return \Illuminate\Http\Response
+	*/
+	public function getItem ($id)
 	{
-		global $code_sape, $sape, $sape_context;
-
 		$item			= $this->itemService->getById($id);
 		$countries		= $this->countryService->getAll();
-		$arMeta 		= [];
-		
-		$title 		= $item['items_name'] . ', статья ' . $item['items_name'] . ', русский турист, сайт про туризм и путешествия';
-		$arMeta 	= [
-			'title' => $title
-		];
-		
-		$item['items_description'] = \App\Providers\SapeServiceProvider::replaceSapeCode($item['items_description']);
+		$title			= $item['items_name'] . ', статья ' . $item['items_name'] . ', русский турист, сайт про туризм и путешествия';
 		$data = [
 			'boardConfig'	=> $this->boardConfig,
-			'arMeta'		=> $arMeta,
+			'arMeta'		=> ['title' => $title],
 			'countries'		=> $countries,
 			'item'			=> $item
 		];

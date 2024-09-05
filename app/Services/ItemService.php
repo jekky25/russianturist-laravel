@@ -2,15 +2,14 @@
 namespace App\Services;
 
 use App\Traits\BaseConfig;
-use App\Traits\Tstr;
 use App\Models\Item;
 use App\Services\LengthPager;
 
 class ItemService
 {
-	use BaseConfig,	Tstr;
+	use BaseConfig;
 
-	public $boardingConfig 	= [];
+	public $boardConfig 	= [];
 
 	public function __construct()
 	{
@@ -18,10 +17,10 @@ class ItemService
 	}
 
 	/**
-     * Get all items by pagination
-     * @param  int  $count
-     * @return \Illuminate\Database\Eloquent\Collection 
-     */
+	* Get all items by pagination
+	* @param  int  $count
+	* @return \Illuminate\Database\Eloquent\Collection 
+	*/
 	public function getAllByPaginate($count)
 	{
 		$items = Item::select('*')->orderBy('items_time')->paginate($count);
@@ -33,7 +32,11 @@ class ItemService
 		return $items;
 	}
 
-
+	/**
+	* get item by id
+	* @param int $id
+	* @return \Illuminate\Database\Eloquent\Collection 
+	*/
 	public function getById($id)
 	{
 		$item = Item::select('*')
@@ -41,14 +44,12 @@ class ItemService
 		->first();
 
 		$this->getFotos($item);
-		$item['items_description'] 	= $this->replaceSpaces($item['items_description']);
-
 		return $item;
 	}
 
 	/**
 	 * get pictures of the items to the object
-	 * @return \Illuminate\Database\Eloquent\Collection $row 
+	 * @param \Illuminate\Database\Eloquent\Collection $row 
 	 * @return void
 	 */
 	public function getFotos(&$row)
@@ -59,7 +60,6 @@ class ItemService
 			->first();
 		$row['fotos'] = $foto;
 		
-		$stars = '';
 		$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/items/' . $row['fotos']['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
 
 		$foto_out = asset('fotos/items/'. $row['fotos']['foto_id'] . '.jpg');

@@ -4,21 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Providers\SapeServiceProvider;
 use App\Models\Foto;
+use App\Traits\Tstr;
 
 class Item extends Model
 {
-    use HasFactory;
+	use HasFactory, Tstr;
 
-    /**
-     * get fotos
-     */
-    public function fotos()
-    {
-      return $this->hasMany(
-        Foto::class,
-        'foto_parent_id',
-        'items_id');
-    }
+	public function getItemsDescriptionAttribute ($val)
+	{
+		$val = $this->replaceSpaces($val);
+		return SapeServiceProvider::replaceSapeCode($val);
+	}
+	
+	/**
+	* get fotos
+	*/
+	public function fotos()
+	{
+		return $this->hasMany(
+			Foto::class,
+			'foto_parent_id',
+			'items_id');
+	}
 }

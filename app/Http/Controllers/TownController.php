@@ -2,8 +2,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\CountryService;
 use App\Services\TownService;
@@ -14,8 +12,8 @@ class TownController extends Controller
 {
 	use BaseConfig;
 	public $boardingConfig = [];
-    /**
-     * Create a new controller instance.
+	/**
+    * Create a new controller instance.
      *
      * @return void
      */
