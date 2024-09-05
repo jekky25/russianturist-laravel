@@ -40,20 +40,20 @@ class CountryService
 	}
 
 	/**
-	 * add pictures of the countries to the object
-	 * @return void
-	 */
+	* add pictures of the countries to the object
+	* @return void
+	*/
 	public function addFotos()
 	{
 		foreach ($this->countries as &$row) 
 		{
-			$foto               = $row->fotos()
-				                ->where('foto_type','country')
-				                ->orderBy('foto_position')
-				                ->limit(1)
-				                ->get();
-			$row['fotos']       = $foto;
-            $row['fotoStr'] 	= !empty ($row['fotos']) ? asset('fotos/countries/' . $row['fotos'][0]['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
-        }
+			$foto				= $row->fotos()
+								->where('foto_type','country')
+								->orderBy('foto_position')
+								->limit(1)
+								->get();
+			$row['fotos']		= $foto;
+			$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/countries/' . $row['fotos'][0]['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
+		}
 	}
 }

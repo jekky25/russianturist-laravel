@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Providers\SapeServiceProvider;
 
 class Hotel extends Model
 {
@@ -11,9 +12,14 @@ class Hotel extends Model
 
 	public $fotos = [];
 
+	public function getHotelsDescriptionAttribute ($val)
+	{
+		return SapeServiceProvider::replaceSapeCode($val);
+	}
+
 	/**
-     * get fotos
-     */
+	* get fotos
+	*/
 	public function fotos()
 	{
 		return $this->hasMany(
@@ -23,8 +29,8 @@ class Hotel extends Model
 	}
 
 	/**
-     * get town
-     */
+	* get town
+	*/
 	public function town()
 	{
 		return $this->belongsTo(Town::class, 'towns_id', 'towns_id');

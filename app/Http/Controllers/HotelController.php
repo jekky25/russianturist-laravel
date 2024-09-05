@@ -1,9 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Services\CountryService;
 use App\Services\HotelService;
@@ -13,12 +10,12 @@ use App\Traits\Picture;
 class HotelController extends Controller
 {
 	use BaseConfig, Picture;
-	public $boardingConfig = [];
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+	public $boardConfig = [];
+	/**
+	* Create a new controller instance.
+	*
+	* @return void
+	*/
 	public function __construct(
 		public CountryService $countryService,
 		public HotelService $hotelService,
@@ -27,25 +24,18 @@ class HotelController extends Controller
 		$this->boardConfig = $this->getBoardConfig();
 	}
 
-    /**
-     * Show the application dashboard.
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-	public function index(Request $request)
+	/**
+	* Show the application dashboard.
+	* @return \Illuminate\Http\Response
+	*/
+	public function index()
 	{
-		$countries		= $this->countryService->getAll();
-		$hotels			= $this->hotelService->getAll();
-		$arMeta = [];
-		$title 		= 'Отели, русский турист, сайт про туризм и путешествия';
-
-		$arMeta = [
-			'title' => $title
-		];
-
+		$countries			= $this->countryService->getAll();
+		$hotels				= $this->hotelService->getAll();
+		$title				= 'Отели, русский турист, сайт про туризм и путешествия';
 		$data = [
 			'boardConfig'	=> $this->boardConfig,
-			'arMeta'		=> $arMeta,
+			'arMeta'		=> ['title' => $title],
 			'hotels'		=> $hotels,
 			'countries'		=> $countries,
 		];
@@ -53,30 +43,22 @@ class HotelController extends Controller
 	}
 
 	/**
-     * Show a hotel page
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  string  $name
-     * @return \Illuminate\Http\Response
-     */
-	public function getHotel (Request $request, $name)
+	* Show a hotel page
+	* @param  string  $name
+	* @return \Illuminate\Http\Response
+	*/
+	public function getHotel ($name)
 	{
 		$hotel						= $this->hotelService->getByName($name);
 		$countries					= $this->countryService->getAll();
 		if (empty ($hotel)) abort(404);
-		
-		$hotel->hotels_description 	= \App\Providers\SapeServiceProvider::replaceSapeCode($hotel->hotels_description);
-
-		$arMeta 					= [];
 		$title 						= $hotel['hotels_name'] . ', отель ' . $hotel['hotels_name'] . ', русский турист, сайт про туризм и путешествия';
-		$arMeta = [
-			'title' => $title
-		];
 
 		\App\Providers\SapeServiceProvider::getSapeCode();
 		
 		$data = [
 			'boardConfig'	=> $this->boardConfig,
-			'arMeta'		=> $arMeta,
+			'arMeta'		=> ['title' => $title],
 			'hotel'			=> $hotel,
 			'countries'		=> $countries,
 		];
@@ -84,31 +66,23 @@ class HotelController extends Controller
 	}
 
 	/**
-     * Show a photos of hotel page
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  string  $name
-	 * @param  string  $foto
-	 * @param  int     $id
-     * @return \Illuminate\Http\Response
-     */
-	public function getHotelFotos (Request $request, $name, $foto, $id=0)
+	* Show a photos of hotel page
+	* @param  string  $name
+	* @param  string  $foto
+	* @param  int     $id
+	* @return \Illuminate\Http\Response
+	*/
+	public function getHotelFotos ($name, $foto, $id=0)
 	{
 		$this->hotelService->selectedPicture	= $id;
 		$hotel									= $this->hotelService->getByName($name);
 		$countries								= $this->countryService->getAll();
-
 		//draw width and height of the picture
 		$resultIm								= $this->getSizeParams($hotel->selFoto['foto_id'], $this->boardConfig['max_foto_width_big']);
-
-		$arMeta 					= [];
-		$title = $hotel['hotels_name'] . ', отель ' . $hotel['hotels_name'] . ', русский турист, сайт про туризм и путешествия';
-		$arMeta = [
-			'title' => $title
-		];
-		
+		$title 									= $hotel['hotels_name'] . ', отель ' . $hotel['hotels_name'] . ', русский турист, сайт про туризм и путешествия';
 		$data = [
 			'boardConfig'	=> $this->boardConfig,
-			'arMeta'		=> $arMeta,
+			'arMeta'		=> ['title' => $title],
 			'hotel'			=> $hotel,
 			'countries'		=> $countries,
 			'resultX_im'	=> $resultIm['resultX_im_l'],
