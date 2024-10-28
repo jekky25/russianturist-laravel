@@ -70,7 +70,9 @@
 				<tr>
 					<td colspan="9" class="main_tab">
 					<!--centr_begin-->
+<div id="app">
 		@yield('main_body')
+</div>
 <!--centr_end-->
 <div class="predupr">При републикации материалов гиперссылка на сайт по туризму www.russianturist.ru обязательна!</div>
 					</td>

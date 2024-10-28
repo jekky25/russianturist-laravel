@@ -29,7 +29,7 @@ Route::get('/items/item_{id}.html', 'ItemController@getItem')->whereNumber('id')
 Route::get('/hotels/{name}{foto}{id}.html', 'HotelController@getHotelFotos')->where('foto', '_foto_')->whereNumber('id')->name('hotel_fotos_id');
 Route::get('/hotels/{name}{foto}.html', 'HotelController@getHotelFotos')->where('foto', '_foto')->name('hotel_fotos');
 Route::get('/hotels/{name}.html', 'HotelController@getHotel')->name('hotel_name');
-
+Route::get('/{page}', 'IndexController')->where('page', '.*');
 
 
 if (!function_exists('pr')) {
