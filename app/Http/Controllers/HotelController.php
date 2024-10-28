@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Services\CountryService;
 use App\Services\HotelService;
+use App\Http\Resources\HotelShortListResource;
 use App\Traits\BaseConfig;
 use App\Traits\Picture;
 
 class HotelController extends Controller
 {
 	use BaseConfig, Picture;
-	public $boardConfig = [];
+	public $boardConfig		= [];
+	private $countHotels	= 5;
 	/**
 	* Create a new controller instance.
 	*
@@ -47,7 +49,7 @@ class HotelController extends Controller
 	* @param  string  $name
 	* @return \Illuminate\Http\Response
 	*/
-	public function getHotel ($name)
+	public function getHotel($name)
 	{
 		$hotel						= $this->hotelService->getByName($name);
 		$countries					= $this->countryService->getAll();
@@ -72,7 +74,7 @@ class HotelController extends Controller
 	* @param  int     $id
 	* @return \Illuminate\Http\Response
 	*/
-	public function getHotelFotos ($name, $foto, $id=0)
+	public function getHotelFotos($name, $foto, $id=0)
 	{
 		$this->hotelService->selectedPicture	= $id;
 		$hotel									= $this->hotelService->getByName($name);
@@ -89,5 +91,15 @@ class HotelController extends Controller
 			'resultY_im'	=> $resultIm['resultY_im_l']
 		];
 		return response()->view('hotel_foto', $data);
+	}
+
+	/**
+	* Get a short list of the hotels
+	* @return json
+	*/
+	public function getHotelShortList()
+	{
+		$hotels	= $this->hotelService->getByLimit($this->countHotels);
+		return HotelShortListResource::collection($hotels);
 	}
 }

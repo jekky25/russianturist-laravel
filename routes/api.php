@@ -19,4 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 /*ajax */
+Route::get('/get/config/', 'ConfigController@index')->name('get.config');
 Route::get('/get/countries/', 'CountryController@getCountries')->name('get.countries');
+Route::get('/get/hotels/short/', 'HotelController@getHotelShortList')->name('get.hotels.short');

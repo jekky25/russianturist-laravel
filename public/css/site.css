@@ -115,7 +115,13 @@ td.main_tab {padding:20px 10px 50px 10px; height:740px;}
 div.main_l {font-size:11px; width:49%; padding-right:10px; text-align:justify; float:left;}
 div.main_r {font-size:11px; float:right; width:49%; text-align:justify;}
 div.main_r div {margin-bottom:10px; padding-bottom:10px;}
-div.main_r h1 {color:#6d0f0a; font-size:14px; text-align:center; padding-bottom:20px;}
+div.main_r h1, div.main_r h2 
+{
+	color:#6d0f0a;
+	font-size:14px;
+	text-align:center;
+	padding-bottom:20px;
+}
 div.main_r p {padding-top:10px;}
 .prew {display:block;}
 .prew img {border:1px solid #c6a33f; float:left; margin-right:10px;}

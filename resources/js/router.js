@@ -25,6 +25,11 @@ export default createRouter({
 			name: 'cities'
 		},
 		{
+			path: '/hotels/:name.html',
+			component: () => import('./components/Home/Index'),
+			name: 'hotel_name'
+		},
+		{
 			path: '/hotels/',
 			component: () => import('./components/Home/Index'),
 			name: 'hotels'

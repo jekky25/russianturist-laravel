@@ -16,7 +16,7 @@
 							<div>
 								<ul>
 									<li v-for="country in countries">
-										<router-link :title="`${country.name}`" :to="{ name: 'country_name', params: { name: `${country.name}` } }" >{{ country.name }}</router-link>
+										<router-link :title="`${country.name}`" :to="{ name: 'country_name', params: { name: `${country.slug}` } }" >{{ country.name }}</router-link>
 								
 									
 									</li>
@@ -64,8 +64,6 @@
 								<td colspan="9" class="main_tab">
 									<!--centr_begin-->
 									<div>
-										<router-link to="/posts">Posts</router-link>
-    						    		<router-link to="/tags">Tags</router-link>
 								        <router-view></router-view>
     								</div>
 									<!--centr_end-->
@@ -106,7 +104,7 @@
 </template>
 
 <script>
-    export default {
+	export default {
 		name: "Index",
 		data() {
 				return {
@@ -114,9 +112,9 @@
 					errors: null
 				};
   			},
-        mounted() {
+		mounted() {
 			this.getCountries();
-        },
+		},
 		methods:
 		{
 			getCountries()
@@ -132,5 +130,5 @@
 			}
 
 		}
-    }
+	}
 </script>

@@ -70,7 +70,7 @@ class SapeServiceProvider extends ServiceProvider
 			unset($code_sape[$i]);
 		}
 		$text =  str_replace("<br />\n\r\n<br />\n{sape_links}", '', $text);
-
+		$text =  str_replace("{sape_links}", '', $text);
 		//Сапа
 		if ( defined('_SAPE_USER') )
 		$text = $sape_context->replace_in_text_segment($text);
