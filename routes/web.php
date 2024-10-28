@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
 Route::get('/countries/{name}.html', 'CountryController@getCountry')->name('country_name');
 
 Route::middleware('slashes')->group(function () {
@@ -30,7 +29,7 @@ Route::get('/hotels/{name}{foto}{id}.html', 'HotelController@getHotelFotos')->wh
 Route::get('/hotels/{name}{foto}.html', 'HotelController@getHotelFotos')->where('foto', '_foto')->name('hotel_fotos');
 Route::get('/hotels/{name}.html', 'HotelController@getHotel')->name('hotel_name');
 Route::get('/{page}', 'IndexController')->where('page', '.*');
-
+Route::get('/', 'HomeController@index')->name('home');
 
 if (!function_exists('pr')) {
 	function pr (...$ar)

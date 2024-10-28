@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Services\CountryService;
 use App\Services\HotelService;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CountryResource;
 use App\Traits\BaseConfig;
 
 class CountryController extends Controller
@@ -49,7 +50,7 @@ class CountryController extends Controller
 	* @param  string  $name
 	* @return \Illuminate\Http\Response
 	*/
-	public function getCountry ($name)
+	public function getCountry($name)
 	{
 		$arMeta = [];
 		$country					= $this->countryService->getByName($name);
@@ -70,5 +71,15 @@ class CountryController extends Controller
 			'hotels'		=> $this->hotelService->hotels
 		];
 		return response()->view('country_id', $data);
+	}
+
+	/**
+	* Get all countrires 
+	* @return json
+	*/
+	public function getCountries()
+	{
+		$countries	= $this->countryService->getAll();		
+		return CountryResource::collection($countries);
 	}
 }

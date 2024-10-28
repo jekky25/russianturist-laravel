@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*ajax */
+Route::get('/get/countries/', 'CountryController@getCountries')->name('get.countries');
