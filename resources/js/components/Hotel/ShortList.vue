@@ -29,10 +29,12 @@
 					configHeightHotelPicture: 0,
 					configHotelWidthPicture: 0,
 					configHotelHeightPicture: 0,
-					configMarginHotelWidthPicture: 0
+					configMarginHotelWidthPicture: 0,
+					countryId:0
 				};
 			},
 		mounted() {
+			this.countryId = typeof this.$attrs.countryId !== 'undefined' ? parseInt(this.$attrs.countryId) : 0;
 			this.getHotels();
 			this.getConfig();
 		},
@@ -40,7 +42,7 @@
 		{
 			getHotels()
 			{
-				axios.get('/api/get/hotels/short/')
+				axios.get('/api/get/hotels/short/' + this.countryId)
 				.then(res => {
 					this.hotels = res.data.data;
 				})

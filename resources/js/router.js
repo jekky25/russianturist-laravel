@@ -10,7 +10,7 @@ export default createRouter({
 		},
 		{
 			path: '/countries/:name.html',
-			component: () => import('./components/Home/Index'),
+			component: () => import('./components/Country/Id'),
 			name: 'country_name',
 			props: true
 		},

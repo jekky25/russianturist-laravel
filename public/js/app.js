@@ -23359,7 +23359,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return _cache[10] || (_cache[10] = [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Статьи")]);
     }),
     _: 1 /* STABLE */
-  })])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("centr_begin"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("centr_end"), _cache[15] || (_cache[15] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  })])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("centr_begin"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_view, {
+    key: _ctx.$route.path
+  }))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("centr_end"), _cache[15] || (_cache[15] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "predupr"
   }, "При републикации материалов гиперссылка на сайт по туризму www.russianturist.ru обязательна!", -1 /* HOISTED */))])])])])]), _cache[16] || (_cache[16] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
     "class": "r_main",
@@ -23492,7 +23494,7 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: '/countries/:name.html',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_Home_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Home/Index */ "./resources/js/components/Home/Index.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Country_Id_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Country/Id */ "./resources/js/components/Country/Id.vue"));
     },
     name: 'country_name',
     props: true
@@ -39298,7 +39300,7 @@ function useRoute(_name) {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Home_Index_vue":1,"resources_js_components_Country_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Home_Index_vue":1,"resources_js_components_Country_Id_vue":1,"resources_js_components_Country_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

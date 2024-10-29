@@ -95,11 +95,13 @@ class HotelController extends Controller
 
 	/**
 	* Get a short list of the hotels
+	* @param  int     $id
 	* @return json
 	*/
-	public function getHotelShortList()
+	public function getHotelShortList($id)
 	{
-		$hotels	= $this->hotelService->getByLimit($this->countHotels);
+		$hotels	= $id > 0	? $this->hotelService->getOfCountry($id, 0, $this->boardConfig['limit_out_hotels'])
+							: $this->hotelService->getByLimit($this->countHotels);
 		return HotelShortListResource::collection($hotels);
 	}
 }

@@ -64,7 +64,7 @@
 								<td colspan="9" class="main_tab">
 									<!--centr_begin-->
 									<div>
-								        <router-view></router-view>
+								        <router-view :key="$route.path"></router-view>
     								</div>
 									<!--centr_end-->
 									<div class="predupr">При републикации материалов гиперссылка на сайт по туризму www.russianturist.ru обязательна!</div>
