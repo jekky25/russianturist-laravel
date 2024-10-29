@@ -16,7 +16,7 @@ export default createRouter({
 		},
 		{
 			path: '/countries/',
-			component: () => import('./components/Home/Index'),
+			component: () => import('./components/Country/Index'),
 			name: 'countries'
 		},
 		{

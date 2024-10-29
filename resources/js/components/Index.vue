@@ -1,6 +1,6 @@
 <template>
 <div class="header">
-	<div class="head_l"><router-link title="Русский турист" :to="{ name: 'home' }"><img alt="Русский турист" title="Русский турист" src="image/logo.jpg"></router-link></div>
+	<div class="head_l"><router-link title="Русский турист" :to="{ name: 'home' }"><img alt="Русский турист" title="Русский турист" src="/image/logo.jpg"></router-link></div>
 	<div class="head_c"></div>
 	<div class="head_r"></div>
 </div>

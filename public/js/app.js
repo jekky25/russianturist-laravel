@@ -23264,7 +23264,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return _cache[0] || (_cache[0] = [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
         alt: "Русский турист",
         title: "Русский турист",
-        src: "image/logo.jpg"
+        src: "/image/logo.jpg"
       }, null, -1 /* HOISTED */)]);
     }),
     _: 1 /* STABLE */
@@ -23499,7 +23499,7 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: '/countries/',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_Home_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Home/Index */ "./resources/js/components/Home/Index.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Country_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Country/Index */ "./resources/js/components/Country/Index.vue"));
     },
     name: 'countries'
   }, {
@@ -39298,7 +39298,7 @@ function useRoute(_name) {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if (chunkId === "resources_js_components_Home_Index_vue") return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Home_Index_vue":1,"resources_js_components_Country_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
