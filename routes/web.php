@@ -18,7 +18,6 @@ Route::middleware('slashes')->group(function () {
 	Route::get('/hotels/', 			'HotelController@index')	->name('hotels');
 });
 
-Route::get('/towns/{name}.html', 'TownController@getTown')->name('town_name');
 Route::get('/items/item_{id}.html', 'ItemController@getItem')->whereNumber('id')->name('item_id');
 
 Route::get('/hotels/{name}{foto}{id}.html', 'HotelController@getHotelFotos')->where('foto', '_foto_')->whereNumber('id')->name('hotel_fotos_id');
@@ -31,6 +30,8 @@ Route::middleware('slashes')->group(function () {
 	Route::get('/countries/', 		'CountryController@index')	->name('countries'); //depricated
 	Route::get('/towns/', 			'TownController@index')		->name('towns'); //deprecated
 });
+Route::get('/towns/{name}.html', 'TownController@getTown')->name('town_name'); //depricated
+
 Route::get('/', 'HomeController@index')->name('home');
 
 if (!function_exists('pr')) {

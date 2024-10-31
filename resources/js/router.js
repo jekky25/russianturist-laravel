@@ -26,7 +26,7 @@ export default createRouter({
 		},
 		{
 			path: '/towns/:name.html',
-			component: () => import('./components/Home/Index'),
+			component: () => import('./components/City/Id'),
 			name: 'city_name',
 			props: true
 		},

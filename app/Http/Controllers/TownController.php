@@ -6,6 +6,7 @@ use App\Services\CountryService;
 use App\Services\TownService;
 use App\Services\HotelService;
 use App\Http\Resources\CityResource;
+use App\Http\Resources\CityFullResource;
 use App\Traits\BaseConfig;
 
 class TownController extends Controller
@@ -51,7 +52,7 @@ class TownController extends Controller
 	* @param  string  $name
 	* @return \Illuminate\Http\Response
 	*/
-	public function getTown ($name)
+	public function getTown($name)
 	{
 		$town						=	$this->townService->getByName($name);
 		$town						=	$this->townService->getPictureLink($town, $this->boardConfig['foto_width_town_id'], $this->boardConfig['foto_height_town_id']);
@@ -76,5 +77,17 @@ class TownController extends Controller
 	{
 		$cities	= $this->townService->getAll();
 		return CityResource::collection($cities);
+	}
+
+	/**
+	* Show a city page
+	* @param  string  $name
+	* @return \Illuminate\Http\Response
+	*/
+	public function getCityByName($name)
+	{
+		$city	= $this->townService->getByName($name);
+		$city	= $this->townService->getPictureLink($city, $this->boardConfig['foto_width_town_id'], $this->boardConfig['foto_height_town_id']);
+		return new CityFullResource($city);
 	}
 }

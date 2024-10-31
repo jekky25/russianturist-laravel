@@ -44,18 +44,22 @@ __webpack_require__.r(__webpack_exports__);
       configHotelWidthPicture: 0,
       configHotelHeightPicture: 0,
       configMarginHotelWidthPicture: 0,
-      countryId: 0
+      countryId: 0,
+      cityId: 0,
+      url: null
     };
   },
   mounted: function mounted() {
     this.countryId = typeof this.$attrs.countryId !== 'undefined' ? parseInt(this.$attrs.countryId) : 0;
+    this.cityId = typeof this.$attrs.cityId !== 'undefined' ? parseInt(this.$attrs.cityId) : 0;
+    this.url = this.cityId > 0 ? '/api/get/hotels/short/city/' + this.cityId : '/api/get/hotels/short/' + this.countryId;
     this.getHotels();
     this.getConfig();
   },
   methods: {
     getHotels: function getHotels() {
       var _this = this;
-      axios.get('/api/get/hotels/short/' + this.countryId).then(function (res) {
+      axios.get(this.url).then(function (res) {
         _this.hotels = res.data.data;
       })["catch"](function (res) {
         _this.errors = res.data;

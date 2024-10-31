@@ -30,11 +30,15 @@
 					configHotelWidthPicture: 0,
 					configHotelHeightPicture: 0,
 					configMarginHotelWidthPicture: 0,
-					countryId:0
+					countryId:0,
+					cityId:0,
+					url: null
 				};
 			},
 		mounted() {
-			this.countryId = typeof this.$attrs.countryId !== 'undefined' ? parseInt(this.$attrs.countryId) : 0;
+			this.countryId	= typeof this.$attrs.countryId !== 'undefined'	? parseInt(this.$attrs.countryId)	: 0;
+			this.cityId		= typeof this.$attrs.cityId !== 'undefined'		? parseInt(this.$attrs.cityId)		: 0;
+			this.url		= this.cityId > 0								? '/api/get/hotels/short/city/' + this.cityId : '/api/get/hotels/short/' + this.countryId;
 			this.getHotels();
 			this.getConfig();
 		},
@@ -42,7 +46,7 @@
 		{
 			getHotels()
 			{
-				axios.get('/api/get/hotels/short/' + this.countryId)
+				axios.get(this.url)
 				.then(res => {
 					this.hotels = res.data.data;
 				})
