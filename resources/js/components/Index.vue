@@ -87,7 +87,7 @@
 </div>
 <div class="footer">
 	<div class="foot_l">
-		<div><img src="image/kompas.jpg" alt="Компас" title="Компас"></div>
+		<div><img src="/image/kompas.jpg" alt="Компас" title="Компас"></div>
 	</div>
 	<div class="foot_c">
 		<div class="foot_c2">

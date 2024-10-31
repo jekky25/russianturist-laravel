@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Services\CountryService;
 use App\Services\HotelService;
 use App\Http\Resources\HotelShortListResource;
+use App\Http\Resources\HotelResource;
 use App\Traits\BaseConfig;
 use App\Traits\Picture;
 
@@ -115,5 +116,15 @@ class HotelController extends Controller
 		$hotels	= $id > 0	? $this->hotelService->getOfTown($id, 0, $this->boardConfig['limit_out_hotels'])
 							: $this->hotelService->getByLimit($this->countHotels);
 		return HotelShortListResource::collection($hotels);
+	}
+
+	/**
+	* Get all hotels 
+	* @return json
+	*/
+	public function getHotels()
+	{
+		$hotels = $this->hotelService->getAll();
+		return HotelResource::collection($hotels);
 	}
 }

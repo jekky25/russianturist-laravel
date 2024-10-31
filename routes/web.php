@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('slashes')->group(function () {
 	Route::get('/items/', 			'ItemController@index')		->name('items');
-	Route::get('/hotels/', 			'HotelController@index')	->name('hotels');
 });
 
 Route::get('/items/item_{id}.html', 'ItemController@getItem')->whereNumber('id')->name('item_id');
@@ -29,6 +28,7 @@ Route::get('/countries/{name}.html', 'CountryController@getCountry')->name('coun
 Route::middleware('slashes')->group(function () {
 	Route::get('/countries/', 		'CountryController@index')	->name('countries'); //depricated
 	Route::get('/towns/', 			'TownController@index')		->name('towns'); //deprecated
+	Route::get('/hotels/', 			'HotelController@index')	->name('hotels'); //deprecated
 });
 Route::get('/towns/{name}.html', 'TownController@getTown')->name('town_name'); //depricated
 
@@ -61,5 +61,5 @@ Route::get('/clear', function () {
     Artisan::call('view:clear');
     Artisan::call('route:clear');
     return "Сброс кэша выполнен!";
-    */
 });
+Auth::routes();

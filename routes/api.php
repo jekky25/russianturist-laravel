@@ -26,3 +26,4 @@ Route::get('/get/city/name/{name}', 'TownController@getCityByName')->name('get.c
 Route::get('/get/cities/', 'TownController@getCities')->name('get.cities');
 Route::get('/get/hotels/short/city/{id}', 'HotelController@getHotelShortListByCity')->whereNumber('id')->name('get.hotels.short.city');
 Route::get('/get/hotels/short/{id}', 'HotelController@getHotelShortList')->whereNumber('id')->name('get.hotels.short');
+Route::get('/get/hotels/', 'HotelController@getHotels')->name('get.hotels');

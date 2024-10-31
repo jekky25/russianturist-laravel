@@ -23379,7 +23379,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   })])], -1 /* HOISTED */))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_cache[19] || (_cache[19] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": "foot_l"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    src: "image/kompas.jpg",
+    src: "/image/kompas.jpg",
     alt: "Компас",
     title: "Компас"
   })])], -1 /* HOISTED */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_noindex)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_cache[18] || (_cache[18] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("2009 Сайт про Российский Туризм и отдых ")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
@@ -23526,7 +23526,7 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: '/hotels/',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_Home_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Home/Index */ "./resources/js/components/Home/Index.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Hotel_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Hotel/Index */ "./resources/js/components/Hotel/Index.vue"));
     },
     name: 'hotels'
   }, {
@@ -39307,7 +39307,7 @@ function useRoute(_name) {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Home_Index_vue":1,"resources_js_components_Country_Id_vue":1,"resources_js_components_Country_Index_vue":1,"resources_js_components_City_Index_vue":1,"resources_js_components_City_Id_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Home_Index_vue":1,"resources_js_components_Country_Id_vue":1,"resources_js_components_Country_Index_vue":1,"resources_js_components_City_Index_vue":1,"resources_js_components_City_Id_vue":1,"resources_js_components_Hotel_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
