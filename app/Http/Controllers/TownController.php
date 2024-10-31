@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Services\CountryService;
 use App\Services\TownService;
 use App\Services\HotelService;
+use App\Http\Resources\CityResource;
 use App\Traits\BaseConfig;
 
 class TownController extends Controller
@@ -65,5 +66,15 @@ class TownController extends Controller
 			'hotels'		=> $hotels,
 		];
 		return response()->view('town_id', $data);
+	}
+
+	/**
+	* Get all cities 
+	* @return json
+	*/
+	public function getCities()
+	{
+		$cities	= $this->townService->getAll();
+		return CityResource::collection($cities);
 	}
 }

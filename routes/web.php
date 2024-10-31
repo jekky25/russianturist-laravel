@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('slashes')->group(function () {
-	Route::get('/towns/', 			'TownController@index')		->name('towns');
 	Route::get('/items/', 			'ItemController@index')		->name('items');
 	Route::get('/hotels/', 			'HotelController@index')	->name('hotels');
 });
@@ -30,6 +29,7 @@ Route::get('/{page}', 'IndexController')->where('page', '.*');
 Route::get('/countries/{name}.html', 'CountryController@getCountry')->name('country_name'); //depricated
 Route::middleware('slashes')->group(function () {
 	Route::get('/countries/', 		'CountryController@index')	->name('countries'); //depricated
+	Route::get('/towns/', 			'TownController@index')		->name('towns'); //deprecated
 });
 Route::get('/', 'HomeController@index')->name('home');
 

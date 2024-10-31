@@ -21,8 +21,14 @@ export default createRouter({
 		},
 		{
 			path: '/towns/',
-			component: () => import('./components/Home/Index'),
+			component: () => import('./components/City/Index'),
 			name: 'cities'
+		},
+		{
+			path: '/towns/:name.html',
+			component: () => import('./components/Home/Index'),
+			name: 'city_name',
+			props: true
 		},
 		{
 			path: '/hotels/:name.html',
