@@ -6,6 +6,7 @@ use App\Services\CountryService;
 use App\Services\HotelService;
 use App\Http\Resources\HotelShortListResource;
 use App\Http\Resources\HotelResource;
+use App\Http\Resources\HotelFullResource;
 use App\Traits\BaseConfig;
 use App\Traits\Picture;
 
@@ -126,5 +127,16 @@ class HotelController extends Controller
 	{
 		$hotels = $this->hotelService->getAll();
 		return HotelResource::collection($hotels);
+	}
+
+	/**
+	* Show a hotel page
+	* @param  string  $name
+	* @return \Illuminate\Http\Response
+	*/
+	public function getHotelByName($name)
+	{
+		$city = $this->hotelService->getByName($name);
+		return new HotelFullResource($city);
 	}
 }

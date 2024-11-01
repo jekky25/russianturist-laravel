@@ -31,8 +31,18 @@ export default createRouter({
 			props: true
 		},
 		{
-			path: '/hotels/:name.html',
+			path: '/hotels/:name:foto:id.html',
 			component: () => import('./components/Home/Index'),
+			name: 'hotel_fotos_id'
+		},
+		{
+			path: '/hotels/:name:foto.html',
+			component: () => import('./components/Home/Index'),
+			name: 'hotel_fotos'
+		},
+		{
+			path: '/hotels/:name.html',
+			component: () => import('./components/Hotel/Id'),
 			name: 'hotel_name'
 		},
 		{

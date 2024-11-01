@@ -30,7 +30,7 @@ class HotelService
 	* @param  int  $limit
 	* @return \Illuminate\Database\Eloquent\Collection 
 	*/
-	public function getByLimit ($limit)
+	public function getByLimit($limit)
 	{
 		$this->hotels = Hotel::select('*')->orderBy('hotels_time','desc')->limit($limit)->get();
 		foreach ($this->hotels as &$row)
@@ -157,7 +157,7 @@ class HotelService
 	*/
 	private function getPictureLink($pictureId)
 	{
-		return asset ('/fotos/hotels/' . $pictureId . '.jpg');
+		return asset('/fotos/hotels/' . $pictureId . '.jpg');
 	}
 	/**
 	* get picture params
@@ -168,7 +168,7 @@ class HotelService
 		foreach ($this->hotels->fotos as $k => &$row)
 		{
 			$row['f_act']		= $this->getPictureActiveClass($k);
-			$row['foto_out']	= $this->getPictureLink ($row['foto_id']);
+			$row['foto_out']	= $this->getPictureLink($row['foto_id']);
 		}
 	}
 
@@ -185,15 +185,15 @@ class HotelService
 			$row['f_act'] = '';
 			if ( ($id == 0 && $k == 0) || $id > 0 && $id == $row['foto_id'])
 			{
-				$row['f_act']	 		= 'class="f_act"';
+				$row['f_act']	 		= 'f_act';
 				$this->hotels->selFoto 		= $row;
 				$this->hotels->prevFoto		= $k > 0 ? $this->hotels->fotos[($k-1)] : [];
-				$this->hotels->nextFoto		= ($k + 1) < count (($this->hotels->fotos) ) ? $this->hotels->fotos[($k+1)] : [];
+				$this->hotels->nextFoto		= ($k + 1) < count(($this->hotels->fotos) ) ? $this->hotels->fotos[($k+1)] : [];
 				$this->hotels->positionFoto	= ($k + 1);
 			}
-			$row['foto_out'] = asset ('/fotos/hotels/' . $row['foto_id'] . '.jpg');
+			$row['foto_out'] = asset('/fotos/hotels/' . $row['foto_id'] . '.jpg');
 		}
-		$this->hotels->countFoto	= count ($this->hotels->fotos);
+		$this->hotels->countFoto	= count($this->hotels->fotos);
 	}
 
 	/**
@@ -203,6 +203,6 @@ class HotelService
 	*/
 	private function getPictureActiveClass($iteration)
 	{
-		return ($iteration == 0) ? 'class="f_act"' : '';
+		return ($iteration == 0) ? 'f_act' : '';
 	}
 }

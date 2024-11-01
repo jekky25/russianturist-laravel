@@ -23518,9 +23518,21 @@ __webpack_require__.r(__webpack_exports__);
     name: 'city_name',
     props: true
   }, {
-    path: '/hotels/:name.html',
+    path: '/hotels/:name:foto:id.html',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Home_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Home/Index */ "./resources/js/components/Home/Index.vue"));
+    },
+    name: 'hotel_fotos_id'
+  }, {
+    path: '/hotels/:name:foto.html',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Home_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Home/Index */ "./resources/js/components/Home/Index.vue"));
+    },
+    name: 'hotel_fotos'
+  }, {
+    path: '/hotels/:name.html',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Hotel_Id_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Hotel/Id */ "./resources/js/components/Hotel/Id.vue"));
     },
     name: 'hotel_name'
   }, {
@@ -39307,7 +39319,7 @@ function useRoute(_name) {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Home_Index_vue":1,"resources_js_components_Country_Id_vue":1,"resources_js_components_Country_Index_vue":1,"resources_js_components_City_Index_vue":1,"resources_js_components_City_Id_vue":1,"resources_js_components_Hotel_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Home_Index_vue":1,"resources_js_components_Country_Id_vue":1,"resources_js_components_Country_Index_vue":1,"resources_js_components_City_Index_vue":1,"resources_js_components_City_Id_vue":1,"resources_js_components_Hotel_Id_vue":1,"resources_js_components_Hotel_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
