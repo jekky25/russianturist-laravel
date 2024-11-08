@@ -17,13 +17,18 @@ class HotelFullResource extends JsonResource
 	public function toArray(Request $request): array
 	{
 		return [
-			'id'			=> $this->hotels_id,
-			'name'			=> $this->hotels_name,
-			'slug'			=> $this->hotels_eng_name,
-			'img'			=> $this->hotels_img,
-			'description'	=> $this->hotels_description,
-			'city'			=> new CityShortResource($this->town),
-			'pictures'		=> PictureResource::collection($this->fotos)
+			'id'				=> $this->hotels_id,
+			'name'				=> $this->hotels_name,
+			'slug'				=> $this->hotels_eng_name,
+			'img'				=> $this->hotels_img,
+			'description'		=> $this->hotels_description,
+			'city'				=> new CityShortResource($this->town),
+			'pictures'			=> PictureResource::collection($this->fotos),
+			'pictureSelected'	=> !empty($this->selFoto)		? new PictureResource($this->selFoto)	: null,
+			'picturePosition'	=> !empty($this->positionFoto)	? $this->positionFoto					: null,
+			'pictureNext'		=> !empty($this->nextFoto)		? $this->nextFoto 						: null,
+			'picturePrev'		=> !empty($this->prevFoto)		? $this->prevFoto						: null,
+			'pictureCount'		=> !empty($this->countFoto)		? (int) $this->countFoto				: 0,
 		];
 	}
 }

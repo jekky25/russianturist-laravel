@@ -20,7 +20,6 @@ Route::middleware('slashes')->group(function () {
 Route::get('/items/item_{id}.html', 'ItemController@getItem')->whereNumber('id')->name('item_id');
 
 Route::get('/hotels/{name}{foto}{id}.html', 'HotelController@getHotelFotos')->where('foto', '_foto_')->whereNumber('id')->name('hotel_fotos_id');
-Route::get('/hotels/{name}{foto}.html', 'HotelController@getHotelFotos')->where('foto', '_foto')->name('hotel_fotos');
 Route::get('/{page}', 'IndexController')->where('page', '.*');
 
 Route::get('/countries/{name}.html', 'CountryController@getCountry')->name('country_name'); //depricated
@@ -29,6 +28,7 @@ Route::middleware('slashes')->group(function () {
 	Route::get('/towns/', 			'TownController@index')		->name('towns'); //deprecated
 	Route::get('/hotels/', 			'HotelController@index')	->name('hotels'); //deprecated
 });
+Route::get('/hotels/{name}{foto}.html', 'HotelController@getHotelFotos')->where('foto', '_foto')->name('hotel_fotos'); //depricated
 Route::get('/towns/{name}.html', 'TownController@getTown')->name('town_name'); //depricated
 Route::get('/hotels/{name}.html', 'HotelController@getHotel')->name('hotel_name'); //depricated
 

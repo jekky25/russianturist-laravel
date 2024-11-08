@@ -50,8 +50,7 @@ class HotelService
 	{
 		$hotel = Hotel::select('*')
 			->where('hotels_eng_name', $name)
-			->first();
-		if (empty($hotel)) return;
+			->firstOrFail();
 
 		$hotel->hotels_description	= $this->replaceSpaces($hotel->hotels_description);
 		$hotel->town				= $hotel->town()->first();

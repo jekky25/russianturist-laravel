@@ -36,12 +36,12 @@ export default createRouter({
 			name: 'hotel_fotos_id'
 		},
 		{
-			path: '/hotels/:name:foto.html',
-			component: () => import('./components/Home/Index'),
+			path: '/hotels/:name/foto.html',
+			component: () => import('./components/Picture/HotelIndex'),
 			name: 'hotel_fotos'
 		},
 		{
-			path: '/hotels/:name.html',
+			path: '/hotels/name.html',
 			component: () => import('./components/Hotel/Id'),
 			name: 'hotel_name'
 		},
