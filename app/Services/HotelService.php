@@ -44,6 +44,7 @@ class HotelService
 	/**
 	* get hotel by name
 	* @param  string  $name
+	* @param  int  $pictureId
 	* @return \Illuminate\Database\Eloquent\Collection 
 	*/
 	public function getByName($name)
@@ -62,6 +63,19 @@ class HotelService
 		$this->getSliderParams();
 
 
+		return $this->hotels;
+	}
+
+	/**
+	* get hotel by name and selected picture
+	* @param  string  $name
+	* @param  int  $pictureId
+	* @return \Illuminate\Database\Eloquent\Collection 
+	*/
+	public function getByNameSelectedPicture($name, $pictureId = 0)
+	{
+		$this->selectedPicture = $pictureId > 0 ? $pictureId : 0;
+		$this->getByName($name);
 		return $this->hotels;
 	}
 

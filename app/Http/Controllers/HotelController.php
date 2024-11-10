@@ -136,7 +136,19 @@ class HotelController extends Controller
 	*/
 	public function getHotelByName($name)
 	{
-		$city = $this->hotelService->getByName($name);
-		return new HotelFullResource($city);
+		$hotel = $this->hotelService->getByName($name);
+		return new HotelFullResource($hotel);
+	}
+
+	/**
+	* Show a hotel picture page
+	* @param  string  $name
+	* @param  int  $id
+	* @return \Illuminate\Http\Response
+	*/
+	public function getHotelPicture($name, $id=0)
+	{
+		$hotel = $this->hotelService->getByNameSelectedPicture($name, $id);
+		return new HotelFullResource($hotel);
 	}
 }

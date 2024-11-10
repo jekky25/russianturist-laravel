@@ -25,27 +25,28 @@
 <script>
 	import PictureShortList from "../../components/Picture/ShortList.vue"
 	export default {
-		name: 'PictureHotelIndex',
+		name: 'PictureHotelIndexId',
 		components:{
 			PictureShortList
         },
 		data() {
 				return {
 					hotel: null,
+					picture: null,
 					errors: null,
-					picture_width:0
 				};
 			},
 		mounted() {
-			this.getHotel(this.$route.params.name);
+			this.getHotel(this.$route.params.name, this.$route.params.id);
 		},
 		methods:
 		{
-			getHotel(name)
+			getHotel(name, picture)
 			{
-				axios.get('/api/get/hotel/name/' + name)
+				axios.get('/api/get/hotel/name/' + name + '/picture/' + picture)
 				.then(res => {
 					this.hotel = res.data.data;
+					console.log(this.hotel);
 				})
 				.catch(res => {
 					this.errors = res.data;

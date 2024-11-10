@@ -26,8 +26,8 @@ class HotelFullResource extends JsonResource
 			'pictures'			=> PictureResource::collection($this->fotos),
 			'pictureSelected'	=> !empty($this->selFoto)		? new PictureResource($this->selFoto)	: null,
 			'picturePosition'	=> !empty($this->positionFoto)	? $this->positionFoto					: null,
-			'pictureNext'		=> !empty($this->nextFoto)		? $this->nextFoto 						: null,
-			'picturePrev'		=> !empty($this->prevFoto)		? $this->prevFoto						: null,
+			'pictureNext'		=> !empty($this->nextFoto)		? new PictureResource($this->nextFoto)	: null,
+			'picturePrev'		=> !empty($this->prevFoto)		? new PictureResource($this->prevFoto)	: null,
 			'pictureCount'		=> !empty($this->countFoto)		? (int) $this->countFoto				: 0,
 		];
 	}
