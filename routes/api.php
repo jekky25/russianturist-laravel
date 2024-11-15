@@ -29,3 +29,4 @@ Route::get('/get/hotels/short/{id}', 'HotelController@getHotelShortList')->where
 Route::get('/get/hotel/name/{name}/picture/{id}', 'HotelController@getHotelPicture')->whereNumber('id')->name('get.hotel');
 Route::get('/get/hotel/name/{name}', 'HotelController@getHotelByName')->name('get.hotel');
 Route::get('/get/hotels/', 'HotelController@getHotels')->name('get.hotels');
+Route::get('/get/items/', 'ItemController@getItems')->name('get.items');

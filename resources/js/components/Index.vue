@@ -17,8 +17,6 @@
 								<ul>
 									<li v-for="country in countries">
 										<router-link :title="`${country.name}`" :to="{ name: 'country_name', params: { name: `${country.slug}` } }" >{{ country.name }}</router-link>
-								
-									
 									</li>
 								</ul>
 							</div>

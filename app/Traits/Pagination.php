@@ -9,7 +9,7 @@ trait Pagination {
      * @param  App\Models\Item  $items
      * @return array
      */
-	public function getPaginationLinks ($items)
+	public function getPaginationLinks($items)
 	{
 		$pagination = $items->toArray()['links'];
 		$pagination[0] = str_replace (' Previous','', $pagination[0]);

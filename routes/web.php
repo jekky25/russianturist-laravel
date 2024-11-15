@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('slashes')->group(function () {
-	Route::get('/items/', 			'ItemController@index')		->name('items');
 });
 
 Route::get('/items/item_{id}.html', 'ItemController@getItem')->whereNumber('id')->name('item_id');
@@ -26,6 +25,7 @@ Route::middleware('slashes')->group(function () {
 	Route::get('/countries/', 		'CountryController@index')	->name('countries'); //depricated
 	Route::get('/towns/', 			'TownController@index')		->name('towns'); //deprecated
 	Route::get('/hotels/', 			'HotelController@index')	->name('hotels'); //deprecated
+	Route::get('/items/', 			'ItemController@index')		->name('items'); //deprecated
 });
 Route::get('/hotels/{name}{foto}{id}.html', 'HotelController@getHotelFotos')->where('foto', '_foto_')->whereNumber('id')->name('hotel_fotos_id'); //depricated
 Route::get('/hotels/{name}{foto}.html', 'HotelController@getHotelFotos')->where('foto', '_foto')->name('hotel_fotos'); //depricated

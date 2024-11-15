@@ -29,6 +29,7 @@ class ItemService
 		{
 			$this->getFotos($row);
 		}
+		$items->withPath('/items/');
 		return $items;
 	}
 

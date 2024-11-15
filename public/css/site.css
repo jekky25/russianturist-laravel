@@ -184,3 +184,8 @@ div.pagination a.active {color:#f72d4e;}
   width:auto; 
   margin:0 auto;
 }
+
+.name_my_mess {
+  margin-left: 5px;
+  margin-right: 5px;
+}

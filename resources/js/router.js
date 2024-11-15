@@ -51,8 +51,13 @@ export default createRouter({
 			name: 'hotels'
 		},
 		{
-			path: '/items/',
+			path: '/items/item_:id.html',
 			component: () => import('./components/Home/Index'),
+			name: 'item_id'
+		},
+		{
+			path: '/items/',
+			component: () => import('./components/Item/Index'),
 			name: 'items'
 		}
 	]

@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\ItemService;
 use App\Services\CountryService;
 use App\Traits\BaseConfig;
 use App\Traits\Pagination;
+use App\Http\Resources\ItemResource;
 
 class ItemController extends Controller
 {
@@ -28,14 +28,13 @@ class ItemController extends Controller
 
 	/**
 	* Show the application dashboard.
-	* @param  \Illuminate\Http\Request  $request
 	* @return \Illuminate\Http\Response
 	*/
 	public function index()
 	{
 		$boardConfig	= $this->boardConfig;
 		$items			= $this->itemService->getAllByPaginate($this->countPerPage);
-		$pagination		= $this->getPaginationLinks ($items);
+		$pagination		= $this->getPaginationLinks($items);
 		$countries		= $this->countryService->getAll();
 		$title 		= 'Статьи, русский турист, сайт про туризм и путешествия';
 		$data = [
@@ -54,7 +53,7 @@ class ItemController extends Controller
 	* @param  int     $id
 	* @return \Illuminate\Http\Response
 	*/
-	public function getItem ($id)
+	public function getItem($id)
 	{
 		$item			= $this->itemService->getById($id);
 		$countries		= $this->countryService->getAll();
@@ -66,5 +65,15 @@ class ItemController extends Controller
 			'item'			=> $item
 		];
 		return response()->view('item_id', $data);
+	}
+
+	/**
+	* Get all items
+	* @return json
+	*/
+	public function getItems()
+	{
+		$items	= $this->itemService->getAllByPaginate($this->countPerPage);
+		return ItemResource::collection($items);
 	}
 }

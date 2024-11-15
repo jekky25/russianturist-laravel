@@ -14,7 +14,6 @@ class Item extends Model
 
 	public function getItemsDescriptionAttribute ($val)
 	{
-		$val = $this->replaceSpaces($val);
 		return SapeServiceProvider::replaceSapeCode($val);
 	}
 	
