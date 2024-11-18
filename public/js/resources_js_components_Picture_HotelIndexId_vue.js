@@ -33,11 +33,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       axios.get('/api/get/hotel/name/' + name + '/picture/' + picture).then(function (res) {
         _this.hotel = res.data.data;
-        console.log(_this.hotel);
+        _this.setTitle(_this.hotel);
       })["catch"](function (res) {
         _this.errors = res.data;
       });
       return false;
+    },
+    setTitle: function setTitle(item) {
+      if (item === null) return false;
+      window.document.title = item.name + ', отель ' + item.name + ', русский турист, сайт про туризм и путешествия';
     }
   }
 });

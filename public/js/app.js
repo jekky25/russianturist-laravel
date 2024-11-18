@@ -23419,6 +23419,10 @@ var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({
     Index: _components_Index_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
+_router_js__WEBPACK_IMPORTED_MODULE_3__["default"].beforeEach(function (toRoute, fromRoute, next) {
+  window.document.title = toRoute.meta && toRoute.meta.title ? toRoute.meta.title : '';
+  next();
+});
 app.use(_router_js__WEBPACK_IMPORTED_MODULE_3__["default"]);
 app.mount('#app');
 
@@ -23490,69 +23494,102 @@ __webpack_require__.r(__webpack_exports__);
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Home_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Home/Index */ "./resources/js/components/Home/Index.vue"));
     },
-    name: 'home'
+    name: 'home',
+    meta: {
+      title: 'Русский турист, сайт про туризм и путешествия'
+    }
   }, {
     path: '/countries/:name.html',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Country_Id_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Country/Id */ "./resources/js/components/Country/Id.vue"));
     },
     name: 'country_name',
-    props: true
+    props: true,
+    meta: {
+      title: 'Страны, русский турист, сайт про туризм и путешествия'
+    }
   }, {
     path: '/countries/',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Country_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Country/Index */ "./resources/js/components/Country/Index.vue"));
     },
-    name: 'countries'
+    name: 'countries',
+    meta: {
+      title: 'Страны, русский турист, сайт про туризм и путешествия'
+    }
   }, {
     path: '/towns/',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_City_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/City/Index */ "./resources/js/components/City/Index.vue"));
     },
-    name: 'cities'
+    name: 'cities',
+    meta: {
+      title: 'Города, русский турист, сайт про туризм и путешествия'
+    }
   }, {
     path: '/towns/:name.html',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_City_Id_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/City/Id */ "./resources/js/components/City/Id.vue"));
     },
     name: 'city_name',
-    props: true
+    props: true,
+    meta: {
+      title: 'Города, русский турист, сайт про туризм и путешествия'
+    }
   }, {
     path: '/hotels/:name/foto/:id.html',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Picture_HotelIndexId_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Picture/HotelIndexId */ "./resources/js/components/Picture/HotelIndexId.vue"));
     },
-    name: 'hotel_fotos_id'
+    name: 'hotel_fotos_id',
+    meta: {
+      title: 'Отели, русский турист, сайт про туризм и путешествия'
+    }
   }, {
     path: '/hotels/:name/foto.html',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Picture_HotelIndex_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Picture/HotelIndex */ "./resources/js/components/Picture/HotelIndex.vue"));
     },
-    name: 'hotel_fotos'
+    name: 'hotel_fotos',
+    meta: {
+      title: 'Отели, русский турист, сайт про туризм и путешествия'
+    }
   }, {
     path: '/hotels/:name.html',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Hotel_Id_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Hotel/Id */ "./resources/js/components/Hotel/Id.vue"));
     },
-    name: 'hotel_name'
+    name: 'hotel_name',
+    meta: {
+      title: 'Отели, русский турист, сайт про туризм и путешествия'
+    }
   }, {
     path: '/hotels/',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Hotel_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Hotel/Index */ "./resources/js/components/Hotel/Index.vue"));
     },
-    name: 'hotels'
+    name: 'hotels',
+    meta: {
+      title: 'Отели, русский турист, сайт про туризм и путешествия'
+    }
   }, {
     path: '/items/item_:id.html',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Item_Id_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Item/Id */ "./resources/js/components/Item/Id.vue"));
     },
-    name: 'item_id'
+    name: 'item_id',
+    meta: {
+      title: 'Статьи, русский турист, сайт про туризм и путешествия'
+    }
   }, {
     path: '/items/',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Item_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Item/Index */ "./resources/js/components/Item/Index.vue"));
     },
-    name: 'items'
+    name: 'items',
+    meta: {
+      title: 'Статьи, русский турист, сайт про туризм и путешествия'
+    }
   }]
 }));
 

@@ -32,10 +32,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       axios.get('/api/get/country/name/' + name).then(function (res) {
         _this.country = res.data.data;
+        _this.setTitle(_this.country);
       })["catch"](function (res) {
         _this.errors = res.data;
       });
       return false;
+    },
+    setTitle: function setTitle(item) {
+      if (item === null) return false;
+      window.document.title = item.name + ', страна ' + item.name + ', русский турист, сайт про туризм и путешествия';
     }
   }
 });

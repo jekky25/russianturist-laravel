@@ -33,12 +33,18 @@
 				axios.get('/api/get/country/name/' + name)
 				.then(res => {
 					this.country = res.data.data;
+					this.setTitle(this.country);
 				})
 				.catch(res => {
 					this.errors = res.data;
 				});
 				return false;
 			},
+			setTitle(item)
+			{
+				if (item === null) return false;
+				window.document.title = item.name + ', страна ' + item.name + ', русский турист, сайт про туризм и путешествия';
+			}
 		}
 	}
 </script>

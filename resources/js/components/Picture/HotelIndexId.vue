@@ -46,12 +46,17 @@
 				axios.get('/api/get/hotel/name/' + name + '/picture/' + picture)
 				.then(res => {
 					this.hotel = res.data.data;
-					console.log(this.hotel);
+					this.setTitle(this.hotel);
 				})
 				.catch(res => {
 					this.errors = res.data;
 				});
 				return false;
+			},
+			setTitle(item)
+			{
+				if (item === null) return false;
+				window.document.title = item.name + ', отель ' + item.name + ', русский турист, сайт про туризм и путешествия';
 			}
 		}
 	}

@@ -27,10 +27,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       axios.get('/api/get/item/id/' + id).then(function (res) {
         _this.item = res.data.data;
+        _this.setTitle(_this.item);
       })["catch"](function (res) {
         _this.errors = res.data;
       });
       return false;
+    },
+    setTitle: function setTitle(item) {
+      if (item === null) return false;
+      window.document.title = item.name + ', статья ' + item.name + ', русский турист, сайт про туризм и путешествия';
     }
   }
 });

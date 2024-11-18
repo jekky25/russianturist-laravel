@@ -8,5 +8,10 @@ const app = createApp({
         Index
     }
 });
+router.beforeEach((toRoute, fromRoute, next) => {
+    window.document.title = toRoute.meta && toRoute.meta.title ? toRoute.meta.title : '';
+  
+    next();
+});
 app.use(router);
 app.mount('#app');
