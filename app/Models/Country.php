@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\BaseConfig;
 use App\Models\Foto;
+use App\Traits\Tstr;
 
 class Country extends Model
 {
-	use HasFactory, BaseConfig;
+	use HasFactory, BaseConfig, Tstr;
 
 	public $boardConfig = [];
 
@@ -25,7 +26,7 @@ class Country extends Model
 
 	public function getCountriesDescriptionAttribute ($val)
 	{
-		return str_replace("\n", "\n<br />\n", $val);
+		return $this->replaceSpaces($val);
 	}
 
 	public function getCountriesImgAttribute ()

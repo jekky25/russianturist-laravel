@@ -7,6 +7,7 @@ use App\Services\CountryService;
 use App\Traits\BaseConfig;
 use App\Traits\Pagination;
 use App\Http\Resources\ItemResource;
+use App\Http\Resources\ItemFullResource;
 
 class ItemController extends Controller
 {
@@ -75,5 +76,16 @@ class ItemController extends Controller
 	{
 		$items	= $this->itemService->getAllByPaginate($this->countPerPage);
 		return ItemResource::collection($items);
+	}
+
+	/**
+	* Show an item page
+	* @param  string  $id
+	* @return \Illuminate\Http\Response
+	*/
+	public function getItemById($id)
+	{
+		$item			= $this->itemService->getById($id);
+		return new ItemFullResource($item);
 	}
 }

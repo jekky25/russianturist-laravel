@@ -23544,7 +23544,7 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: '/items/item_:id.html',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_components_Home_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Home/Index */ "./resources/js/components/Home/Index.vue"));
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Item_Id_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Item/Id */ "./resources/js/components/Item/Id.vue"));
     },
     name: 'item_id'
   }, {
@@ -39325,7 +39325,7 @@ function useRoute(_name) {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Home_Index_vue":1,"resources_js_components_Country_Id_vue":1,"resources_js_components_Country_Index_vue":1,"resources_js_components_City_Index_vue":1,"resources_js_components_City_Id_vue":1,"resources_js_components_Picture_HotelIndexId_vue":1,"resources_js_components_Picture_HotelIndex_vue":1,"resources_js_components_Hotel_Id_vue":1,"resources_js_components_Hotel_Index_vue":1,"resources_js_components_Item_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Home_Index_vue":1,"resources_js_components_Country_Id_vue":1,"resources_js_components_Country_Index_vue":1,"resources_js_components_City_Index_vue":1,"resources_js_components_City_Id_vue":1,"resources_js_components_Picture_HotelIndexId_vue":1,"resources_js_components_Picture_HotelIndex_vue":1,"resources_js_components_Hotel_Id_vue":1,"resources_js_components_Hotel_Index_vue":1,"resources_js_components_Item_Id_vue":1,"resources_js_components_Item_Index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

@@ -16,10 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('slashes')->group(function () {
 });
 
-Route::get('/items/item_{id}.html', 'ItemController@getItem')->whereNumber('id')->name('item_id');
-
 Route::get('/{page}', 'IndexController')->where('page', '.*');
 
+Route::get('/items/item_{id}.html', 'ItemController@getItem')->whereNumber('id')->name('item_id');
 Route::get('/countries/{name}.html', 'CountryController@getCountry')->name('country_name'); //depricated
 Route::middleware('slashes')->group(function () {
 	Route::get('/countries/', 		'CountryController@index')	->name('countries'); //depricated

@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Providers\SapeServiceProvider;
 use App\Models\Foto;
-use App\Traits\Tstr;
 
 class Item extends Model
 {
-	use HasFactory, Tstr;
+	use HasFactory;
 
 	public function getItemsDescriptionAttribute ($val)
 	{

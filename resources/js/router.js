@@ -52,7 +52,7 @@ export default createRouter({
 		},
 		{
 			path: '/items/item_:id.html',
-			component: () => import('./components/Home/Index'),
+			component: () => import('./components/Item/Id'),
 			name: 'item_id'
 		},
 		{
