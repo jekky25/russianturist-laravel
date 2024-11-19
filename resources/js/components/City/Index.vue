@@ -14,6 +14,7 @@
 	</div>
 </template>
 <script>
+	import getConfig from "../../methods/getConfig.js";
 	export default {
 		name: 'CityIndex',
 		data() {
@@ -29,40 +30,31 @@
 		},
 		mounted() {
 			this.getCities();
-			this.getConfig();
+			this.getPictureParams();
 		},
 		methods:
 		{
+			async getPictureParams()
+			{
+				this.setConfigPicture(await getConfig());
+			},
 			getCities()
 			{
 				axios.get('/api/get/cities/')
 				.then(res => {
 					this.cities = res.data.data;
-					console.log(this.cities);
 				})
 				.catch(res => {
 					this.errors = res.data;
 				});
 				return false;
 			},
-			getConfig()
+			setConfigPicture(res)
 			{
-				axios.get('/api/get/config/')
-				.then(res => {
-					this.config = res.data;
-					this.setConfigPicture();
-				})
-				.catch(res => {
-					this.errors = res.data;
-				});
-				return false;
-			},
-			setConfigPicture()
-			{
-				this.configHeightCityPicture			= parseInt(this.config.foto_height_town) + 10;
-				this.configCityWidthPicture				= parseInt(this.config.foto_width_town);
-				this.configCityHeightPicture			= parseInt(this.config.foto_height_town);
-				this.configMarginCityWidthPicture		= parseInt(this.config.foto_width_town) + 10;
+				this.configHeightCityPicture			= parseInt(res.config.foto_height_town) + 10;
+				this.configCityWidthPicture				= parseInt(res.config.foto_width_town);
+				this.configCityHeightPicture			= parseInt(res.config.foto_height_town);
+				this.configMarginCityWidthPicture		= parseInt(res.config.foto_width_town) + 10;
 				return false;
 			}
 		}

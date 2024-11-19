@@ -9,6 +9,7 @@
 </template>
 
 <script>
+	import getConfig from "../../methods/getConfig.js";
 	export default {
 		name: 'PictureShortList',
 		data() {
@@ -23,26 +24,29 @@
 		mounted() {
 			this.pictures	= this.$attrs.pictures;
 			this.hotel		= this.$attrs.hotel;
-			this.getConfig();
+			this.getPictureParams();
 		},
 		methods:
 		{
-			getConfig()
+			async getPictureParams()
 			{
-				axios.get('/api/get/config/')
+				this.setConfigPicture(await getConfig());
+			},
+			async getConfig()
+			{
+				await axios.get('/api/get/config/')
 				.then(res => {
 					this.config = res.data;
-					this.setConfigPicture();
 				})
 				.catch(res => {
 					this.errors = res.data;
 				});
 				return false;
 			},
-			setConfigPicture()
+			setConfigPicture(res)
 			{
-				this.configHeightHotelPrew			= parseInt(this.config.foto_height_hotel_prew);
-				this.configWidthHotelPrew			= parseInt(this.config.foto_width_hotel_prew);
+				this.configHeightHotelPrew			= parseInt(res.config.foto_height_hotel_prew);
+				this.configWidthHotelPrew			= parseInt(res.config.foto_width_hotel_prew);
 				return false;
 			}
 		}

@@ -15,6 +15,7 @@
 	</div>
 </template>
 <script>
+	import getConfig from "../../methods/getConfig.js";
 	export default {
 		name: 'CountryIndex',
 		data() {
@@ -30,10 +31,14 @@
 		},
 		mounted() {
 			this.getCountries();
-			this.getConfig();
+			this.getPictureParams();
 		},
 		methods:
 		{
+			async getPictureParams()
+			{
+				this.setConfigPicture(await getConfig());
+			},
 			getCountries()
 			{
 				axios.get('/api/get/countries/')
@@ -45,24 +50,12 @@
 				});
 				return false;
 			},
-			getConfig()
+			setConfigPicture(res)
 			{
-				axios.get('/api/get/config/')
-				.then(res => {
-					this.config = res.data;
-					this.setConfigPicture();
-				})
-				.catch(res => {
-					this.errors = res.data;
-				});
-				return false;
-			},
-			setConfigPicture()
-			{
-				this.configHeightCountryPicture			= parseInt(this.config.foto_height_country) + 10;
-				this.configCountryWidthPicture			= parseInt(this.config.foto_width_country);
-				this.configCountryHeightPicture			= parseInt(this.config.foto_height_country);
-				this.configMarginCountryWidthPicture	= parseInt(this.config.foto_width_country) + 10;
+				this.configHeightCountryPicture			= parseInt(res.config.foto_height_country) + 10;
+				this.configCountryWidthPicture			= parseInt(res.config.foto_width_country);
+				this.configCountryHeightPicture			= parseInt(res.config.foto_height_country);
+				this.configMarginCountryWidthPicture	= parseInt(res.config.foto_width_country) + 10;
 				return false;
 			}
 		}

@@ -15,6 +15,7 @@
 	</div>
 </template>
 <script>
+	import getConfig from "../../methods/getConfig.js";
 	export default {
 		name: 'HotelIndex',
 		data() {
@@ -30,10 +31,14 @@
 		},
 		mounted() {
 			this.getHotels();
-			this.getConfig();
+			this.getPictureParams();
 		},
 		methods:
 		{
+			async getPictureParams()
+			{
+				this.setConfigPicture(await getConfig());
+			},
 			getHotels()
 			{
 				axios.get('/api/get/hotels/')
@@ -45,27 +50,14 @@
 				});
 				return false;
 			},
-			getConfig()
+			setConfigPicture(res)
 			{
-				axios.get('/api/get/config/')
-				.then(res => {
-					this.config = res.data;
-					this.setConfigPicture();
-				})
-				.catch(res => {
-					this.errors = res.data;
-				});
-				return false;
-			},
-			setConfigPicture()
-			{
-				this.configHeightHotelPicture			= parseInt(this.config.foto_height_hotel) + 10;
-				this.configHotelWidthPicture			= parseInt(this.config.foto_width_hotel);
-				this.configHotelHeightPicture			= parseInt(this.config.foto_height_hotel);
-				this.configMarginHotelWidthPicture		= parseInt(this.config.foto_width_hotel) + 10;
+				this.configHeightHotelPicture			= parseInt(res.config.foto_height_hotel) + 10;
+				this.configHotelWidthPicture			= parseInt(res.config.foto_width_hotel);
+				this.configHotelHeightPicture			= parseInt(res.config.foto_height_hotel);
+				this.configMarginHotelWidthPicture		= parseInt(res.config.foto_width_hotel) + 10;
 				return false;
 			}
-
 		}
 	}
 </script>

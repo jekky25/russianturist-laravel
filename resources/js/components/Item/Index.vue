@@ -19,6 +19,7 @@
 	</div>
 </template>
 <script>
+	import getConfig from "../../methods/getConfig.js";
 	export default {
 		name: 'ItemIndex',
 		data() {
@@ -35,10 +36,14 @@
 		mounted() {
 			this.getCurrentPage();
 			this.getItems(this.currentPage);
-			this.getConfig();
+			this.getPictureParams();
 		},
 		methods:
 		{
+			async getPictureParams()
+			{
+				this.setConfigPicture(await getConfig());
+			},
 			getCurrentPage()
 			{
 				this.currentPage = typeof(this.$route.query.page) !== 'undefined' ? parseInt(this.$route.query.page) : 1;
@@ -64,23 +69,11 @@
 				});
 				return ar;
 			},
-			getConfig()
+			setConfigPicture(res)
 			{
-				axios.get('/api/get/config/')
-				.then(res => {
-					this.config = res.data;
-					this.setConfigPicture();
-				})
-				.catch(res => {
-					this.errors = res.data;
-				});
-				return false;
-			},
-			setConfigPicture()
-			{
-				this.configHeightItemPicture			= parseInt(this.config.foto_height_item);
-				this.configWidthItemPicture				= parseInt(this.config.foto_width_item);
-				this.configMarginItemWidthPicture		= parseInt(this.config.foto_width_item) + 10;
+				this.configHeightItemPicture			= parseInt(res.config.foto_height_item);
+				this.configWidthItemPicture				= parseInt(res.config.foto_width_item);
+				this.configMarginItemWidthPicture		= parseInt(res.config.foto_width_item) + 10;
 				return false;
 			}
 		},

@@ -19,6 +19,7 @@
 </template>
 
 <script>
+	import getConfig from "../../methods/getConfig.js";
 	export default {
 		name: 'HotelShortList',
 		data() {
@@ -40,10 +41,14 @@
 			this.cityId		= typeof this.$attrs.cityId !== 'undefined'		? parseInt(this.$attrs.cityId)		: 0;
 			this.url		= this.cityId > 0								? '/api/get/hotels/short/city/' + this.cityId : '/api/get/hotels/short/' + this.countryId;
 			this.getHotels();
-			this.getConfig();
+			this.getPictureParams();
 		},
 		methods:
 		{
+			async getPictureParams()
+			{
+				this.setConfigPicture(await getConfig());
+			},
 			getHotels()
 			{
 				axios.get(this.url)
@@ -55,24 +60,12 @@
 				});
 				return false;
 			},
-			getConfig()
+			setConfigPicture(res)
 			{
-				axios.get('/api/get/config/')
-				.then(res => {
-					this.config = res.data;
-					this.setConfigPicture();
-				})
-				.catch(res => {
-					this.errors = res.data;
-				});
-				return false;
-			},
-			setConfigPicture()
-			{
-				this.configHeightHotelPicture		= parseInt(this.config.foto_height_hotel) + 10;
-				this.configHotelWidthPicture		= parseInt(this.config.foto_width_hotel);
-				this.configMarginHotelWidthPicture	= parseInt(this.config.foto_width_hotel) + 10;
-				this.configHotelHeightPicture		= parseInt(this.config.foto_height_hotel);
+				this.configHeightHotelPicture		= parseInt(res.config.foto_height_hotel) + 10;
+				this.configHotelWidthPicture		= parseInt(res.config.foto_width_hotel);
+				this.configMarginHotelWidthPicture	= parseInt(res.config.foto_width_hotel) + 10;
+				this.configHotelHeightPicture		= parseInt(res.config.foto_height_hotel);
 				return false;
 			}
 		}
