@@ -24,12 +24,17 @@ class Country extends Model
 		$this->boardConfig = $this->getBoardConfig();
 	}
 
-	public function getCountriesDescriptionAttribute ($val)
+	public function getCountriesDescriptionAttribute($val)
 	{
 		return $this->replaceSpaces($val);
 	}
 
-	public function getCountriesImgAttribute ()
+	public function getCountriesShortDescriptionAttribute()
+	{
+		return $this->countries_description;
+	}
+
+	public function getCountriesImgAttribute()
 	{
 		$foto = asset('fotos/countries/'. $this['foto']['foto_id'] . '.jpg');
 		return !empty($foto) ? '<img title="' . $this['countries_name'] . '" alt="' . $this['countries_name'] . '" src="' . $foto . '" width="' . $this->boardConfig['foto_width_country_id'] . '" height="' . $this->boardConfig['foto_height_country_id'] . '">' : '';
