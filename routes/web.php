@@ -49,12 +49,12 @@ Route::get('/migr', function () {
 });
 
 Route::get('/artis', function () {
+//		Artisan::call('make:provider SapeServiceProvider');
 		//Artisan::call('make:model Hotel');
 	    //return "Артисан выполнен!";
 });
 
 Route::get('/clear', function () {
-    /*
     Artisan::call('cache:clear');
     Artisan::call('config:cache');
     Artisan::call('view:clear');
