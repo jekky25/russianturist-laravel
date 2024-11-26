@@ -13,7 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('slashes')->group(function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
+	Route::group(['namespace' => 'Main'], function() {
+		Route::get('/', 'IndexController');
+	});
+
+	Route::group(['namespace' => 'Config', 'prefix' => 'configs'], function() {
+		Route::get('/', 'IndexController@index')->name('admin.config.index');
+		Route::get('/create', 'IndexController@create')->name('admin.config.create');
+		Route::post('/store', 'IndexController@store')->name('admin.config.store');
+		Route::get('/{config}', 'IndexController@show')->name('admin.config.show');
+		Route::get('/{config}/edit', 'IndexController@edit')->name('admin.config.edit');
+		Route::patch('/{config}', 'IndexController@update')->name('admin.config.update');
+		Route::delete('/{config}', 'IndexController@destroy')->name('admin.config.destroy');
+	});
 });
 
 Route::get('/{page}', 'IndexController')->where('page', '.*');
