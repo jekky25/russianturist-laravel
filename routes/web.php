@@ -22,10 +22,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
 		Route::get('/', 'IndexController@index')->name('admin.config.index');
 		Route::get('/create', 'IndexController@create')->name('admin.config.create');
 		Route::post('/store', 'IndexController@store')->name('admin.config.store');
-		Route::get('/{config}', 'IndexController@show')->name('admin.config.show');
-		Route::get('/{config}/edit', 'IndexController@edit')->name('admin.config.edit');
-		Route::patch('/{config}', 'IndexController@update')->name('admin.config.update');
-		Route::delete('/{config}', 'IndexController@destroy')->name('admin.config.destroy');
+		Route::get('/{id}', 'IndexController@show')->name('admin.config.show');
+		Route::get('/{id}/edit', 'IndexController@edit')->name('admin.config.edit');
+		Route::patch('/{id}', 'IndexController@update')->name('admin.config.update');
+		Route::delete('/{id}', 'IndexController@destroy')->name('admin.config.destroy');
 	});
 });
 

@@ -24,7 +24,7 @@ class UpdateRequest extends FormRequest
 			'name.required'			=> 'Имя не заполнено',
 			'name.unique'			=> 'Имя не уникально',
 			'name.regex'			=> 'Данные некорректно заполнены',
-			'value.required'		=> 'Значение не уникально'
+			'value.required'		=> 'Значение не заполнено'
 		];
 	}
 
@@ -36,7 +36,7 @@ class UpdateRequest extends FormRequest
 	public function rules(): array
 	{
 		return [
-			'name'  => ['required', 'string', 'unique:vars', 'regex:/^[A-Za-z0-9]+$/i'],
+			'name'  => ['required', 'string', 'unique:vars,name, ' . \Request::instance()->id, 'regex:/^[A-Za-z0-9_]+$/i'],
 			'value' => ['required', 'string']
 		];
 	}
