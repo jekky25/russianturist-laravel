@@ -10,13 +10,7 @@
 			{{ csrf_field() }}
 			@method('PATCH')
 			<div class="card-body">
-			@if (!empty ($errors->all()))
-				<div class="error text-danger">
-					@foreach ($errors->all() as $message)
-						<div class="text-xs">{{ $message }}</div>
-					@endforeach
-				</div>
-			@endif				
+				<x-admin.errors />			
 				<x-admin.input  :value="old('name', $config->name)" title="Имя" name="name" placeholder="Введите имя" />
 				<x-admin.input  :value="old('value', $config->value)" title="Значение" name="value"	placeholder="Введите значение" />
 				<div class="form-group row">
