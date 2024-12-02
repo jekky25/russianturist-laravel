@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('vars', function (Blueprint $table) {
-            $table->integer('id')->first();
+            $table->primary('id');
         });
     }
 
@@ -21,10 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (Schema::hasColumn('vars', 'id')) {
-            Schema::table('vars', function (Blueprint $table) {
-                $table->dropPrimary('id');
-            });
-        }
+        Schema::table('vars', function (Blueprint $table) {
+            $table->dropPrimary('id');
+        });
     }
 };
