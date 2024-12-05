@@ -65,7 +65,7 @@ class CountryService
 	public function getById($id)
 	{
 		$country = Country::select('*')
-			->where('countries_id', $id)
+			->where('id', $id)
 			->firstOrFail();
 		return $country;
 	}

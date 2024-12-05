@@ -22,11 +22,11 @@
 					<tbody>
 					@foreach ($countries as $country)
 						<tr>
-							<td>{{ $country->countries_id }}</td>
+							<td>{{ $country->id }}</td>
 							<td>{{ $country->name }}</td>
 							<td>
-								<a class="mr-2 text-success" href="{{route('admin.country.edit', $country->countries_id)}}"><i class="fas fa-pen"></i></a>
-								<a class="text-danger action-delete-modal" href="javascript://" data-href="{{route('admin.country.destroy', $country->countries_id)}}" data-bs-toggle="modal" data-bs-target="#formModal"><i class="fas fa-trash-alt"></i></a>
+								<a class="mr-2 text-success" href="{{route('admin.country.edit', $country->id)}}"><i class="fas fa-pen"></i></a>
+								<a class="text-danger action-delete-modal" href="javascript://" data-href="{{route('admin.country.destroy', $country->id)}}" data-bs-toggle="modal" data-bs-target="#formModal"><i class="fas fa-trash-alt"></i></a>
 							</td>
 						</tr>
 					@endforeach

@@ -38,8 +38,8 @@ class UpdateRequest extends FormRequest
 	public function rules(): array
 	{
 		return [
-			'name'					=> ['required', 'string', 'unique:countries,name,' . \Request::instance()->id . ',countries_id'],
-			'slug'					=> ['required', 'string', 'unique:countries,slug,' . \Request::instance()->id . ',countries_id', 'regex:/^[A-Za-z0-9_]+$/i'],
+			'name'					=> ['required', 'string', 'unique:countries,name,' . \Request::instance()->id],
+			'slug'					=> ['required', 'string', 'unique:countries,slug,' . \Request::instance()->id, 'regex:/^[A-Za-z0-9_]+$/i'],
 			'description'			=> ['required', 'string']
 
 		];

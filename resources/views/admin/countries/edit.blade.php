@@ -6,7 +6,7 @@
 	<x-admin.title-block title="Редактирование страны" />
 	<!-- /.content-header -->
 	<div class="col-12">
-		<form action="{{route('admin.country.update', $country->countries_id)}}" class="col-4" method="post">
+		<form action="{{route('admin.country.update', $country->id)}}" class="col-4" method="post">
 			{{ csrf_field() }}
 			@method('PATCH')
 			<div class="card-body">

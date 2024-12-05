@@ -19,7 +19,7 @@ class Country extends Model
 		'description'
 	];
 	public $timestamps		= false;
-	protected $primaryKey 	= 'countries_id';
+	protected $primaryKey 	= 'id';
 
 	/**
 	* Create a new controller instance.
@@ -52,6 +52,6 @@ class Country extends Model
 	*/
 	public function fotos()
 	{
-		return $this->hasMany(Foto::class, 'foto_parent_id', 'countries_id');
+		return $this->hasMany(Foto::class, 'foto_parent_id', 'id');
 	}
 }
