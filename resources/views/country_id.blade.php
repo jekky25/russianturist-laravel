@@ -19,7 +19,7 @@
   				@endforeach
 			@endif
 		</div>
-		<p>{!!$country['countries_description']!!}</p>
+		<p>{!!$country['description']!!}</p>
 	</div>
 </div>
 @overwrite

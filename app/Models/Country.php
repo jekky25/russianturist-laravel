@@ -16,7 +16,7 @@ class Country extends Model
 	protected $fillable = [
 		'countries_name',
 		'countries_eng_name',
-		'countries_description'
+		'description'
 	];
 	public $timestamps		= false;
 	protected $primaryKey 	= 'countries_id';
@@ -38,7 +38,7 @@ class Country extends Model
 
 	public function getCountriesShortDescriptionAttribute()
 	{
-		return $this->countries_description;
+		return $this->description;
 	}
 
 	public function getCountriesImgAttribute()

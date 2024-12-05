@@ -15,7 +15,7 @@
 				<x-admin.input  :value="old('countries_eng_name', $country->countries_eng_name)" title="Транскрипция" name="countries_eng_name"	placeholder="Введите значение" />
 				<div class="form-group">
 					<label for="InputName">Описание</label>
-					<textarea class="form-control" name="countries_description" placeholder="Введите описание">{{ old('countries_description', $country->countries_description) }}</textarea>
+					<textarea class="form-control" name="description" placeholder="Введите описание">{{ old('description', $country->description) }}</textarea>
 				</div>
 				<div class="form-group row">
 					<div class="col-6"></div>

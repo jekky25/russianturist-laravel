@@ -19,7 +19,7 @@ class CountryFullResource extends JsonResource
 			'name'			=> $this->countries_name,
 			'slug'			=> $this->countries_eng_name,
 			'img'			=> $this->countries_img,
-			'description'	=> $this->countries_description
+			'description'	=> $this->description
 		];
 	}
 }
