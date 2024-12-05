@@ -12,7 +12,7 @@
 			<div class="card-body">
 				<x-admin.errors />			
 				<x-admin.input  :value="old('countries_name', $country->countries_name)" title="Имя" name="countries_name" placeholder="Введите имя" />
-				<x-admin.input  :value="old('countries_eng_name', $country->countries_eng_name)" title="Транскрипция" name="countries_eng_name"	placeholder="Введите значение" />
+				<x-admin.input  :value="old('slug', $country->slug)" title="Транскрипция" name="slug" placeholder="Введите значение" />
 				<div class="form-group">
 					<label for="InputName">Описание</label>
 					<textarea class="form-control" name="description" placeholder="Введите описание">{{ old('description', $country->description) }}</textarea>

@@ -14,7 +14,7 @@ class CountryService
 	public function getByName($name)
 	{
 		$country = Country::select('*')
-				->where('countries_eng_name', $name)
+				->where('slug', $name)
 				->first();
 
 		$country->description = str_replace("\n", "\n<br />\n", $country->description);

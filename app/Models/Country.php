@@ -15,7 +15,7 @@ class Country extends Model
 	public $boardConfig = [];
 	protected $fillable = [
 		'countries_name',
-		'countries_eng_name',
+		'slug',
 		'description'
 	];
 	public $timestamps		= false;

@@ -17,7 +17,7 @@ class CountryShortResource extends JsonResource
 		return [
 			'id'			=> $this->countries_id,
 			'name'			=> $this->countries_name,
-			'slug'			=> $this->countries_eng_name,
+			'slug'			=> $this->slug,
 		];
 	}
 }

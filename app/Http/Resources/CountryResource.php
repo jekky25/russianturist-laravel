@@ -20,7 +20,7 @@ class CountryResource extends JsonResource
 		return [
 			'id'			=> $this->countries_id,
 			'name'			=> $this->countries_name,
-			'slug'			=> $this->countries_eng_name,
+			'slug'			=> $this->slug,
 			'fotoStr'		=> $this->fotoStr,
 			'description'	=> Helper::cutText($this->countries_short_description, self::DESCRIPTION_SIZE),
 		];
