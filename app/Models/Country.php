@@ -14,7 +14,7 @@ class Country extends Model
 
 	public $boardConfig = [];
 	protected $fillable = [
-		'countries_name',
+		'name',
 		'slug',
 		'description'
 	];
@@ -44,7 +44,7 @@ class Country extends Model
 	public function getCountriesImgAttribute()
 	{
 		$foto = asset('fotos/countries/'. $this['foto']['foto_id'] . '.jpg');
-		return !empty($foto) ? '<img title="' . $this['countries_name'] . '" alt="' . $this['countries_name'] . '" src="' . $foto . '" width="' . $this->boardConfig['foto_width_country_id'] . '" height="' . $this->boardConfig['foto_height_country_id'] . '">' : '';
+		return !empty($foto) ? '<img title="' . $this['name'] . '" alt="' . $this['name'] . '" src="' . $foto . '" width="' . $this->boardConfig['foto_width_country_id'] . '" height="' . $this->boardConfig['foto_height_country_id'] . '">' : '';
 	}
 
 	/**

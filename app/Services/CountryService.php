@@ -32,7 +32,7 @@ class CountryService
 	 * @param  string  $orderBy
 	 * @return \Illuminate\Database\Eloquent\Collection 
 	 */
-	public function getAll($orderBy = 'countries_name')
+	public function getAll($orderBy = 'name')
 	{
 		$this->countries = Country::select('*')->orderBy($orderBy)->get();
 		$this->addFotos();

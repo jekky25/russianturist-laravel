@@ -21,8 +21,8 @@ class StoreRequest extends FormRequest
 	public function messages():array
 	{
 		return	[
-			'countries_name.required'			=> 'Название не заполнено',
-			'countries_name.unique'				=> 'Название не уникально',
+			'name.required'						=> 'Название не заполнено',
+			'name.unique'						=> 'Название не уникально',
 			'slug.required'						=> 'Имя для ссылки не заполнено',
 			'slug.unique'						=> 'Имя для ссылки не уникально',
 			'slug.regex'						=> 'Имя для ссылки не корректно заполнено',
@@ -38,7 +38,7 @@ class StoreRequest extends FormRequest
 	public function rules(): array
 	{
 		return [
-			'countries_name'		=> ['required', 'string', 'unique:countries'],
+			'name'					=> ['required', 'string', 'unique:countries'],
 			'slug'					=> ['required', 'string', 'unique:countries', 'regex:/^[A-Za-z0-9_]+$/i'],
 			'description'			=> ['required', 'string']
 		];

@@ -2,7 +2,7 @@
 @section('title', $arMeta['title'])
 @section('main_body')
 <div class="main_items_id">
-							<h1>{{$town->towns_name}} (<a href="{{route('country_name',$town->country['slug'])}}">{{$town->country['countries_name']}}</a>)</h1>
+							<h1>{{$town->towns_name}} (<a href="{{route('country_name',$town->country['slug'])}}">{{$town->country['name']}}</a>)</h1>
 <div class="hot_prew">
 <div class="country_foto">{!!$town->towns_img!!}</div>
 	<div class="country_r">

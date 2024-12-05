@@ -2,7 +2,7 @@
 @section('title', $arMeta['title'])
 @section('main_body')
 <div class="main_items_id">
-	<h1>{{$country['countries_name']}}</h1>
+	<h1>{{$country['name']}}</h1>
 	<div class="hot_prew">
 		<div class="country_foto">{!!$country['countries_img']!!}</div>
 		<div class="country_r">
