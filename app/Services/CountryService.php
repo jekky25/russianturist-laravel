@@ -52,8 +52,63 @@ class CountryService
 								->orderBy('foto_position')
 								->limit(1)
 								->get();
+			if (count($foto) == 0) continue;
 			$row['fotos']		= $foto;
-			$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/countries/' . $row['fotos'][0]['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
+			$row['fotoStr']		= !empty($row['fotos']) ? asset('fotos/countries/' . $row['fotos'][0]['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
+		}
+	}
+
+	/**
+	* get country by id
+	* @return \Illuminate\Database\Eloquent\Collection 
+	*/
+	public function getById($id)
+	{
+		$country = Country::select('*')
+			->where('countries_id', $id)
+			->firstOrFail();
+		return $country;
+	}
+
+	/**
+	* create a country
+	* @param  array $request
+	* @return void
+	*/	
+	public function create($request) 
+	{
+		try {
+			Country::create($request);
+		} catch (\Exception $e) {
+			throw new \Exception('Failed to create a Country '.$e->getMessage());
+		}
+	}
+
+	/**
+	* update a country
+	* @param array $params
+	* @return void
+	*/	
+	public function update($id, $params)
+	{
+		try {
+			Country::find($id)->update($params);
+		} catch (\Exception $e) {
+			throw new \Exception('Failed to update the Country. '.$e->getMessage());
+		}
+	}
+
+	
+	/**
+	* delete a country
+	* @param  id $id
+	* @return void
+	*/
+	public function destroy($id) {
+		try {
+			Country::find($id)->delete();
+		} catch (\Exception $e) {
+			throw new \Exception('Failed to delete Country . '.$e->getMessage());
 		}
 	}
 }

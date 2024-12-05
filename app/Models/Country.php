@@ -13,6 +13,13 @@ class Country extends Model
 	use HasFactory, BaseConfig, Tstr;
 
 	public $boardConfig = [];
+	protected $fillable = [
+		'countries_name',
+		'countries_eng_name',
+		'countries_description'
+	];
+	public $timestamps		= false;
+	protected $primaryKey 	= 'countries_id';
 
 	/**
 	* Create a new controller instance.
