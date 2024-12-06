@@ -13,10 +13,7 @@
 				<x-admin.errors />			
 				<x-admin.input  :value="old('name', $country->name)" title="Имя" name="name" placeholder="Введите имя" />
 				<x-admin.input  :value="old('slug', $country->slug)" title="Транскрипция" name="slug" placeholder="Введите значение" />
-				<div class="form-group">
-					<label for="InputName">Описание</label>
-					<textarea class="form-control" name="description" placeholder="Введите описание">{{ old('description', $country->description) }}</textarea>
-				</div>
+				<x-admin.textarea  :value="old('description', $country->description)" title="Описание" name="description" placeholder="Введите описание" />
 				<div class="form-group row">
 					<div class="col-6"></div>
 					<div class="col-6">
