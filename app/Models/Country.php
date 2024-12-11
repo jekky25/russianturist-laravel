@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\BaseConfig;
+use App\Services\ImageService;
 use App\Models\Foto;
 use App\Traits\Tstr;
 
@@ -12,11 +13,14 @@ class Country extends Model
 {
 	use HasFactory, BaseConfig, Tstr;
 
+	const IMAGES_DIRECTORY	= 'images/country';
+
 	public $boardConfig = [];
 	protected $fillable = [
 		'name',
 		'slug',
-		'description'
+		'description',
+		'image'
 	];
 	public $timestamps		= false;
 	protected $primaryKey 	= 'id';
@@ -40,6 +44,12 @@ class Country extends Model
 	{
 		return $this->description;
 	}
+
+	public function getImagePathAttribute()
+	{
+		return self::IMAGES_DIRECTORY . ImageService::SEPARATOR . $this->image;
+	}
+	
 
 	public function getCountriesImgAttribute()
 	{

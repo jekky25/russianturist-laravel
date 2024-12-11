@@ -26,7 +26,9 @@ class StoreRequest extends FormRequest
 			'slug.required'						=> 'Имя для ссылки не заполнено',
 			'slug.unique'						=> 'Имя для ссылки не уникально',
 			'slug.regex'						=> 'Имя для ссылки не корректно заполнено',
-			'description.required'				=> 'Описание не заполнено'
+			'description.required'				=> 'Описание не заполнено',
+			'image.required'					=> 'Изображение не загружено',
+			'image.image'						=> 'Файл не является изображением'
 		];
 	}
 
@@ -40,7 +42,8 @@ class StoreRequest extends FormRequest
 		return [
 			'name'					=> ['required', 'string', 'unique:countries'],
 			'slug'					=> ['required', 'string', 'unique:countries', 'regex:/^[A-Za-z0-9_]+$/i'],
-			'description'			=> ['required', 'string']
+			'description'			=> ['required', 'string'],
+			'image'					=> ['required', 'image']
 		];
 	}
 }

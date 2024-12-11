@@ -2,10 +2,18 @@
 namespace App\Services;
 
 use App\Models\Country;
+use App\Services\ImageService;
 
 class CountryService
 {
 	private $countries;
+
+	public function __construct(
+		private ImageService $image
+	)
+	{
+	}
+
 	/**
 	 * get country by name
 	 * @param  string  $name
@@ -78,6 +86,7 @@ class CountryService
 	public function create($request) 
 	{
 		try {
+			$request['image'] = $this->image->put(Country::IMAGES_DIRECTORY, $request['image']);
 			Country::create($request);
 		} catch (\Exception $e) {
 			throw new \Exception('Failed to create a Country '.$e->getMessage());
@@ -86,13 +95,15 @@ class CountryService
 
 	/**
 	* update a country
-	* @param array $params
+	* @param array $request
 	* @return void
 	*/	
-	public function update($id, $params)
+	public function update($id, $request)
 	{
 		try {
-			Country::find($id)->update($params);
+			$country = Country::find($id);
+			if (!empty($request['image'])) $request['image'] = $this->image->update($country->ImagePath, Country::IMAGES_DIRECTORY, $request['image']);
+			$country->update($request);
 		} catch (\Exception $e) {
 			throw new \Exception('Failed to update the Country. '.$e->getMessage());
 		}
@@ -106,7 +117,9 @@ class CountryService
 	*/
 	public function destroy($id) {
 		try {
-			Country::find($id)->delete();
+			$country = Country::find($id);
+			$this->image->destroy($country->ImagePath);
+			$country->delete();
 		} catch (\Exception $e) {
 			throw new \Exception('Failed to delete Country . '.$e->getMessage());
 		}
