@@ -1,12 +1,12 @@
 <?php
 namespace App\Services;
 
-use App\Traits\Tstr;
+use App\Traits\TStr;
 use App\Models\Hotel;
 
 class HotelService
 {
-	use Tstr;
+	use TStr;
 	public $hotels;
 	public $selectedPicture = 0;
 

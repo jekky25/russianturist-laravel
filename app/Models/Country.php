@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\BaseConfig;
 use App\Services\ImageService;
 use App\Models\Foto;
-use App\Traits\Tstr;
+use App\Traits\TStr;
 
 class Country extends Model
 {
-	use HasFactory, BaseConfig, Tstr;
+	use HasFactory, BaseConfig, TStr;
 
 	const IMAGES_DIRECTORY	= 'images/country';
 
