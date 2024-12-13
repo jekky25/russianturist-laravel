@@ -27,7 +27,7 @@
 							<td>{{ $country->id }}</td>
 							<td>{{ $country->name }}</td>
 							<td>{{ $country->slug }}</td>
-							<td>@if (!empty($country->image))<img class="w-25" alt="" title"" src="{{ asset('storage/' . $country->imagePath) }}" />@endif</td>
+							<td>@if (!empty($country->image))<img class="w-25" alt="" title"" src="{{ asset($country->imagePath) }}" />@endif</td>
 							<td>
 								<a class="mr-2 text-success" href="{{route('admin.country.edit', $country->id)}}"><i class="fas fa-pen"></i></a>
 								<a class="text-danger action-delete-modal" href="javascript://" data-href="{{route('admin.country.destroy', $country->id)}}" data-bs-toggle="modal" data-bs-target="#formModal"><i class="fas fa-trash-alt"></i></a>

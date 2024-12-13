@@ -47,14 +47,14 @@ class Country extends Model
 
 	public function getImagePathAttribute()
 	{
-		return self::IMAGES_DIRECTORY . ImageService::SEPARATOR . $this->image;
+		return 'storage' . ImageService::SEPARATOR . self::IMAGES_DIRECTORY . ImageService::SEPARATOR . $this->image;
 	}
 	
 
 	public function getCountriesImgAttribute()
 	{
-		$foto = asset('fotos/countries/'. $this['foto']['foto_id'] . '.jpg');
-		return !empty($foto) ? '<img title="' . $this['name'] . '" alt="' . $this['name'] . '" src="' . $foto . '" width="' . $this->boardConfig['foto_width_country_id'] . '" height="' . $this->boardConfig['foto_height_country_id'] . '">' : '';
+		$foto = asset($this->image_path);
+		return !empty($this->image) ? '<img title="' . $this['name'] . '" alt="' . $this['name'] . '" src="' . $foto . '" width="' . $this->boardConfig['foto_width_country_id'] . '" height="' . $this->boardConfig['foto_height_country_id'] . '">' : '';
 	}
 
 	/**

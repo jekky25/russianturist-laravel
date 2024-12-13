@@ -26,12 +26,6 @@ class CountryService
 				->first();
 
 		$country->description = str_replace("\n", "\n<br />\n", $country->description);
-		$foto   = $country->fotos()
-				->where('foto_type','country')
-				->orderBy('foto_position')
-				->first()
-				->toArray();
-		$country['foto']	= $foto;
 		return $country;
 	}
 
@@ -55,14 +49,7 @@ class CountryService
 	{
 		foreach ($this->countries as &$row) 
 		{
-			$foto				= $row->fotos()
-								->where('foto_type','country')
-								->orderBy('foto_position')
-								->limit(1)
-								->get();
-			if (count($foto) == 0) continue;
-			$row['fotos']		= $foto;
-			$row['fotoStr']		= !empty($row['fotos']) ? asset('fotos/countries/' . $row['fotos'][0]['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
+			$row['fotoStr'] = asset($row->image_path);
 		}
 	}
 

@@ -29,7 +29,7 @@ class CountryController extends Controller
 	*/
 	public function getCountries()
 	{
-		$countries	= $this->countryService->getAll();		
+		$countries	= $this->countryService->getAll();
 		return CountryResource::collection($countries);
 	}
 
