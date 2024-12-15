@@ -15,6 +15,7 @@ class Country extends Model
 
 	const IMAGES_DIRECTORY	= 'images/country';
 
+	protected $table = 'countries';
 	public $boardConfig = [];
 	protected $fillable = [
 		'name',
@@ -30,8 +31,9 @@ class Country extends Model
 	*
 	* @return void
 	*/
-	public function __construct()
+	public function __construct(array $attributes = [])
 	{
+		parent::__construct($attributes);
 		$this->boardConfig = $this->getBoardConfig();
 	}
 

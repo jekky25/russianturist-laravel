@@ -45,8 +45,8 @@ class ConfigTest extends TestCase
     }
 
 	/** @test */
-    public function check_updating_data_to_the_config_model(): void
-    {
+	public function check_updating_data_to_the_config_model(): void
+	{
 		$config	= Config::factory()->create();
 		$url = '/admin/configs/' . $config->id . '/';
 		$response= $this->patch($url, $this->data);
@@ -60,8 +60,8 @@ class ConfigTest extends TestCase
 	}
 
 	/** @test */
-    public function check_deleting_data_from_the_config_model(): void
-    {
+	public function check_deleting_data_from_the_config_model(): void
+	{
 		$config = Config::factory()->create();
 		$url = '/admin/configs/' . $config->id . '/';
 		$response = $this->delete($url);
