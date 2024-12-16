@@ -27,7 +27,7 @@ class TownService
 		{
 			$foto = $row->fotos()
 				->where('type','town')
-				->orderBy('foto_position')
+				->orderBy('position')
 				->first();
 			$row['fotos'] = $foto;
 		
@@ -51,7 +51,7 @@ class TownService
 
 		$foto   = $town->fotos()
 				->where('type','town')
-				->orderBy('foto_position')
+				->orderBy('position')
 				->first()
 				->toArray();
 		

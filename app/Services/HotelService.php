@@ -134,7 +134,7 @@ class HotelService
 	{
 		$foto = $row->fotos()
 			->where('type','hotel')
-			->orderBy('foto_position')
+			->orderBy('position')
 			->limit($limit)
 			->get();
 		if ($limit > 1)	

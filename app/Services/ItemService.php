@@ -57,7 +57,7 @@ class ItemService
 	{
 		$foto = $row->fotos()
 			->where('type','item')
-			->orderBy('foto_position')
+			->orderBy('position')
 			->first();
 		$row['fotos'] = $foto;
 		
