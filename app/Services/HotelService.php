@@ -133,7 +133,7 @@ class HotelService
 	public function getFotos(&$row, $limit = 1)
 	{
 		$foto = $row->fotos()
-			->where('foto_type','hotel')
+			->where('type','hotel')
 			->orderBy('foto_position')
 			->limit($limit)
 			->get();
