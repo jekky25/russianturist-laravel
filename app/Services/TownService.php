@@ -43,7 +43,7 @@ class TownService
 	public function getByName($name)
 	{
 		$town = Town::select('*')
-				->where('towns_eng_name', $name)
+				->where('slug', $name)
 				->first();
 
 		$town->description = str_replace("\n", "\n<br />\n", $town->description);

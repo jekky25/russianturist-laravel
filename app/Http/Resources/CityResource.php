@@ -20,7 +20,7 @@ class CityResource extends JsonResource
 		return [
 			'id'			=> $this->towns_id,
 			'name'			=> $this->towns_name,
-			'slug'			=> $this->towns_eng_name,
+			'slug'			=> $this->slug,
 			'fotoStr'		=> $this->fotoStr,
 			'description'	=> Helper::cutText($this->description, self::DESCRIPTION_SIZE),
 		];

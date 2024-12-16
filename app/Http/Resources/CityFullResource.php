@@ -18,7 +18,7 @@ class CityFullResource extends JsonResource
 		return [
 			'id'			=> $this->towns_id,
 			'name'			=> $this->towns_name,
-			'slug'			=> $this->towns_eng_name,
+			'slug'			=> $this->slug,
 			'img'			=> $this->towns_img,
 			'description'	=> $this->description,
 			'country'		=> new CountryShortResource($this->country)
