@@ -23,7 +23,7 @@ class Item extends Model
 	{
 		return $this->hasMany(
 			Foto::class,
-			'foto_parent_id',
+			'parent_id',
 			'items_id');
 	}
 }

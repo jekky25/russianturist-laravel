@@ -61,9 +61,9 @@ class ItemService
 			->first();
 		$row['fotos'] = $foto;
 		
-		$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/items/' . $row['fotos']['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
+		$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/items/' . $row['fotos']['id'] . '.jpg') : asset ('image/no_foto.jpg');
 
-		$foto_out = asset('fotos/items/'. $row['fotos']['foto_id'] . '.jpg');
+		$foto_out = asset('fotos/items/'. $row['fotos']['id'] . '.jpg');
 		$row['items_img'] = !empty($foto_out) ? '<img title="' . $row['items_name'] . '" alt="' . $row['items_name'] . '" src="' . $foto_out . '" width="' . $this->boardConfig['foto_width_item_id'] . '" height="' . $this->boardConfig['foto_height_item_id'] . '">' : '';
 	}
 }

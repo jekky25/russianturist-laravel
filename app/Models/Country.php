@@ -64,6 +64,6 @@ class Country extends Model
 	*/
 	public function fotos()
 	{
-		return $this->hasMany(Foto::class, 'foto_parent_id', 'id');
+		return $this->hasMany(Foto::class, 'parent_id', 'id');
 	}
 }

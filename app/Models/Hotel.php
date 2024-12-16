@@ -24,7 +24,7 @@ class Hotel extends Model
 	{
 		return $this->hasMany(
 			Foto::class,
-			'foto_parent_id',
+			'parent_id',
 			'hotels_id');
 	}
 

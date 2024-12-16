@@ -149,7 +149,7 @@ class HotelService
 				$stars .= '<img alt="" src="' . asset('image/star.png') . '" />';
 			}
 			$row['starsStr']	= $row['stars'] = $stars;
-			$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/hotels/' . $row['fotos'][0]['foto_id'] . '.jpg') : asset ('image/no_foto.jpg');
+			$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/hotels/' . $row['fotos'][0]['id'] . '.jpg') : asset ('image/no_foto.jpg');
 	}
 
 	/**
@@ -181,7 +181,7 @@ class HotelService
 		foreach ($this->hotels->fotos as $k => &$row)
 		{
 			$row['f_act']		= $this->getPictureActiveClass($k);
-			$row['foto_out']	= $this->getPictureLink($row['foto_id']);
+			$row['foto_out']	= $this->getPictureLink($row['id']);
 		}
 	}
 
@@ -196,7 +196,7 @@ class HotelService
 		foreach ($this->hotels->fotos as $k => &$row)
 		{
 			$row['f_act'] = '';
-			if ( ($id == 0 && $k == 0) || $id > 0 && $id == $row['foto_id'])
+			if ( ($id == 0 && $k == 0) || $id > 0 && $id == $row['id'])
 			{
 				$row['f_act']	 		= 'f_act';
 				$this->hotels->selFoto 		= $row;
@@ -204,7 +204,7 @@ class HotelService
 				$this->hotels->nextFoto		= ($k + 1) < count(($this->hotels->fotos) ) ? $this->hotels->fotos[($k+1)] : [];
 				$this->hotels->positionFoto	= ($k + 1);
 			}
-			$row['foto_out'] = asset('/fotos/hotels/' . $row['foto_id'] . '.jpg');
+			$row['foto_out'] = asset('/fotos/hotels/' . $row['id'] . '.jpg');
 		}
 		$this->hotels->countFoto	= count($this->hotels->fotos);
 	}

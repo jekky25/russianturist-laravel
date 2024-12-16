@@ -10,7 +10,7 @@
 				@foreach ($hotel->fotos as $item)
 					<div class="foto1" style="height:{{$boardConfig['foto_height_hotel_prew']}}px;">
 						<div style="width:{{$boardConfig['foto_width_hotel_prew']}}px; padding:0;">
-							<a href="{{route('hotel_fotos_id',[$hotel->hotels_eng_name, '_foto_',$item['foto_id']])}}" alt="{{$hotel['hotels_name']}}" title="{{$hotel['hotels_name']}}" class="prew">
+							<a href="{{route('hotel_fotos_id',[$hotel->hotels_eng_name, '_foto_',$item['id']])}}" alt="{{$hotel['hotels_name']}}" title="{{$hotel['hotels_name']}}" class="prew">
 								<img title="{{$hotel['hotels_name']}}" alt="{{$hotel['hotels_name']}}" src="{{$item['foto_out']}}" width="{{$boardConfig['foto_width_hotel_prew']}}" height="{{$boardConfig['foto_height_hotel_prew']}}" {!!$item['f_act']!!}>
 							</a>
 						</div>
@@ -20,12 +20,12 @@
 </div>
 <div class="foto_big">
 <div style="width:{{$resultX_im}}px;">
-		<img title="{{$hotel['hotels_name']}}" alt="{{$hotel['hotels_name']}}" src="{{asset('/fotos/hotels/' . $hotel->selFoto['foto_id'] . '.jpg')}}" width="{{$resultX_im}} " height="{{$resultY_im}}">
+		<img title="{{$hotel['hotels_name']}}" alt="{{$hotel['hotels_name']}}" src="{{asset('/fotos/hotels/' . $hotel->selFoto['id'] . '.jpg')}}" width="{{$resultX_im}} " height="{{$resultY_im}}">
 		@if (!empty ($hotel->prevFoto))
-		<a href="{{route('hotel_fotos_id',[$hotel->hotels_eng_name, '_foto_',$hotel->prevFoto['foto_id']])}}" class="no_dec left"><< предыдущее</a>
+		<a href="{{route('hotel_fotos_id',[$hotel->hotels_eng_name, '_foto_',$hotel->prevFoto['id']])}}" class="no_dec left"><< предыдущее</a>
 		@endif
 		@if (!empty ($hotel->nextFoto))
-		<a href="{{route('hotel_fotos_id',[$hotel->hotels_eng_name, '_foto_',$hotel->nextFoto['foto_id']])}}" class="no_dec right">следуюее >></a>
+		<a href="{{route('hotel_fotos_id',[$hotel->hotels_eng_name, '_foto_',$hotel->nextFoto['id']])}}" class="no_dec right">следуюее >></a>
 		@endif
 		{{$hotel->positionFoto}} /{{$hotel->countFoto}} </div>
 </div>
