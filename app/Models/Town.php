@@ -33,6 +33,6 @@ class Town extends Model
 	*/
 	public function country()
 	{
-		return $this->belongsTo(Country::class, 'countries_id', 'id');
+		return $this->belongsTo(Country::class, 'country_id', 'id');
 	}
 }

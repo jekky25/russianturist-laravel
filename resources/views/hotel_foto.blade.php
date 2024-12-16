@@ -2,7 +2,7 @@
 @section('title', $arMeta['title'])
 @section('main_body')
 <div class="main_items_id">
-<h1>{{$hotel->hotels_name}} (<a href="{{route('town_name',$hotel->town['slug'])}}">{{$hotel->town['towns_name']}}</a>)</h1>
+<h1>{{$hotel->hotels_name}} (<a href="{{route('town_name',$hotel->town['slug'])}}">{{$hotel->town['name']}}</a>)</h1>
 <div class="hot_prew">
 <div class="pr_fot_hotel" style="width:150px;">
 			<h2><a href="{{route('hotel_name',$hotel->hotels_eng_name)}}" alt="{{$hotel->hotels_name}}" title="{{$hotel->hotels_name}}">Описание отеля</a></h2>

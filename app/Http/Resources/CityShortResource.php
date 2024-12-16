@@ -16,7 +16,7 @@ class CityShortResource extends JsonResource
 	{
 		return [
 			'id'			=> $this->towns_id,
-			'name'			=> $this->towns_name,
+			'name'			=> $this->name,
 			'slug'			=> $this->slug,
 		];
 	}

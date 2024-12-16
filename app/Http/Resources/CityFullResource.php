@@ -17,7 +17,7 @@ class CityFullResource extends JsonResource
 	{
 		return [
 			'id'			=> $this->towns_id,
-			'name'			=> $this->towns_name,
+			'name'			=> $this->name,
 			'slug'			=> $this->slug,
 			'img'			=> $this->towns_img,
 			'description'	=> $this->description,

@@ -12,7 +12,7 @@ class TownService
 	*/
 	public function getAll()
 	{
-		$this->towns = Town::select('*')->orderBy('towns_name')->get();
+		$this->towns = Town::select('*')->orderBy('name')->get();
 		$this->getFotos();
 		return $this->towns;
 	}
@@ -69,7 +69,7 @@ class TownService
 	public function getPictureLink($town, $width, $height)
 	{
 		$foto_out 					= !empty($town->foto) ? asset('/fotos/towns/' . $town->foto['id'] . '.jpg') : '';
-		$town->towns_img 			= !empty($foto_out) ? '<img title="' . $town->towns_name . '" alt="' . $town->towns_name . '" src="' . $foto_out . '" width="' . $width . '" height="' . $height . '">' : '';
+		$town->towns_img 			= !empty($foto_out) ? '<img title="' . $town->name . '" alt="' . $town->name . '" src="' . $foto_out . '" width="' . $width . '" height="' . $height . '">' : '';
 		return $town;
 	}
 }
