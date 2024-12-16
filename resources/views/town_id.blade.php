@@ -20,7 +20,7 @@
 			@endif
 </div>
 
-<p>{!!$town->towns_description!!}</p>
+<p>{!!$town->description!!}</p>
 </div>
 </div>
 @overwrite

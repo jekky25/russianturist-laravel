@@ -22,7 +22,7 @@ class CityResource extends JsonResource
 			'name'			=> $this->towns_name,
 			'slug'			=> $this->towns_eng_name,
 			'fotoStr'		=> $this->fotoStr,
-			'description'	=> Helper::cutText($this->towns_description, self::DESCRIPTION_SIZE),
+			'description'	=> Helper::cutText($this->description, self::DESCRIPTION_SIZE),
 		];
 	}
 }

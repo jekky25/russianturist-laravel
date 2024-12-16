@@ -20,7 +20,7 @@ class CityFullResource extends JsonResource
 			'name'			=> $this->towns_name,
 			'slug'			=> $this->towns_eng_name,
 			'img'			=> $this->towns_img,
-			'description'	=> $this->towns_description,
+			'description'	=> $this->description,
 			'country'		=> new CountryShortResource($this->country)
 		];
 	}

@@ -31,7 +31,7 @@ class TownService
 				->first();
 			$row['fotos'] = $foto;
 		
-			$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/towns/' . $row['fotos']['id'] . '.jpg') : asset ('image/no_foto.jpg');
+			$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/towns/' . $row['fotos']['id'] . '.jpg') : asset('image/no_foto.jpg');
 		}
 	}
 
@@ -46,7 +46,7 @@ class TownService
 				->where('towns_eng_name', $name)
 				->first();
 
-		$town->towns_description = str_replace("\n", "\n<br />\n", $town->towns_description);
+		$town->description = str_replace("\n", "\n<br />\n", $town->description);
 		$town->country = $town->country()->first();
 
 		$foto   = $town->fotos()
@@ -68,7 +68,7 @@ class TownService
 	*/
 	public function getPictureLink($town, $width, $height)
 	{
-		$foto_out 					= !empty ($town->foto) ? asset('/fotos/towns/' . $town->foto['id'] . '.jpg') : '';
+		$foto_out 					= !empty($town->foto) ? asset('/fotos/towns/' . $town->foto['id'] . '.jpg') : '';
 		$town->towns_img 			= !empty($foto_out) ? '<img title="' . $town->towns_name . '" alt="' . $town->towns_name . '" src="' . $foto_out . '" width="' . $width . '" height="' . $height . '">' : '';
 		return $town;
 	}

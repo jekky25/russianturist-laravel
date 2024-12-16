@@ -11,7 +11,7 @@
 <h3 class="tit_hot" style="margin-left:{{ ($boardConfig['foto_width_town'] + 10) }}px;">
 <a href="{{route('town_name',$item['towns_eng_name'])}}" alt="{{$item['towns_name']}}" title="{{$item['towns_name']}}">{{$item['towns_name']}}</a>
 </h3>
-<p>{!!App\Helpers\Helper::cutText($item['towns_description'], 300)!!}<a href="{{route('town_name',$item['towns_eng_name'])}}" title="{{$item['towns_name']}}"> »»</a></p>
+<p>{!!App\Helpers\Helper::cutText($item['description'], 300)!!}<a href="{{route('town_name',$item['towns_eng_name'])}}" title="{{$item['towns_name']}}"> »»</a></p>
 </div>
 	@endforeach
 @endif
