@@ -45,16 +45,13 @@ class TownService
 		$town = Town::select('*')
 				->where('slug', $name)
 				->first();
-
 		$town->description = str_replace("\n", "\n<br />\n", $town->description);
 		$town->country = $town->country()->first();
-
 		$foto   = $town->fotos()
 				->where('type','town')
 				->orderBy('position')
 				->first()
 				->toArray();
-		
 		$town->foto	= $foto;
 		return $town;
 	}

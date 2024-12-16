@@ -25,7 +25,7 @@ class Town extends Model
 		return $this->hasMany(
 			Foto::class,
 			'parent_id',
-			'towns_id');
+			'id');
 	}
 
 	/**
