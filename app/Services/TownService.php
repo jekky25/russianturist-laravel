@@ -2,19 +2,112 @@
 namespace App\Services;
 
 use App\Models\Town;
+use App\Models\Foto;
+use App\Services\ImageService;
+use Illuminate\Support\Facades\DB;
 
 class TownService
 {
 	private $towns;
+
+	public function __construct(
+		private ImageService $image
+	)
+	{
+	}
+
 	/**
 	* get all towns
 	* @return \Illuminate\Database\Eloquent\Collection 
 	*/
 	public function getAll()
 	{
-		$this->towns = Town::select('*')->orderBy('name')->get();
-		$this->getFotos();
+		$this->towns = Town::select('*')->with(['country', 'fotos'])->orderBy('name')->get();
 		return $this->towns;
+	}
+
+	/**
+	* get city by id
+	* @return \Illuminate\Database\Eloquent\Collection 
+	*/
+	public function getById($id)
+	{
+		return Town::select('*')
+			->where('id', $id)
+			->with(['country', 'fotos'])
+			->firstOrFail();
+	}
+
+	/**
+	* create a city
+	* @param  array $request
+	* @return void
+	*/	
+	public function create($request) 
+	{
+		try {
+			DB::beginTransaction();
+			$request['image'] = $this->image->put(Town::IMAGES_DIRECTORY, $request['image']);
+			$city = Town::create($request);
+			$requestFoto = [
+				'parent_id'	=> $city->id,
+				'position'	=> Foto::START_SORT,
+				'type'		=> Town::IMAGES_TYPE,
+				'image'		=> $request['image']
+			];
+			Foto::create($requestFoto);
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
+			throw new \Exception('Failed to create a City '.$e->getMessage());
+		}
+	}
+
+	/**
+	* update a city
+	* @param array $request
+	* @return void
+	*/	
+	public function update($id, $request)
+	{
+		try {
+			DB::beginTransaction();
+			$city = Town::find($id);
+			if (!empty($request['image'])) $request['image'] = $this->image->put(Town::IMAGES_DIRECTORY, $request['image']);
+			$city->update($request);
+			$requestFoto = [
+				'parent_id'	=> $city->id,
+				'position'	=> Foto::START_SORT,
+				'type'		=> Town::IMAGES_TYPE,
+				'image'		=> $request['image']
+			];
+			Foto::create($requestFoto);
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
+			throw new \Exception('Failed to update the City. '.$e->getMessage());
+		}
+	}
+
+	/**
+	* delete a city
+	* @param  id $id
+	* @return void
+	*/
+	public function destroy($id) {
+		try {
+			$city = Town::find($id);
+			if ($city->fotos->count() > 0)
+			{
+				foreach ($city->fotos as $foto)
+				{
+					$this->image->destroyFoto($foto);
+				}
+			}
+			$city->delete();
+		} catch (\Exception $e) {
+			throw new \Exception('Failed to delete Country . '.$e->getMessage());
+		}
 	}
 
 	/**
@@ -26,12 +119,12 @@ class TownService
 		foreach ($this->towns as &$row) 
 		{
 			$foto = $row->fotos()
-				->where('type','town')
+				->where('type', Town::IMAGES_TYPE)
 				->orderBy('position')
 				->first();
 			$row['fotos'] = $foto;
 		
-			$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/towns/' . $row['fotos']['id'] . '.jpg') : asset('image/no_foto.jpg');
+			$row['fotoStr']		= !empty($row['fotos']) ? asset('fotos/towns/' . $row['fotos']['id'] . '.jpg') : asset('image/no_foto.jpg');
 		}
 	}
 

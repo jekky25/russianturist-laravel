@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="{{ asset("plugins/overlayScrollbars/css/OverlayScrollbars.min.css") }}">
 	<!-- Daterange picker -->
 	<link rel="stylesheet" href="{{ asset("plugins/daterangepicker/daterangepicker.css") }}">
-	<link rel="stylesheet" href="{{ asset("css/app_adm.css?t=3") }}">
+	<link rel="stylesheet" href="{{ asset("css/app_adm.css?t=5") }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">

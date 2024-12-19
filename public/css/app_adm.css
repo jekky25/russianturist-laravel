@@ -13,3 +13,8 @@
 .modal-footer .row .col-6 {
 	text-align: center;
 }
+
+.max-w-100px {
+	max-width: 100px;
+	display: inline-block;
+}

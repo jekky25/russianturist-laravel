@@ -47,6 +47,16 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 		Route::patch('/{id}', 'IndexController@update')->name('admin.country.update');
 		Route::delete('/{id}', 'IndexController@destroy')->name('admin.country.destroy');
 	});
+
+	Route::group(['namespace' => 'City', 'prefix' => 'cities', 'middleware' => ['auth', 'admin']], function() {
+		Route::get('/', 'IndexController@index')->name('admin.city.index');
+		Route::get('/create', 'IndexController@create')->name('admin.city.create');
+		Route::post('/store', 'IndexController@store')->name('admin.city.store');
+		Route::get('/{id}', 'IndexController@show')->name('admin.city.show');
+		Route::get('/{id}/edit', 'IndexController@edit')->name('admin.city.edit');
+		Route::patch('/{id}', 'IndexController@update')->name('admin.city.update');
+		Route::delete('/{id}', 'IndexController@destroy')->name('admin.city.destroy');
+	});
 });
 
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
