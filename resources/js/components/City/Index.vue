@@ -3,7 +3,7 @@
 		<template v-if="cities">
 			<div  v-for="city in cities" class="hot_prew" :style="{'height': configHeightCityPicture + 'px'}">
 				<router-link :title="`${city.name}`" :alt="`${city.name}`" :to="{ name: 'city_name', params: { name: `${city.slug}` } }" class="prew">
-					<img :title="`${city.name}`" :alt="`${city.name}`" :src="`${city.fotoStr}`" :width="`${configCityWidthPicture}`" :height="`${configCityHeightPicture}`">
+					<img :title="`${city.name}`" :alt="`${city.name}`" :src="`${city.firstImagePath}`" :width="`${configCityWidthPicture}`" :height="`${configCityHeightPicture}`">
 				</router-link>
 				<h3 class="tit_hot" :style="{'margin-left':configMarginCityWidthPicture + 'px'}">
 					<router-link :title="`${city.name}`" :alt="`${city.name}`" :to="{ name: 'city_name', params: { name: `${city.slug}` } }">{{ city.name }}</router-link>

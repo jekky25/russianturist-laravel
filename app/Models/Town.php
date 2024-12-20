@@ -27,6 +27,12 @@ class Town extends Model
 		return SapeServiceProvider::replaceSapeCode($val);
 	}
 
+	public function getFirstImagePathAttribute ()
+	{
+		if ($this->fotos->count() == 0) return null;
+		return $this->fotos[0]->image_path;
+	}
+
 	/**
 	* get fotos
 	*/

@@ -17,7 +17,7 @@ class TownController extends Controller
 	* @return void
 	*/
 	public function __construct(
-		public TownService		$townService
+		public TownService		$city
 	)
 	{
 		$this->boardConfig = $this->getBoardConfig();
@@ -29,7 +29,7 @@ class TownController extends Controller
 	*/
 	public function getCities()
 	{
-		$cities	= $this->townService->getAll();
+		$cities	= $this->city->getAll();
 		return CityResource::collection($cities);
 	}
 
@@ -40,8 +40,8 @@ class TownController extends Controller
 	*/
 	public function getCityByName($name)
 	{
-		$city	= $this->townService->getByName($name);
-		$city	= $this->townService->getPictureLink($city, $this->boardConfig['foto_width_town_id'], $this->boardConfig['foto_height_town_id']);
+		$city	= $this->city->getByName($name);
+		$city	= $this->city->getPictureLink($city, $this->boardConfig['foto_width_town_id'], $this->boardConfig['foto_height_town_id']);
 		return new CityFullResource($city);
 	}
 }
