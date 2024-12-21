@@ -3,7 +3,10 @@
 	@if (!empty($image))
 	@if ($image instanceof \Illuminate\Database\Eloquent\Collection && $image->count() > 0)
 		@foreach($image as $_image)
-			<div class="w-50 mb-2"><img class="w-50" alt="" title="" src="{{ asset($_image->imagePath) }}" /></div>
+			<div class="w-50 mb-2">
+				<img class="w-50 mr-2" alt="" title="" src="{{ asset($_image->imagePath) }}" /> 
+				<a class="text-danger action-delete-modal" href="javascript://" data-href="{{route('admin.foto.destroy.back.form', $_image->id)}}" data-bs-toggle="modal" data-bs-target="#formModal"><i class="fas fa-trash-alt"></i></a>
+			</div>
 		@endforeach
 	@else
 	<div class="w-50 mb-2"><img class="w-50" alt="" title="" src="{{ asset($imagePath) }}" /></div>

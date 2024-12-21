@@ -9,14 +9,15 @@ use App\Services\ImageService;
 class Foto extends Model
 {
 	use HasFactory;
-	const STORAGE_SECTION_ITEM		= 'item';
-	const STORAGE_SECTION_HOTEL		= 'hotel';
-	const STORAGE_SECTION_COUNTRY	= 'country';
-	const STORAGE_SECTION_CITY		= 'town';
+
+	const ITEM		= 'item';
+	const HOTEL		= 'hotel';
+	const COUNTRY	= 'country';
+	const CITY		= 'town';
 
 	const OLD_DIR_PICTURES = 'fotos';
 	const START_SORT = '10';
-	
+
 	public $timestamps		= false;
 	protected $fillable = [
 		'parent_id',
@@ -34,10 +35,10 @@ class Foto extends Model
 	public static function getStorageSections()
 	{
 		return [
-			self::STORAGE_SECTION_ITEM		=> 'images/item',
-			self::STORAGE_SECTION_HOTEL		=> 'images/hotel',
-			self::STORAGE_SECTION_COUNTRY	=> 'images/country',
-			self::STORAGE_SECTION_CITY		=> 'images/city',
+			self::ITEM		=> 'images/item',
+			self::HOTEL		=> 'images/hotel',
+			self::COUNTRY	=> 'images/country',
+			self::CITY		=> 'images/city',
 		];
 	}
 

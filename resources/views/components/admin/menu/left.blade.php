@@ -27,6 +27,12 @@
 					<p>Города</p>
 				</a>
 			</li>
+			<li class="nav-item">
+				<a href="{{route('admin.hotel.index')}}" class="nav-link">
+				<i class="nav-icon fas fa-solid fa-building"></i>
+					<p>Отели</p>
+				</a>
+			</li>
 		</ul>
 	</div>
 	<!-- /.sidebar -->

@@ -22,7 +22,7 @@ class IndexController extends Controller
 	}
 
 	/**
-	* show admin country index page
+	* show admin city index page
 	*
 	* @return \Illuminate\Http\Response
 	*/
@@ -32,7 +32,7 @@ class IndexController extends Controller
 	}
 
 	/**
-	* show admin country create page
+	* show admin city create page
 	*
 	* @return \Illuminate\Http\Response
 	*/
@@ -42,7 +42,7 @@ class IndexController extends Controller
 	}
 
 	/**
-	* create country in admin
+	* create city in admin
 	*
 	* @param  StoreRequest  $request
 	* @return void
@@ -54,7 +54,7 @@ class IndexController extends Controller
 	}
 
 	/**
-	* show admin country detail page
+	* show admin city detail page
 	*
 	* @param  int $id
 	* @return \Illuminate\Http\Response
@@ -65,7 +65,7 @@ class IndexController extends Controller
 	}
 
 	/**
-	* show admin country edit page
+	* show admin city edit page
 	*
 	* @param  int $id
 	* @return \Illuminate\Http\Response
@@ -79,7 +79,7 @@ class IndexController extends Controller
 	}
 
 	/**
-	* update country in admin
+	* update city in admin
 	*
 	* @param  UpdateRequest  $request
 	* @param  int $id
@@ -92,7 +92,7 @@ class IndexController extends Controller
 	}
 
 	/**
-	* destroy country in admin
+	* destroy city in admin
 	*
 	* @param int $id
 	* @return void

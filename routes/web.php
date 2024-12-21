@@ -57,6 +57,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 		Route::patch('/{id}', 'IndexController@update')->name('admin.city.update');
 		Route::delete('/{id}', 'IndexController@destroy')->name('admin.city.destroy');
 	});
+
+	Route::group(['namespace' => 'Foto', 'prefix' => 'fotos', 'middleware' => ['auth', 'admin']], function() {
+		Route::delete('/{id}/back/form/', 'IndexController@destroyBackForm')->name('admin.foto.destroy.back.form');
+	});
 });
 
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');

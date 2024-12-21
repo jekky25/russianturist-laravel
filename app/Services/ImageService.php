@@ -12,6 +12,27 @@ class ImageService
 	const PATH_STORAGE		= 'storage';
 
 	/**
+	* get a type of the picture from the model
+	* @param string $type
+	* @return string
+	*/
+	public static function getFotoType($type)
+	{
+		return constant(Foto::class . "::" . $type);
+	}
+
+	/**
+	* get picture by id
+	* @return \App\Models\Foto 
+	*/
+	public function getById($id)
+	{
+		return Foto::select('*')
+			->where('id', $id)
+			->firstOrFail();
+	}
+
+	/**
 	 * put image to the storage
 	 * @param string $dir
 	 * @param UploadedFile $file 

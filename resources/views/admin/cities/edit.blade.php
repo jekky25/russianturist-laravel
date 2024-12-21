@@ -34,5 +34,6 @@
 		</form>
 	</div>
 </div>
+<x-admin.modal-delete />
 <!-- /.content-wrapper -->
 @endsection
