@@ -61,6 +61,16 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 	Route::group(['namespace' => 'Foto', 'prefix' => 'fotos', 'middleware' => ['auth', 'admin']], function() {
 		Route::delete('/{id}/back/form/', 'IndexController@destroyBackForm')->name('admin.foto.destroy.back.form');
 	});
+	
+	Route::group(['namespace' => 'Hotel', 'prefix' => 'hotels', 'middleware' => ['auth', 'admin']], function() {
+		Route::get('/', 'IndexController@index')->name('admin.hotel.index');
+		Route::get('/create', 'IndexController@create')->name('admin.hotel.create');
+		Route::post('/store', 'IndexController@store')->name('admin.hotel.store');
+		Route::get('/{id}', 'IndexController@show')->name('admin.hotel.show');
+		Route::get('/{id}/edit', 'IndexController@edit')->name('admin.hotel.edit');
+		Route::patch('/{id}', 'IndexController@update')->name('admin.hotel.update');
+		Route::delete('/{id}', 'IndexController@destroy')->name('admin.hotel.destroy');
+	});
 });
 
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
