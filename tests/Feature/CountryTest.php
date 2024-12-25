@@ -26,6 +26,9 @@ class CountryTest extends TestCase
 		'description'	=> ''
 	];
 
+	/**
+	 * Set up variables
+	 */
 	protected function setUp() :void
 	{
 		parent::setUp();
@@ -34,6 +37,12 @@ class CountryTest extends TestCase
 		$this->user = $user;
 	}
 
+	/**
+	 * Add a fake image to the storage
+	 * 
+	 * @param string $name
+	 * @return string
+	 */
 	protected function addImage($name)
 	{
 		Storage::fake();
