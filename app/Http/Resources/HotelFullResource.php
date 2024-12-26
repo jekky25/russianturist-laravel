@@ -19,7 +19,7 @@ class HotelFullResource extends JsonResource
 		return [
 			'id'				=> $this->hotels_id,
 			'name'				=> $this->hotels_name,
-			'slug'				=> $this->hotels_eng_name,
+			'slug'				=> $this->slug,
 			'img'				=> $this->hotels_img,
 			'description'		=> $this->description,
 			'city'				=> new CityShortResource($this->town),

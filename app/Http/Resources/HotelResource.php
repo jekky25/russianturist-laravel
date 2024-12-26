@@ -20,7 +20,7 @@ class HotelResource extends JsonResource
 		return [
 			'id'			=> $this->hotels_id,
 			'name'			=> $this->hotels_name,
-			'slug'			=> $this->hotels_eng_name,
+			'slug'			=> $this->slug,
 			'fotoStr'		=> $this->fotoStr,
 			'description'	=> Helper::cutText($this->description, self::DESCRIPTION_SIZE),
 		];

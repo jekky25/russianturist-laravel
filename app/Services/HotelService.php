@@ -50,7 +50,7 @@ class HotelService
 	public function getByName($name)
 	{
 		$hotel = Hotel::select('*')
-			->where('hotels_eng_name', $name)
+			->where('slug', $name)
 			->firstOrFail();
 
 		$hotel->description	= $this->replaceSpaces($hotel->description);
@@ -159,7 +159,7 @@ class HotelService
 	private function getPicturesBlockLink()
 	{
 		$hotel = &$this->hotels;
-		$hotel->hotel_fotos_enter = !empty($hotel->fotos) ? '<a href="' . route('hotel_fotos',[$hotel->hotels_eng_name,'_foto']) . '" alt="' . $hotel->hotels_name . '" title="' . $hotel->hotels_name . '">Фотографии отеля</a>' : '';
+		$hotel->hotel_fotos_enter = !empty($hotel->fotos) ? '<a href="' . route('hotel_fotos',[$hotel->slug,'_foto']) . '" alt="' . $hotel->hotels_name . '" title="' . $hotel->hotels_name . '">Фотографии отеля</a>' : '';
 		unset ($hotel);
 	}
 
