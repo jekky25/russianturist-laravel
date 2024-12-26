@@ -53,7 +53,7 @@ class HotelService
 			->where('hotels_eng_name', $name)
 			->firstOrFail();
 
-		$hotel->hotels_description	= $this->replaceSpaces($hotel->hotels_description);
+		$hotel->description	= $this->replaceSpaces($hotel->description);
 		$hotel->town				= $hotel->town()->first();
 
 		$this->hotels = $hotel;

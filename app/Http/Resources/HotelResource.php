@@ -22,7 +22,7 @@ class HotelResource extends JsonResource
 			'name'			=> $this->hotels_name,
 			'slug'			=> $this->hotels_eng_name,
 			'fotoStr'		=> $this->fotoStr,
-			'description'	=> Helper::cutText($this->hotels_description, self::DESCRIPTION_SIZE),
+			'description'	=> Helper::cutText($this->description, self::DESCRIPTION_SIZE),
 		];
 	}
 }
