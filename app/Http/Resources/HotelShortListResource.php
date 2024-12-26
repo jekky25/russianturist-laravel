@@ -18,7 +18,7 @@ class HotelShortListResource extends JsonResource
 	public function toArray(Request $request): array
 	{
 		return [
-			'id'			=> $this->hotels_id,
+			'id'			=> $this->id,
 			'name'			=> $this->name,
 			'shortName'		=> Helper::cutText($this->hotels_name, self::NAME_SIZE),
 			'slug'			=> $this->slug,
