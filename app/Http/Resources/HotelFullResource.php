@@ -18,7 +18,7 @@ class HotelFullResource extends JsonResource
 	{
 		return [
 			'id'				=> $this->hotels_id,
-			'name'				=> $this->hotels_name,
+			'name'				=> $this->name,
 			'slug'				=> $this->slug,
 			'img'				=> $this->hotels_img,
 			'description'		=> $this->description,

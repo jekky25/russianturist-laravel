@@ -16,7 +16,7 @@ class HotelService
 	*/
 	public function getAll()
 	{
-		$this->hotels = Hotel::select('*')->orderBy('hotels_name')->get();
+		$this->hotels = Hotel::select('*')->orderBy('name')->get();
 		foreach ($this->hotels as &$row)
 		{
 			$this->getFotos($row);
@@ -159,7 +159,7 @@ class HotelService
 	private function getPicturesBlockLink()
 	{
 		$hotel = &$this->hotels;
-		$hotel->hotel_fotos_enter = !empty($hotel->fotos) ? '<a href="' . route('hotel_fotos',[$hotel->slug,'_foto']) . '" alt="' . $hotel->hotels_name . '" title="' . $hotel->hotels_name . '">Фотографии отеля</a>' : '';
+		$hotel->hotel_fotos_enter = !empty($hotel->fotos) ? '<a href="' . route('hotel_fotos',[$hotel->slug,'_foto']) . '" alt="' . $hotel->name . '" title="' . $hotel->name . '">Фотографии отеля</a>' : '';
 		unset ($hotel);
 	}
 
