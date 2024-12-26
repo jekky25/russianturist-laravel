@@ -89,7 +89,7 @@ class HotelService
 	public function getOfCountry($countryId, $offset, $limit)
 	{
 		$this->hotels = Hotel::select('*')
-		->where('countries_id', $countryId)
+		->where('country_id', $countryId)
 		->orderBy('create_time','desc')
 		->offset($offset)
 		->limit($limit)
