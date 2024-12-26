@@ -32,7 +32,7 @@ class HotelService
 	*/
 	public function getByLimit($limit)
 	{
-		$this->hotels = Hotel::select('*')->orderBy('hotels_time','desc')->limit($limit)->get();
+		$this->hotels = Hotel::select('*')->orderBy('create_time','desc')->limit($limit)->get();
 		foreach ($this->hotels as &$row)
 		{
 			$this->getFotos($row);
@@ -90,7 +90,7 @@ class HotelService
 	{
 		$this->hotels = Hotel::select('*')
 		->where('countries_id', $countryId)
-		->orderBy('hotels_time','desc')
+		->orderBy('create_time','desc')
 		->offset($offset)
 		->limit($limit)
 		->get();
@@ -114,7 +114,7 @@ class HotelService
 	{
 		$this->hotels = Hotel::select('*')
 		->where('town_id', $townId)
-		->orderBy('hotels_time','desc')
+		->orderBy('create_time','desc')
 		->offset($offset)
 		->limit($limit)
 		->get();
