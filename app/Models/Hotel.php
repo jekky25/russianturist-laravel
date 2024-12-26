@@ -33,6 +33,6 @@ class Hotel extends Model
 	*/
 	public function town()
 	{
-		return $this->belongsTo(Town::class, 'towns_id', 'id');
+		return $this->belongsTo(Town::class, 'town_id', 'id');
 	}
 }

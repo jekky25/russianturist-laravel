@@ -113,7 +113,7 @@ class HotelService
 	public function getOfTown($townId, $offset, $limit)
 	{
 		$this->hotels = Hotel::select('*')
-		->where('towns_id', $townId)
+		->where('town_id', $townId)
 		->orderBy('hotels_time','desc')
 		->offset($offset)
 		->limit($limit)
