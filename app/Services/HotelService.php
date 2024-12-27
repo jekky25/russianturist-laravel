@@ -305,4 +305,25 @@ class HotelService
 			throw new \Exception('Failed to update the Hotel. '.$e->getMessage());
 		}
 	}
+
+	/**
+	* delete a hotel
+	* @param  id $id
+	* @return void
+	*/
+	public function destroy($id) {
+		try {
+			$hotel = Hotel::find($id);
+			if ($hotel->fotos->count() > 0)
+			{
+				foreach ($hotel->fotos as $foto)
+				{
+					$this->image->destroyFoto($foto);
+				}
+			}
+			$hotel->delete();
+		} catch (\Exception $e) {
+			throw new \Exception('Failed to delete Hotel . '.$e->getMessage());
+		}
+	}
 }
