@@ -10,6 +10,21 @@ class Hotel extends Model
 {
 	use HasFactory;
 
+	const IMAGES_DIRECTORY	= 'images/hotel';
+	const IMAGES_TYPE		= 'hotel';
+	const STARS				= [1, 2, 3, 4, 5];
+
+	public $timestamps		= false;
+	protected $fillable		= [
+		'town_id',
+		'country_id',
+		'create_time',
+		'name',
+		'slug',
+		'description',
+		'stars'
+	];
+
 	public function getHotelsDescriptionAttribute ($val)
 	{
 		return SapeServiceProvider::replaceSapeCode($val);

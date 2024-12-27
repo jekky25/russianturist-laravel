@@ -2,9 +2,10 @@
 namespace App\Http\Controllers\Admin\Hotel;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Country\StoreRequest;
-use App\Http\Requests\Admin\Country\UpdateRequest;
+use App\Http\Requests\Admin\Hotel\StoreRequest;
+use App\Http\Requests\Admin\Hotel\UpdateRequest;
 use App\Services\HotelService;
+use App\Services\TownService;
 
 class IndexController extends Controller
 {
@@ -14,13 +15,14 @@ class IndexController extends Controller
 	* @return void
 	*/
 	public function __construct(
-		private HotelService $hotel
+		private HotelService $hotel,
+		private TownService $city
 	)
 	{
 	}
 
 	/**
-	* show admin country index page
+	* show admin hotel index page
 	*
 	* @return \Illuminate\Http\Response
 	*/
@@ -30,13 +32,13 @@ class IndexController extends Controller
 	}
 
 	/**
-	* show admin country create page
+	* show admin hotel create page
 	*
 	* @return \Illuminate\Http\Response
 	*/
 	public function create()
 	{
-		return response()->view('admin.countries.create');
+		return response()->view('admin.hotels.create', ['cities' => $this->city->getAll(), 'stars' => $this->hotel->getAllStars()]);
 	}
 
 	/**
@@ -47,8 +49,8 @@ class IndexController extends Controller
 	*/
 	public function store(StoreRequest $request)
 	{
-		$this->country->create($request->validated());
-		return redirect()->route('admin.country.index');
+		$this->hotel->create($request->validated());
+		return redirect()->route('admin.hotel.index');
 	}
 
 	/**

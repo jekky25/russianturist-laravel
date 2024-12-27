@@ -3,12 +3,22 @@ namespace App\Services;
 
 use App\Traits\TStr;
 use App\Models\Hotel;
+use App\Models\Foto;
+use App\Services\ImageService;
+use Illuminate\Support\Facades\DB;
 
 class HotelService
 {
 	use TStr;
 	public $hotels;
 	public $selectedPicture = 0;
+
+	public function __construct(
+		private TownService $city,
+		private ImageService $image
+	)
+	{
+	}
 
 	/**
 	 * get all hotels
@@ -212,5 +222,46 @@ class HotelService
 	private function getPictureActiveClass($iteration)
 	{
 		return ($iteration == 0) ? 'f_act' : '';
+	}
+
+
+	/**
+	 * get an array of the stars from the model class
+	 * @return array
+	 */
+	public function getAllStars()
+	{
+		return Hotel::STARS;
+	}
+
+	/**
+	* create a hotel
+	* @param  array $request
+	* @return void
+	*/	
+	public function create($request) 
+	{
+		try {
+			DB::beginTransaction();
+			$city = $this->city->getById($request['town_id']);
+			$request['country_id']	= $city->country_id;
+			$request['create_time']	= time();
+			$hotel = Hotel::create($request);
+			if (!empty($request['image']))
+			{
+				$request['image'] = $this->image->put(Hotel::IMAGES_DIRECTORY, $request['image']);
+				$requestFoto = [
+					'parent_id'	=> $hotel->id,
+					'position'	=> Foto::START_SORT,
+					'type'		=> Hotel::IMAGES_TYPE,
+					'image'		=> $request['image']
+				];
+				Foto::create($requestFoto);				
+			}
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
+			throw new \Exception('Failed to create a Hotel '.$e->getMessage());
+		}
 	}
 }
