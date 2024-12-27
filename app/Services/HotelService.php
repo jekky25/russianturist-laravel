@@ -31,6 +31,18 @@ class HotelService
 	}
 
 	/**
+	* get hotel by id
+	* @return \Illuminate\Database\Eloquent\Collection 
+	*/
+	public function getById($id)
+	{
+		return Hotel::select('*')
+			->where('id', $id)
+			->with(['town', 'fotos'])
+			->firstOrFail();
+	}
+
+	/**
 	* get hotels by limit
 	* @param  int  $limit
 	* @return \Illuminate\Database\Eloquent\Collection 
@@ -262,6 +274,35 @@ class HotelService
 		} catch (\Exception $e) {
 			DB::rollBack();
 			throw new \Exception('Failed to create a Hotel '.$e->getMessage());
+		}
+	}
+
+	/**
+	* update a hotel
+	* @param array $request
+	* @return void
+	*/	
+	public function update($id, $request)
+	{
+		try {
+			DB::beginTransaction();
+			$hotel = Hotel::find($id);
+			$request['image'] = !empty($request['image']) ?$this->image->put(Hotel::IMAGES_DIRECTORY, $request['image']) : null;
+			$hotel->update($request);
+			if (!empty($request['image']))
+			{
+				$requestFoto = [
+					'parent_id'	=> $hotel->id,
+					'position'	=> Foto::START_SORT,
+					'type'		=> Hotel::IMAGES_TYPE,
+					'image'		=> $request['image']
+				];
+				Foto::create($requestFoto);
+			}
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
+			throw new \Exception('Failed to update the Hotel. '.$e->getMessage());
 		}
 	}
 }

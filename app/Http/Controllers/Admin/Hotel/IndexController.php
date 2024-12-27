@@ -42,7 +42,7 @@ class IndexController extends Controller
 	}
 
 	/**
-	* create country in admin
+	* create hotel in admin
 	*
 	* @param  StoreRequest  $request
 	* @return void
@@ -54,29 +54,29 @@ class IndexController extends Controller
 	}
 
 	/**
-	* show admin country detail page
+	* show admin hotel detail page
 	*
 	* @param  int $id
 	* @return \Illuminate\Http\Response
 	*/
 	public function show($id)
 	{
-		return response()->view('admin.countries.show', ['country' => $this->country->getById($id)]);
+		return response()->view('admin.hotels.show', ['hotel' => $this->hotel->getById($id)]);
 	}
 
 	/**
-	* show admin country edit page
+	* show admin hotel edit page
 	*
 	* @param  int $id
 	* @return \Illuminate\Http\Response
 	*/
 	public function edit($id)
 	{
-		return response()->view('admin.countries.edit', ['country' => $this->country->getById($id)]);
+		return response()->view('admin.hotels.edit', ['hotel' => $this->hotel->getById($id), 'cities' => $this->city->getAll(), 'stars' => $this->hotel->getAllStars()]);
 	}
 
 	/**
-	* update country in admin
+	* update hotel in admin
 	*
 	* @param  UpdateRequest  $request
 	* @param  int $id
@@ -84,19 +84,19 @@ class IndexController extends Controller
 	*/
 	public function update(UpdateRequest $request, $id)
 	{
-		$this->country->update($id, $request->validated());
-		return redirect()->route('admin.country.index');
+		$this->hotel->update($id, $request->validated());
+		return redirect()->route('admin.hotel.index');
 	}
 
 	/**
-	* destroy country in admin
+	* destroy hotel in admin
 	*
 	* @param int $id
 	* @return void
 	*/
 	public function destroy($id)
 	{
-		$this->country->destroy($id);
-		return redirect()->route('admin.country.index');
+		$this->hotel->destroy($id);
+		return redirect()->route('admin.hotel.index');
 	}
 }
