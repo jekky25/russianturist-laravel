@@ -4,7 +4,7 @@
 		<template v-if="hotels">
 			<div  v-for="hotel in hotels" class="hot_prew" :style="{'height': configHeightHotelPicture + 'px'}">
 				<router-link :title="`${hotel.name}`" :alt="`${hotel.name}`" :to="{ name: 'hotel_name', params: { name: `${hotel.slug}` } }" class="prew">
-					<img :title="`${hotel.name}`" :alt="`${hotel.name}`" :src="`${hotel.fotoStr}`" :width="`${configHotelWidthPicture}`" :height="`${configHotelHeightPicture}`">
+					<img :title="`${hotel.name}`" :alt="`${hotel.name}`" :src="`${hotel.firstImagePath}`" :width="`${configHotelWidthPicture}`" :height="`${configHotelHeightPicture}`">
 				</router-link>
 				<h3 class="tit_hot" :style="{'margin-left':configMarginHotelWidthPicture + 'px'}">
 					<router-link :title="`${hotel.name}`" :alt="`${hotel.name}`" :to="{ name: 'hotel_name', params: { name: `${hotel.slug}` } }">{{ hotel.name }}</router-link>

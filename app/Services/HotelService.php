@@ -16,12 +16,7 @@ class HotelService
 	*/
 	public function getAll()
 	{
-		$this->hotels = Hotel::select('*')->orderBy('name')->get();
-		foreach ($this->hotels as &$row)
-		{
-			$this->getFotos($row);
-		}
-		unset ($row);
+		$this->hotels = Hotel::select('*')->with(['fotos'])->orderBy('name')->get();
 		return $this->hotels;
 	}
 

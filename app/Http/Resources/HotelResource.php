@@ -18,11 +18,11 @@ class HotelResource extends JsonResource
 	public function toArray(Request $request): array
 	{
 		return [
-			'id'			=> $this->id,
-			'name'			=> $this->name,
-			'slug'			=> $this->slug,
-			'fotoStr'		=> $this->fotoStr,
-			'description'	=> Helper::cutText($this->description, self::DESCRIPTION_SIZE),
+			'id'				=> $this->id,
+			'name'				=> $this->name,
+			'slug'				=> $this->slug,
+			'firstImagePath'	=> asset($this->firstImagePath),
+			'description'		=> Helper::cutText($this->description, self::DESCRIPTION_SIZE),
 		];
 	}
 }

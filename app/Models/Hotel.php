@@ -10,11 +10,15 @@ class Hotel extends Model
 {
 	use HasFactory;
 
-	public $fotos = [];
-
 	public function getHotelsDescriptionAttribute ($val)
 	{
 		return SapeServiceProvider::replaceSapeCode($val);
+	}
+
+	public function getFirstImagePathAttribute ()
+	{
+		if ($this->fotos->count() == 0) return null;
+		return $this->fotos[0]->image_path;
 	}
 
 	/**
@@ -22,10 +26,7 @@ class Hotel extends Model
 	*/
 	public function fotos()
 	{
-		return $this->hasMany(
-			Foto::class,
-			'parent_id',
-			'id');
+		return $this->hasMany(Foto::class, 'parent_id', 'id')->where('type', 'hotel');
 	}
 
 	/**
