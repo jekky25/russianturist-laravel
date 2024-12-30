@@ -141,7 +141,7 @@ class TownTest extends TestCase
 
 	}
 
-    /** @test */
+	/** @test */
 	public function check_gettings_edit_city_page_in_the_admin(): void
 	{
 		$city = Town::factory()->create();
