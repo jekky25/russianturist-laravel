@@ -22,12 +22,12 @@ class Town extends Model
 		'description',
 	];
 
-	public function getTownsDescriptionAttribute ($val)
+	public function getDescriptionAttribute($val)
 	{
 		return SapeServiceProvider::replaceSapeCode($val);
 	}
 
-	public function getFirstImagePathAttribute ()
+	public function getFirstImagePathAttribute()
 	{
 		if ($this->fotos->count() == 0) return null;
 		return $this->fotos[0]->image_path;

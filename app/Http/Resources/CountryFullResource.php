@@ -18,7 +18,7 @@ class CountryFullResource extends JsonResource
 			'id'			=> $this->id,
 			'name'			=> $this->name,
 			'slug'			=> $this->slug,
-			'img'			=> $this->countries_img,
+			'img'			=> $this->img,
 			'description'	=> $this->description
 		];
 	}

@@ -11,7 +11,7 @@ class Item extends Model
 {
 	use HasFactory;
 
-	public function getItemsDescriptionAttribute ($val)
+	public function getDescriptionAttribute($val)
 	{
 		return SapeServiceProvider::replaceSapeCode($val);
 	}
@@ -24,6 +24,6 @@ class Item extends Model
 		return $this->hasMany(
 			Foto::class,
 			'parent_id',
-			'items_id');
+			'id');
 	}
 }

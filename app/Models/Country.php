@@ -37,12 +37,7 @@ class Country extends Model
 		$this->boardConfig = $this->getBoardConfig();
 	}
 
-	public function getCountriesDescriptionAttribute($val)
-	{
-		return $this->replaceSpaces($val);
-	}
-
-	public function getCountriesShortDescriptionAttribute()
+	public function getShortDescriptionAttribute()
 	{
 		return $this->description;
 	}
@@ -53,7 +48,7 @@ class Country extends Model
 	}
 	
 
-	public function getCountriesImgAttribute()
+	public function getImgAttribute()
 	{
 		$foto = asset($this->image_path);
 		return !empty($this->image) ? '<img title="' . $this['name'] . '" alt="' . $this['name'] . '" src="' . $foto . '" width="' . $this->boardConfig['foto_width_country_id'] . '" height="' . $this->boardConfig['foto_height_country_id'] . '">' : '';

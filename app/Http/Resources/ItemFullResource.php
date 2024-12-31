@@ -17,9 +17,9 @@ class ItemFullResource extends JsonResource
 	public function toArray(Request $request): array
 	{
 		return [
-			'id'			=> $this->items_id,
-			'name'			=> $this->items_name,
-			'description'	=> $this->replaceSpaces($this->items_description),
+			'id'			=> $this->id,
+			'name'			=> $this->name,
+			'description'	=> $this->replaceSpaces($this->description),
 			'img'			=> $this->items_img
 		];
 	}

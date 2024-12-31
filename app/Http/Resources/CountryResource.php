@@ -22,7 +22,7 @@ class CountryResource extends JsonResource
 			'name'			=> $this->name,
 			'slug'			=> $this->slug,
 			'fotoStr'		=> $this->fotoStr,
-			'description'	=> Helper::cutText($this->countries_short_description, self::DESCRIPTION_SIZE),
+			'description'	=> Helper::cutText($this->short_description, self::DESCRIPTION_SIZE),
 		];
 	}
 }
