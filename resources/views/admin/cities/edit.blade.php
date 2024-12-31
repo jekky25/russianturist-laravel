@@ -13,15 +13,7 @@
 				<x-admin.errors />
 				<x-admin.input  :value="old('name', $city->name)" title="Имя" name="name" placeholder="Введите имя" />
 				<x-admin.input  :value="old('slug', $city->slug)" title="Транскрипция" name="slug" placeholder="Введите значение" />
-				<div class="form-group w-100">
-					<label>Страна</label>
-					<select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" name="country_id">
-						<option value="0">Выберите</option>
-						@foreach ($countries as $country)
-							<option {!! $country->id == old('country_id', $city->country_id) ? 'selected="selected"' : '' !!} data-select2-id="{{ $country->id }}" value="{{ $country->id }}">{{ $country->name }}</option>
-						@endforeach
-					</select>
-				</div>
+				<x-admin.inputSelect :value="old('country_id', $city->country_id)" :items="($countries)" title="Страна" name="country_id" />
 				<x-admin.textarea  :value="old('description', $city->description)" title="Описание" name="description" placeholder="Введите описание" />
 				<x-admin.inputFile  :image="$city->fotos" title="Главное изображение" name="image" placeholder="Выберите файл" />
 				<div class="form-group row">
