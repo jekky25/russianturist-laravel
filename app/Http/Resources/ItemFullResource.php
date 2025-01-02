@@ -19,6 +19,7 @@ class ItemFullResource extends JsonResource
 		return [
 			'id'			=> $this->id,
 			'name'			=> $this->name,
+			'firstImagePath'	=> asset($this->firstImagePath),
 			'description'	=> $this->replaceSpaces($this->description),
 			'img'			=> $this->items_img
 		];

@@ -33,6 +33,12 @@
 					<p>Отели</p>
 				</a>
 			</li>
+			<li class="nav-item">
+				<a href="{{route('admin.item.index')}}" class="nav-link">
+				<i class="nav-icon fas fa-solid fa-scroll"></i>
+					<p>Статьи</p>
+				</a>
+			</li>
 		</ul>
 	</div>
 	<!-- /.sidebar -->

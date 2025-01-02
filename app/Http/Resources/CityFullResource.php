@@ -19,7 +19,7 @@ class CityFullResource extends JsonResource
 			'id'			=> $this->id,
 			'name'			=> $this->name,
 			'slug'			=> $this->slug,
-			'img'			=> $this->towns_img,
+			'firstImagePath'	=> asset($this->firstImagePath),
 			'description'	=> $this->description,
 			'country'		=> new CountryShortResource($this->country)
 		];

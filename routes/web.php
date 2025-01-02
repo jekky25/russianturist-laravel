@@ -71,6 +71,16 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 		Route::patch('/{id}', 'IndexController@update')->name('admin.hotel.update');
 		Route::delete('/{id}', 'IndexController@destroy')->name('admin.hotel.destroy');
 	});
+
+	Route::group(['namespace' => 'Item', 'prefix' => 'items', 'middleware' => ['auth', 'admin']], function() {
+		Route::get('/', 'IndexController@index')->name('admin.item.index');
+		Route::get('/create', 'IndexController@create')->name('admin.item.create');
+		Route::post('/store', 'IndexController@store')->name('admin.item.store');
+		Route::get('/{id}', 'IndexController@show')->name('admin.item.show');
+		Route::get('/{id}/edit', 'IndexController@edit')->name('admin.item.edit');
+		Route::patch('/{id}', 'IndexController@update')->name('admin.item.update');
+		Route::delete('/{id}', 'IndexController@destroy')->name('admin.item.destroy');
+	});
 });
 
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');

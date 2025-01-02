@@ -2,7 +2,9 @@
 	<div class="main_items_id" v-if="item">
 		<h1>{{ item.name }}</h1>
 		<div class="hot_prew">
-			<div class="item_foto" v-html="item.img"></div>
+			<div class="item_foto">
+				<img :title="`${item.name}`" :alt="`${item.name}`" :src="`${item.firstImagePath}`">
+			</div>
 			<p v-html="item.description"></p>
 		</div>
 	</div>

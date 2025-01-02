@@ -3,17 +3,31 @@ namespace App\Services;
 
 use App\Traits\BaseConfig;
 use App\Models\Item;
+use App\Models\Foto;
 use App\Services\LengthPager;
+use Illuminate\Support\Facades\DB;
+use App\Services\ImageService;
 
 class ItemService
 {
 	use BaseConfig;
 
 	public $boardConfig 	= [];
+	public $items;
 
-	public function __construct()
+	public function __construct(private ImageService $image)
 	{
 		$this->boardConfig = $this->getBoardConfig();
+	}
+
+	/**
+	 * get all hotels
+	 * @return \Illuminate\Database\Eloquent\Collection 
+	 */
+	public function getAll()
+	{
+		$this->items = Item::select('*')->with(['fotos'])->orderBy('id')->get();
+		return $this->items;
 	}
 
 	/**
@@ -23,12 +37,8 @@ class ItemService
 	*/
 	public function getAllByPaginate($count)
 	{
-		$items = Item::select('*')->orderBy('create_time')->paginate($count);
+		$items = Item::select('*')->with(['fotos'])->orderBy('create_time')->paginate($count);
 		$items = LengthPager::makeLengthAware($items, $items->total(), $count);
-		foreach ($items as &$row) 
-		{
-			$this->getFotos($row);
-		}
 		$items->withPath('/items/');
 		return $items;
 	}
@@ -42,9 +52,8 @@ class ItemService
 	{
 		$item = Item::select('*')
 		->where('id', $id)
+		->with(['fotos'])
 		->first();
-
-		$this->getFotos($item);
 		return $item;
 	}
 
@@ -65,5 +74,84 @@ class ItemService
 
 		$foto_out = asset('fotos/items/'. $row['fotos']['id'] . '.jpg');
 		$row['items_img'] = !empty($foto_out) ? '<img title="' . $row['name'] . '" alt="' . $row['name'] . '" src="' . $foto_out . '" width="' . $this->boardConfig['foto_width_item_id'] . '" height="' . $this->boardConfig['foto_height_item_id'] . '">' : '';
+	}
+
+	/**
+	* create an item
+	* @param  array $request
+	* @return void
+	*/	
+	public function create($request) 
+	{
+		try {
+			DB::beginTransaction();
+			$request['create_time']	= time();
+			$item = Item::create($request);
+			if (!empty($request['image']))
+			{
+				$request['image'] = $this->image->put(Item::IMAGES_DIRECTORY, $request['image']);
+				$requestFoto = [
+					'parent_id'	=> $item->id,
+					'position'	=> Foto::START_SORT,
+					'type'		=> Item::IMAGES_TYPE,
+					'image'		=> $request['image']
+				];
+				Foto::create($requestFoto);
+			}
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
+			throw new \Exception('Failed to create an Item '.$e->getMessage());
+		}
+	}
+
+	/**
+	* update an Item
+	* @param array $request
+	* @return void
+	*/	
+	public function update($id, $request)
+	{
+		try {
+			DB::beginTransaction();
+			$item = Item::find($id);
+			$request['image'] = !empty($request['image']) ?$this->image->put(Item::IMAGES_DIRECTORY, $request['image']) : null;
+			$item->update($request);
+			if (!empty($request['image']))
+			{
+				$requestFoto = [
+					'parent_id'	=> $item->id,
+					'position'	=> Foto::START_SORT,
+					'type'		=> Item::IMAGES_TYPE,
+					'image'		=> $request['image']
+				];
+				Foto::create($requestFoto);
+			}
+			DB::commit();
+		} catch (\Exception $e) {
+			DB::rollBack();
+			throw new \Exception('Failed to update the Item. '.$e->getMessage());
+		}
+	}
+
+	/**
+	* delete a item
+	* @param  id $id
+	* @return void
+	*/
+	public function destroy($id) {
+		try {
+			$item = Item::find($id);
+			if ($item->fotos->count() > 0)
+			{
+				foreach ($item->fotos as $foto)
+				{
+					$this->image->destroyFoto($foto);
+				}
+			}
+			$item->delete();
+		} catch (\Exception $e) {
+			throw new \Exception('Failed to delete Item . '.$e->getMessage());
+		}
 	}
 }

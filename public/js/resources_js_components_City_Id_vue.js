@@ -146,11 +146,14 @@ var _hoisted_1 = {
 var _hoisted_2 = {
   "class": "hot_prew"
 };
-var _hoisted_3 = ["innerHTML"];
-var _hoisted_4 = {
+var _hoisted_3 = {
+  "class": "country_foto"
+};
+var _hoisted_4 = ["title", "alt", "src"];
+var _hoisted_5 = {
   "class": "country_r"
 };
-var _hoisted_5 = ["innerHTML"];
+var _hoisted_6 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
   var _component_hotel_short_list = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("hotel-short-list");
@@ -166,14 +169,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.city.country.name), 1 /* TEXT */)];
     }),
     _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["to"]), _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(")"))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "country_foto",
-    innerHTML: $data.city.img
-  }, null, 8 /* PROPS */, _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_hotel_short_list, {
+  }, 8 /* PROPS */, ["to"]), _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(")"))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    title: "".concat($data.city.name),
+    alt: "".concat($data.city.name),
+    src: "".concat($data.city.firstImagePath)
+  }, null, 8 /* PROPS */, _hoisted_4)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_hotel_short_list, {
     cityId: $data.city.id
   }, null, 8 /* PROPS */, ["cityId"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
     innerHTML: $data.city.description
-  }, null, 8 /* PROPS */, _hoisted_5)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
+  }, null, 8 /* PROPS */, _hoisted_6)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),

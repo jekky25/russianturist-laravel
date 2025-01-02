@@ -26,7 +26,7 @@ class IndexController extends Controller
 	public static function getBackRotesFoto()
 	{
 		return [
-			ImageService::getFotoType('ITEM')		=> 'admin.city.edit',
+			ImageService::getFotoType('ITEM')		=> 'admin.item.edit',
 			ImageService::getFotoType('HOTEL')		=> 'admin.hotel.edit',
 			ImageService::getFotoType('COUNTRY')	=> 'admin.country.edit',
 			ImageService::getFotoType('CITY')		=> 'admin.city.edit',

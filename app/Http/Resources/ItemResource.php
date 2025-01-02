@@ -18,10 +18,10 @@ class ItemResource extends JsonResource
 	public function toArray(Request $request): array
 	{
 		return [
-			'id'			=> $this->id,
-			'name'			=> $this->name,
-			'fotoStr'		=> $this->fotoStr,
-			'description'	=> Helper::cutText($this->description, self::DESCRIPTION_SIZE),
+			'id'				=> $this->id,
+			'name'				=> $this->name,
+			'firstImagePath'	=> asset($this->firstImagePath),
+			'description'		=> Helper::cutText($this->description, self::DESCRIPTION_SIZE),
 		];
 	}
 }

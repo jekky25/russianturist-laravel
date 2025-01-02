@@ -146,7 +146,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
           title: "".concat(item.name),
           alt: "".concat(item.name),
-          src: "".concat(item.fotoStr),
+          src: "".concat(item.firstImagePath),
           width: "".concat($data.configWidthItemPicture),
           height: "".concat($data.configHeightItemPicture)
         }, null, 8 /* PROPS */, _hoisted_2)];

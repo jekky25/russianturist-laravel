@@ -2,7 +2,9 @@
 	<div class="main_items_id" v-if="city">
 		<h1>{{ city.name }} (<router-link :to="{ name: 'country_name', params: { name: `${city.country.slug}` } }">{{ city.country.name }}</router-link>)</h1>
 		<div class="hot_prew">
-			<div class="country_foto" v-html="city.img"></div>
+			<div class="country_foto">
+				<img :title="`${city.name}`" :alt="`${city.name}`" :src="`${city.firstImagePath}`">
+			</div>
 			<div class="country_r">
 				<hotel-short-list :cityId="city.id"></hotel-short-list>
 			</div>
@@ -11,7 +13,7 @@
 	</div>
 </template>
 <script>
-	import HotelShortList from "../../components/Hotel/ShortList.vue"
+	import HotelShortList from "../../components/Hotel/ShortList.vue";
 	export default {
 		name: 'CityId',
 		components:{

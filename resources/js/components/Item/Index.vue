@@ -4,7 +4,7 @@
 		<template v-if="items">
 			<div  v-for="item in items" class="hot_prew" :style="{'height': configHeightItemPicture + 'px'}">
 				<router-link :title="`${item.name}`" :alt="`${item.name}`" :to="{ name: 'item_id', params: { id: `${item.id}` } }" class="prew">
-					<img :title="`${item.name}`" :alt="`${item.name}`" :src="`${item.fotoStr}`" :width="`${configWidthItemPicture}`" :height="`${configHeightItemPicture}`">
+					<img :title="`${item.name}`" :alt="`${item.name}`" :src="`${item.firstImagePath}`" :width="`${configWidthItemPicture}`" :height="`${configHeightItemPicture}`">
 				</router-link>
 				<h3 class="tit_hot" :style="{'margin-left':configMarginItemWidthPicture + 'px'}">
 					<router-link :title="`${item.name}`" :alt="`${item.name}`" :to="{ name: 'item_id', params: { id: `${item.id}` } }">{{ item.name }}</router-link>

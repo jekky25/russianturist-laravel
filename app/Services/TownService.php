@@ -146,8 +146,7 @@ class TownService
 		$foto   = $town->fotos()
 				->where('type','town')
 				->orderBy('position')
-				->first()
-				->toArray();
+				->first();
 		$town->foto	= $foto;
 		return $town;
 	}
