@@ -87,17 +87,7 @@ class ItemService
 			DB::beginTransaction();
 			$request['create_time']	= time();
 			$item = Item::create($request);
-			if (!empty($request['image']))
-			{
-				$request['image'] = $this->image->put(Item::IMAGES_DIRECTORY, $request['image']);
-				$requestFoto = [
-					'parent_id'	=> $item->id,
-					'position'	=> Foto::START_SORT,
-					'type'		=> Item::IMAGES_TYPE,
-					'image'		=> $request['image']
-				];
-				Foto::create($requestFoto);
-			}
+			$this->image->create($item->id, Item::class, $request['image']);
 			DB::commit();
 		} catch (\Exception $e) {
 			DB::rollBack();
@@ -115,18 +105,8 @@ class ItemService
 		try {
 			DB::beginTransaction();
 			$item = Item::find($id);
-			$request['image'] = !empty($request['image']) ?$this->image->put(Item::IMAGES_DIRECTORY, $request['image']) : null;
 			$item->update($request);
-			if (!empty($request['image']))
-			{
-				$requestFoto = [
-					'parent_id'	=> $item->id,
-					'position'	=> Foto::START_SORT,
-					'type'		=> Item::IMAGES_TYPE,
-					'image'		=> $request['image']
-				];
-				Foto::create($requestFoto);
-			}
+			$this->image->create($item->id, Item::class, $request['image']);
 			DB::commit();
 		} catch (\Exception $e) {
 			DB::rollBack();

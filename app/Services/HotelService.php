@@ -259,17 +259,7 @@ class HotelService
 			$request['country_id']	= $city->country_id;
 			$request['create_time']	= time();
 			$hotel = Hotel::create($request);
-			if (!empty($request['image']))
-			{
-				$request['image'] = $this->image->put(Hotel::IMAGES_DIRECTORY, $request['image']);
-				$requestFoto = [
-					'parent_id'	=> $hotel->id,
-					'position'	=> Foto::START_SORT,
-					'type'		=> Hotel::IMAGES_TYPE,
-					'image'		=> $request['image']
-				];
-				Foto::create($requestFoto);				
-			}
+			$this->image->create($hotel->id, Hotel::class, $request['image']);
 			DB::commit();
 		} catch (\Exception $e) {
 			DB::rollBack();
@@ -287,18 +277,8 @@ class HotelService
 		try {
 			DB::beginTransaction();
 			$hotel = Hotel::find($id);
-			$request['image'] = !empty($request['image']) ?$this->image->put(Hotel::IMAGES_DIRECTORY, $request['image']) : null;
 			$hotel->update($request);
-			if (!empty($request['image']))
-			{
-				$requestFoto = [
-					'parent_id'	=> $hotel->id,
-					'position'	=> Foto::START_SORT,
-					'type'		=> Hotel::IMAGES_TYPE,
-					'image'		=> $request['image']
-				];
-				Foto::create($requestFoto);
-			}
+			$this->image->create($hotel->id, Hotel::class, $request['image']);
 			DB::commit();
 		} catch (\Exception $e) {
 			DB::rollBack();

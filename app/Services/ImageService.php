@@ -77,6 +77,26 @@ class ImageService
 	}
 
 	/**
+	 * create image in the model
+	 * @param int $parentId
+	 * @param string $type
+	 * @param UploadedFile $image
+	 *
+	 * @return void|bool
+	 */
+	public function create($parentId, $class, $image)
+	{
+		if (empty($image)) return false;
+		$imageName = $this->put($class::IMAGES_DIRECTORY, $image);
+		$requestFoto = [
+			'parent_id'	=> $parentId,
+			'position'	=> Foto::START_SORT,
+			'type'		=> $class::IMAGES_TYPE,
+			'image'		=> $imageName
+		];
+		Foto::create($requestFoto);
+	}
+	/**
 	 * update image in the storage
 	 * @param string $url
 	 * @param string $dir

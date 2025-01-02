@@ -47,15 +47,8 @@ class TownService
 	{
 		try {
 			DB::beginTransaction();
-			$request['image'] = $this->image->put(Town::IMAGES_DIRECTORY, $request['image']);
 			$city = Town::create($request);
-			$requestFoto = [
-				'parent_id'	=> $city->id,
-				'position'	=> Foto::START_SORT,
-				'type'		=> Town::IMAGES_TYPE,
-				'image'		=> $request['image']
-			];
-			Foto::create($requestFoto);
+			$this->image->create($city->id, Town::class, $request['image']);
 			DB::commit();
 		} catch (\Exception $e) {
 			DB::rollBack();
@@ -73,18 +66,8 @@ class TownService
 		try {
 			DB::beginTransaction();
 			$city = Town::find($id);
-			$request['image'] = !empty($request['image']) ?$this->image->put(Town::IMAGES_DIRECTORY, $request['image']) : null;
 			$city->update($request);
-			if (!empty($request['image']))
-			{
-				$requestFoto = [
-					'parent_id'	=> $city->id,
-					'position'	=> Foto::START_SORT,
-					'type'		=> Town::IMAGES_TYPE,
-					'image'		=> $request['image']
-				];
-				Foto::create($requestFoto);
-			}
+			$this->image->create($city->id, Town::class, $request['image']);
 			DB::commit();
 		} catch (\Exception $e) {
 			DB::rollBack();
