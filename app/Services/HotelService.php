@@ -3,7 +3,6 @@ namespace App\Services;
 
 use App\Traits\TStr;
 use App\Models\Hotel;
-use App\Models\Foto;
 use App\Services\ImageService;
 use Illuminate\Support\Facades\DB;
 

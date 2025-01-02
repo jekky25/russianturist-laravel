@@ -2,7 +2,6 @@
 namespace App\Services;
 
 use App\Models\Town;
-use App\Models\Foto;
 use App\Services\ImageService;
 use Illuminate\Support\Facades\DB;
 

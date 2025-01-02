@@ -3,7 +3,6 @@ namespace App\Services;
 
 use App\Traits\BaseConfig;
 use App\Models\Item;
-use App\Models\Foto;
 use App\Services\LengthPager;
 use Illuminate\Support\Facades\DB;
 use App\Services\ImageService;
