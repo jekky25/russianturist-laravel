@@ -66,7 +66,7 @@ class TownService
 			DB::beginTransaction();
 			$city = Town::find($id);
 			$city->update($request);
-			$this->image->create($city->id, Town::class, $request['image']);
+			if (!empty($request['image'])) $this->image->create($city->id, Town::class, $request['image']);
 			DB::commit();
 		} catch (\Exception $e) {
 			DB::rollBack();

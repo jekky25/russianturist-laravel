@@ -277,7 +277,7 @@ class HotelService
 			DB::beginTransaction();
 			$hotel = Hotel::find($id);
 			$hotel->update($request);
-			$this->image->create($hotel->id, Hotel::class, $request['image']);
+			if (!empty($request['image'])) $this->image->create($hotel->id, Hotel::class, $request['image']);
 			DB::commit();
 		} catch (\Exception $e) {
 			DB::rollBack();
