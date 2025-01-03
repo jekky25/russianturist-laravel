@@ -105,7 +105,7 @@ class ItemService
 			DB::beginTransaction();
 			$item = Item::find($id);
 			$item->update($request);
-			$this->image->create($item->id, Item::class, $request['image']);
+			if (!empty($request['image'])) $this->image->create($item->id, Item::class, $request['image']);
 			DB::commit();
 		} catch (\Exception $e) {
 			DB::rollBack();
