@@ -13,7 +13,7 @@
 				<x-admin.input  :value="old('name')" title="Название" name="name" placeholder="Введите название" />
 				<x-admin.input  :value="old('slug')" title="Транскрипция" name="slug" placeholder="Введите значение" />
 `				<x-admin.inputSelect :value="old('stars')" :items="($stars)" title="Рейтинг" name="stars" />
-				<x-admin.inputSelect :value="old('town_id')" :items="($cities)" title="Город" name="town_id" />
+				<x-admin.inputSelect :value="old('city_id')" :items="($cities)" title="Город" name="city_id" />
 				<x-admin.textarea  :value="old('description')" title="Описание" name="description" placeholder="Введите описание" />
 				<x-admin.inputFile  title="Главное изображение" name="image" placeholder="Выберите файл" />
 				<div class="form-group row">

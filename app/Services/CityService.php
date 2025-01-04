@@ -1,13 +1,13 @@
 <?php
 namespace App\Services;
 
-use App\Models\Town;
+use App\Models\City;
 use App\Services\ImageService;
 use Illuminate\Support\Facades\DB;
 
-class TownService
+class CityService
 {
-	private $towns;
+	private $cities;
 
 	public function __construct(
 		private ImageService $image
@@ -16,13 +16,13 @@ class TownService
 	}
 
 	/**
-	* get all towns
+	* get all cities
 	* @return \Illuminate\Database\Eloquent\Collection 
 	*/
 	public function getAll()
 	{
-		$this->towns = Town::select('*')->with(['country', 'fotos'])->orderBy('name')->get();
-		return $this->towns;
+		$this->cities = City::select('*')->with(['country', 'fotos'])->orderBy('name')->get();
+		return $this->cities;
 	}
 
 	/**
@@ -31,7 +31,7 @@ class TownService
 	*/
 	public function getById($id)
 	{
-		return Town::select('*')
+		return City::select('*')
 			->where('id', $id)
 			->with(['country', 'fotos'])
 			->firstOrFail();
@@ -46,8 +46,8 @@ class TownService
 	{
 		try {
 			DB::beginTransaction();
-			$city = Town::create($request);
-			$this->image->create($city->id, Town::class, $request['image']);
+			$city = City::create($request);
+			$this->image->create($city->id, City::class, $request['image']);
 			DB::commit();
 		} catch (\Exception $e) {
 			DB::rollBack();
@@ -64,9 +64,9 @@ class TownService
 	{
 		try {
 			DB::beginTransaction();
-			$city = Town::find($id);
+			$city = City::find($id);
 			$city->update($request);
-			if (!empty($request['image'])) $this->image->create($city->id, Town::class, $request['image']);
+			if (!empty($request['image'])) $this->image->create($city->id, City::class, $request['image']);
 			DB::commit();
 		} catch (\Exception $e) {
 			DB::rollBack();
@@ -81,7 +81,7 @@ class TownService
 	*/
 	public function destroy($id) {
 		try {
-			$city = Town::find($id);
+			$city = City::find($id);
 			if ($city->fotos->count() > 0)
 			{
 				foreach ($city->fotos as $foto)
@@ -96,54 +96,54 @@ class TownService
 	}
 
 	/**
-	* add pictures of the towns to the object
+	* add pictures of the cities to the object
 	* @return void
 	*/
 	public function getFotos()
 	{
-		foreach ($this->towns as &$row) 
+		foreach ($this->cities as &$row) 
 		{
 			$foto = $row->fotos()
-				->where('type', Town::IMAGES_TYPE)
+				->where('type', City::IMAGES_TYPE)
 				->orderBy('position')
 				->first();
 			$row['fotos'] = $foto;
 		
-			$row['fotoStr']		= !empty($row['fotos']) ? asset('fotos/towns/' . $row['fotos']['id'] . '.jpg') : asset('image/no_foto.jpg');
+			$row['fotoStr']		= !empty($row['fotos']) ? asset('fotos/cities/' . $row['fotos']['id'] . '.jpg') : asset('image/no_foto.jpg');
 		}
 	}
 
 	/**
-	* get town by name
+	* get city by name
 	* @param  string  $name
 	* @return \Illuminate\Database\Eloquent\Collection 
 	*/
 	public function getByName($name)
 	{
-		$town = Town::select('*')
+		$city = City::select('*')
 				->where('slug', $name)
 				->first();
-		$town->description = str_replace("\n", "\n<br />\n", $town->description);
-		$town->country = $town->country()->first();
-		$foto   = $town->fotos()
-				->where('type','town')
+		$city->description = str_replace("\n", "\n<br />\n", $city->description);
+		$city->country = $city->country()->first();
+		$foto   = $city->fotos()
+				->where('type','city')
 				->orderBy('position')
 				->first();
-		$town->foto	= $foto;
-		return $town;
+		$city->foto	= $foto;
+		return $city;
 	}
 
 	/**
 	* get a picture link
-	* @param  \Illuminate\Database\Eloquent\Collection $town
+	* @param  \Illuminate\Database\Eloquent\Collection $city
 	* @param  int $width
 	* @param  int $height
 	* @return \Illuminate\Database\Eloquent\Collection 
 	*/
-	public function getPictureLink($town, $width, $height)
+	public function getPictureLink($city, $width, $height)
 	{
-		$foto_out 					= !empty($town->foto) ? asset('/fotos/towns/' . $town->foto['id'] . '.jpg') : '';
-		$town->towns_img 			= !empty($foto_out) ? '<img title="' . $town->name . '" alt="' . $town->name . '" src="' . $foto_out . '" width="' . $width . '" height="' . $height . '">' : '';
-		return $town;
+		$foto_out 					= !empty($city->foto) ? asset('/fotos/citys/' . $city->foto['id'] . '.jpg') : '';
+		$city->cities_img 			= !empty($foto_out) ? '<img title="' . $city->name . '" alt="' . $city->name . '" src="' . $foto_out . '" width="' . $width . '" height="' . $height . '">' : '';
+		return $city;
 	}
 }

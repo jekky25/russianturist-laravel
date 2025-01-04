@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Providers\SapeServiceProvider;
 use App\Models\Foto;
 
-class Town extends Model
+class City extends Model
 {
 	use HasFactory;
 
 	const IMAGES_DIRECTORY	= 'images/city';
-	const IMAGES_TYPE		= 'town';
+	const IMAGES_TYPE		= 'city';
 
 	public $timestamps		= false;
 	protected $fillable		= [
@@ -38,7 +38,7 @@ class Town extends Model
 	*/
 	public function fotos()
 	{
-		return $this->hasMany(Foto::class, 'parent_id', 'id')->where('type', 'town');
+		return $this->hasMany(Foto::class, 'parent_id', 'id')->where('type', 'city');
 	}
 
 	/**

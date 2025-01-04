@@ -8,7 +8,7 @@ use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Hotel;
-use App\Models\Town;
+use App\Models\City;
 
 class HotelTest extends TestCase
 {
@@ -21,7 +21,7 @@ class HotelTest extends TestCase
 		'slug'			=> 'ffffff',
 		'country_id'	=> 1,
 		'description'	=> 'sdff dsf fdsf  ffdsf sfsf fs',
-		'town_id'		=> 1,
+		'city_id'		=> 1,
 		'stars'			=> 4
 	];
 
@@ -30,7 +30,7 @@ class HotelTest extends TestCase
 		'slug'			=> '',
 		'country_id'	=> '',
 		'description'	=> '',
-		'town_id'		=> ''
+		'city_id'		=> ''
 	];
 
 	/**
@@ -42,8 +42,8 @@ class HotelTest extends TestCase
 		$user					= User::factory()->create();
 		$user->role				= User::ROLE_ADMIN;
 		$this->user				= $user;
-		$this->city				= Town::factory()->create();
-		$this->data['town_id']	= $this->city->id;
+		$this->city				= City::factory()->create();
+		$this->data['city_id']	= $this->city->id;
 	}
 
 	/**
@@ -106,7 +106,7 @@ class HotelTest extends TestCase
 		$response->assertRedirectToRoute('admin.hotel.index');
 
 		$response = $this->actingAs($this->user)->post($url, $this->dataNoValid);
-		$response->assertInvalid(['name', 'slug', 'description', 'town_id', 'stars']);
+		$response->assertInvalid(['name', 'slug', 'description', 'city_id', 'stars']);
 	}
 
 	/** @test */
@@ -121,7 +121,7 @@ class HotelTest extends TestCase
 		$response->assertRedirectToRoute('admin.hotel.index');
 
 		$response = $this->actingAs($this->user)->patch($url, $this->dataNoValid);
-		$response->assertInvalid(['name', 'slug', 'description', 'town_id', 'stars']);
+		$response->assertInvalid(['name', 'slug', 'description', 'city_id', 'stars']);
 	}
 
 	/** @test */

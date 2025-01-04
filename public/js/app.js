@@ -23518,7 +23518,7 @@ __webpack_require__.r(__webpack_exports__);
       title: 'Страны, русский турист, сайт про туризм и путешествия'
     }
   }, {
-    path: '/towns/',
+    path: '/cities/',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_City_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/City/Index */ "./resources/js/components/City/Index.vue"));
     },
@@ -23527,7 +23527,7 @@ __webpack_require__.r(__webpack_exports__);
       title: 'Города, русский турист, сайт про туризм и путешествия'
     }
   }, {
-    path: '/towns/:name.html',
+    path: '/cities/:name.html',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_City_Id_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/City/Id */ "./resources/js/components/City/Id.vue"));
     },

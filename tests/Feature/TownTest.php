@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\Town;
+use App\Models\City;
 
-class TownTest extends TestCase
+class CityTest extends TestCase
 {
 	use DatabaseMigrations;
 	protected $user = null;
@@ -52,25 +52,25 @@ class TownTest extends TestCase
 	}
 
 	/**
-	 * A basic feature test town.
+	 * A basic feature test city.
 	 */
-	public function test_town_page(): void
+	public function test_city_page(): void
 	{
-		$_SERVER['REQUEST_URI'] = '/towns/';
+		$_SERVER['REQUEST_URI'] = '/cities/';
 		$response = $this->get($_SERVER['REQUEST_URI']);
 		$response->assertStatus(200);
 	}
 
 	/**
-	 * A basic feature test town_name.
+	 * A basic feature test city_name.
 	 */
-	public function test_town_id_page(): void
+	public function test_city_id_page(): void
 	{
-		$_SERVER['REQUEST_URI'] = '/towns/alexandria.html';
+		$_SERVER['REQUEST_URI'] = '/cities/alexandria.html';
 		$response = $this->get($_SERVER['REQUEST_URI']);
 		$response->assertStatus(200);
 
-		$_SERVER['REQUEST_URI'] = '/towns/balchik.html';
+		$_SERVER['REQUEST_URI'] = '/cities/balchik.html';
 		$response = $this->get($_SERVER['REQUEST_URI']);
 		$response->assertStatus(200);
 	}
@@ -93,7 +93,7 @@ class TownTest extends TestCase
 	/** @test */
 	public function check_updating_data_to_the_city_model(): void
 	{
-		$city	= Town::factory()->create();
+		$city	= City::factory()->create();
 		$url = '/admin/cities/' . $city->id . '/';
 		$response = $this->patch($url, $this->data);
 		$response->assertRedirectToRoute('login');
@@ -108,7 +108,7 @@ class TownTest extends TestCase
 	/** @test */
 	public function check_deleting_data_from_the_city_model(): void
 	{
-		$city = Town::factory()->create();
+		$city = City::factory()->create();
 		$url = '/admin/cities/' . $city->id . '/';
 		$response = $this->delete($url);
 		$response->assertRedirectToRoute('login');
@@ -144,7 +144,7 @@ class TownTest extends TestCase
 	/** @test */
 	public function check_gettings_edit_city_page_in_the_admin(): void
 	{
-		$city = Town::factory()->create();
+		$city = City::factory()->create();
 		$url = '/admin/cities/' . $city->id . '/edit/';
 		$response = $this->get($url);
 		$response->assertRedirectToRoute('login');

@@ -14,7 +14,7 @@
 				<x-admin.input  :value="old('name', $hotel->name)" title="Название" name="name" placeholder="Введите название" />
 				<x-admin.input  :value="old('slug', $hotel->slug)" title="Транскрипция" name="slug" placeholder="Введите значение" />
 				<x-admin.inputSelect :value="old('stars', $hotel->stars)" :items="($stars)" title="Рейтинг" name="stars" />
-				<x-admin.inputSelect :value="old('town_id', $hotel->town_id)" :items="($cities)" title="Город" name="town_id" />
+				<x-admin.inputSelect :value="old('city_id', $hotel->city_id)" :items="($cities)" title="Город" name="city_id" />
 				<x-admin.textarea  :value="old('description', $hotel->description)" title="Описание" name="description" placeholder="Введите описание" />
 				<x-admin.inputFile  :image="$hotel->fotos" title="Главное изображение" name="image" placeholder="Выберите файл" />
 				<div class="form-group row">

@@ -2,9 +2,9 @@
 @section('title', $arMeta['title'])
 @section('main_body')
 <div class="main_items_id">
-							<h1>{{$town->name}} (<a href="{{route('country_name',$town->country['slug'])}}">{{$town->country['name']}}</a>)</h1>
+							<h1>{{$city->name}} (<a href="{{route('country_name',$city->country['slug'])}}">{{$city->country['name']}}</a>)</h1>
 <div class="hot_prew">
-<div class="country_foto">{!!$town->towns_img!!}</div>
+<div class="country_foto">{!!$city->cities_img!!}</div>
 	<div class="country_r">
 				<h2>Новые описания отелей</h2>
 				@if (!empty ($hotels))
@@ -20,7 +20,7 @@
 			@endif
 </div>
 
-<p>{!!$town->description!!}</p>
+<p>{!!$city->description!!}</p>
 </div>
 </div>
 @overwrite

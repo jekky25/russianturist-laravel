@@ -58,7 +58,7 @@
 							<td class="vert_pm"><div class="rm_head1"></div></td>
 							<td class="vert_pm1"><a href="{{route('home')}}" title="Главная">Главная</a></td>
 							<td class="vert_pm"></td>
-							<td class="vert_pm1"><a href="{{route('towns')}}" title="Города">Города</a></td>
+							<td class="vert_pm1"><a href="{{route('cities')}}" title="Города">Города</a></td>
 							<td class="vert_pm"></td>
 							<td class="vert_pm1"><a href="{{route('hotels')}}" title="Отели">Отели</a></td>
 							<td class="vert_pm"></td>

@@ -2,12 +2,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Services\TownService;
+use App\Services\CityService;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\CityFullResource;
 use App\Traits\BaseConfig;
 
-class TownController extends Controller
+class CityController extends Controller
 {
 	use BaseConfig;
 	public $boardingConfig = [];
@@ -17,7 +17,7 @@ class TownController extends Controller
 	* @return void
 	*/
 	public function __construct(
-		public TownService		$city
+		public CityService		$city
 	)
 	{
 		$this->boardConfig = $this->getBoardConfig();
@@ -41,7 +41,7 @@ class TownController extends Controller
 	public function getCityByName($name)
 	{
 		$city	= $this->city->getByName($name);
-		$city	= $this->city->getPictureLink($city, $this->boardConfig['foto_width_town_id'], $this->boardConfig['foto_height_town_id']);
+		$city	= $this->city->getPictureLink($city, $this->boardConfig['foto_width_city_id'], $this->boardConfig['foto_height_city_id']);
 		return new CityFullResource($city);
 	}
 }

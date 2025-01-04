@@ -22,7 +22,7 @@ class HotelFullResource extends JsonResource
 			'slug'				=> $this->slug,
 			'img'				=> $this->img,
 			'description'		=> $this->description,
-			'city'				=> new CityShortResource($this->town),
+			'city'				=> new CityShortResource($this->city),
 			'pictures'			=> PictureResource::collection($this->fotos),
 			'pictureSelected'	=> !empty($this->selFoto)		? new PictureResource($this->selFoto)	: null,
 			'picturePosition'	=> !empty($this->positionFoto)	? $this->positionFoto					: null,

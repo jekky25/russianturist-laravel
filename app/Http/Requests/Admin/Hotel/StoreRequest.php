@@ -27,8 +27,8 @@ class StoreRequest extends FormRequest
 			'slug.unique'						=> 'Имя для ссылки не уникально',
 			'slug.regex'						=> 'Имя для ссылки не корректно заполнено',
 			'description.required'				=> 'Описание не заполнено',
-			'town_id.required'					=> 'Город не заполнен',
-			'town_id.min'						=> 'Город не заполнен',
+			'city_id.required'					=> 'Город не заполнен',
+			'city_id.min'						=> 'Город не заполнен',
 			'image.image'						=> 'Файл не является изображением',
 			'stars.required'					=> 'Рейтинг не заполнен',
 			'stars.min'							=> 'Рейтинг не заполнен'
@@ -46,7 +46,7 @@ class StoreRequest extends FormRequest
 			'name'					=> ['required', 'string', 'unique:' . $this->table],
 			'slug'					=> ['required', 'string', 'unique:' . $this->table, 'regex:/^[A-Za-z0-9_]+$/i'],
 			'description'			=> ['required', 'string'],
-			'town_id'				=> ['required', 'integer', 'min:1'],
+			'city_id'				=> ['required', 'integer', 'min:1'],
 			'image'					=> ['nullable', 'image'],
 			'stars'					=> ['required', 'integer', 'min:1']
 		];

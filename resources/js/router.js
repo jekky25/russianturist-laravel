@@ -29,7 +29,7 @@ export default createRouter({
 			}
 		},
 		{
-			path: '/towns/',
+			path: '/cities/',
 			component: () => import('./components/City/Index'),
 			name: 'cities',
 			meta: { 
@@ -37,7 +37,7 @@ export default createRouter({
 			}
 		},
 		{
-			path: '/towns/:name.html',
+			path: '/cities/:name.html',
 			component: () => import('./components/City/Id'),
 			name: 'city_name',
 			props: true,

@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Hotel\StoreRequest;
 use App\Http\Requests\Admin\Hotel\UpdateRequest;
 use App\Services\HotelService;
-use App\Services\TownService;
+use App\Services\CityService;
 
 class IndexController extends Controller
 {
@@ -16,7 +16,7 @@ class IndexController extends Controller
 	*/
 	public function __construct(
 		private HotelService $hotel,
-		private TownService $city
+		private CityService $city
 	)
 	{
 	}

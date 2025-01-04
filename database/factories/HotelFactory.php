@@ -20,7 +20,7 @@ class HotelFactory extends Factory
 			'country_id'	=> 1,
 			'create_time'	=> time(),
 			'stars'			=> 4,
-			'town_id'		=> 1
+			'city_id'		=> 1
 		];
 	}
 }

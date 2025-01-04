@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\City;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\City\StoreRequest;
 use App\Http\Requests\Admin\City\UpdateRequest;
-use App\Services\TownService;
+use App\Services\CityService;
 use App\Services\CountryService;
 
 class IndexController extends Controller
@@ -15,7 +15,7 @@ class IndexController extends Controller
 	* @return void
 	*/
 	public function __construct(
-		private TownService $city,
+		private CityService $city,
 		private CountryService $country
 	)
 	{

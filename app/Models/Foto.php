@@ -13,7 +13,7 @@ class Foto extends Model
 	const ITEM		= 'item';
 	const HOTEL		= 'hotel';
 	const COUNTRY	= 'country';
-	const CITY		= 'town';
+	const CITY		= 'city';
 
 	const OLD_DIR_PICTURES = 'fotos';
 	const START_SORT = '10';

@@ -16,7 +16,7 @@ class Hotel extends Model
 
 	public $timestamps		= false;
 	protected $fillable		= [
-		'town_id',
+		'city_id',
 		'country_id',
 		'create_time',
 		'name',
@@ -45,10 +45,10 @@ class Hotel extends Model
 	}
 
 	/**
-	* get town
+	* get city
 	*/
-	public function town()
+	public function city()
 	{
-		return $this->belongsTo(Town::class, 'town_id', 'id');
+		return $this->belongsTo(City::class, 'city_id', 'id');
 	}
 }

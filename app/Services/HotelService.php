@@ -13,7 +13,7 @@ class HotelService
 	public $selectedPicture = 0;
 
 	public function __construct(
-		private TownService $city,
+		private CityService $city,
 		private ImageService $image
 	)
 	{
@@ -37,7 +37,7 @@ class HotelService
 	{
 		return Hotel::select('*')
 			->where('id', $id)
-			->with(['town', 'fotos'])
+			->with(['city', 'fotos'])
 			->firstOrFail();
 	}
 
@@ -70,7 +70,7 @@ class HotelService
 			->firstOrFail();
 
 		$hotel->description	= $this->replaceSpaces($hotel->description);
-		$hotel->town				= $hotel->town()->first();
+		$hotel->city				= $hotel->city()->first();
 
 		$this->hotels = $hotel;
 		$this->getFotos($this->hotels, 3);
@@ -120,16 +120,16 @@ class HotelService
 	}
 
 	/**
-	* get hotel of the town
-	* @param  int  $townId
+	* get hotel of the city
+	* @param  int  $cityId
 	* @param  int  $offset
 	* @param  int  $limit
 	* @return \Illuminate\Database\Eloquent\Collection 
 	*/
-	public function getOfTown($townId, $offset, $limit)
+	public function getOfCity($cityId, $offset, $limit)
 	{
 		$this->hotels = Hotel::select('*')
-		->where('town_id', $townId)
+		->where('city_id', $cityId)
 		->orderBy('create_time','desc')
 		->offset($offset)
 		->limit($limit)
@@ -254,7 +254,7 @@ class HotelService
 	{
 		try {
 			DB::beginTransaction();
-			$city = $this->city->getById($request['town_id']);
+			$city = $this->city->getById($request['city_id']);
 			$request['country_id']	= $city->country_id;
 			$request['create_time']	= time();
 			$hotel = Hotel::create($request);
