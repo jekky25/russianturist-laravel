@@ -20,7 +20,7 @@ class HotelFullResource extends JsonResource
 			'id'				=> $this->id,
 			'name'				=> $this->name,
 			'slug'				=> $this->slug,
-			'img'				=> $this->hotels_img,
+			'img'				=> $this->img,
 			'description'		=> $this->description,
 			'city'				=> new CityShortResource($this->town),
 			'pictures'			=> PictureResource::collection($this->fotos),

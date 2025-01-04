@@ -16,7 +16,7 @@ class PictureResource extends JsonResource
 	{
 		return [
 			'id'			=> $this->id,
-			'fotoStr'		=> $this->foto_out,
+			'fotoStr'		=> asset($this->image_path),
 			'active'		=> $this->f_act
 		];
 	}

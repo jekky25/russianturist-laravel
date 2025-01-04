@@ -20,10 +20,10 @@ class HotelShortListResource extends JsonResource
 		return [
 			'id'			=> $this->id,
 			'name'			=> $this->name,
-			'shortName'		=> Helper::cutText($this->hotels_name, self::NAME_SIZE),
+			'shortName'		=> Helper::cutText($this->name, self::NAME_SIZE),
 			'slug'			=> $this->slug,
 			'description'	=> Helper::cutText($this->description, self::DESCRIPTION_SIZE),
-			'fotoStr'		=> $this->fotoStr,
+			'firstImagePath'	=> asset($this->firstImagePath),
 			'starsStr'		=> $this->starsStr
 		];
 	}
