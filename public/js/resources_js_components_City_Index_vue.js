@@ -64,10 +64,10 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       return false;
     },
     setConfigPicture: function setConfigPicture(res) {
-      this.configHeightCityPicture = parseInt(res.config.foto_height_city) + 10;
-      this.configCityWidthPicture = parseInt(res.config.foto_width_city);
-      this.configCityHeightPicture = parseInt(res.config.foto_height_city);
-      this.configMarginCityWidthPicture = parseInt(res.config.foto_width_city) + 10;
+      this.configHeightCityPicture = parseInt(res.config.picture_height_city) + 10;
+      this.configCityWidthPicture = parseInt(res.config.picture_width_city);
+      this.configCityHeightPicture = parseInt(res.config.picture_height_city);
+      this.configMarginCityWidthPicture = parseInt(res.config.picture_width_city) + 10;
       return false;
     }
   }

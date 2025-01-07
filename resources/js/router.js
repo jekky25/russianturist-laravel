@@ -46,17 +46,17 @@ export default createRouter({
 			}
 		},
 		{
-			path: '/hotels/:name/foto/:id.html',
+			path: '/hotels/:name/picture/:id.html',
 			component: () => import('./components/Picture/HotelIndexId'),
-			name: 'hotel_fotos_id',
+			name: 'hotel_pictures_id',
 			meta: { 
 				title: 'Отели, русский турист, сайт про туризм и путешествия' 
 			}
 		},
 		{
-			path: '/hotels/:name/foto.html',
+			path: '/hotels/:name/picture.html',
 			component: () => import('./components/Picture/HotelIndex'),
-			name: 'hotel_fotos',
+			name: 'hotel_pictures',
 			meta: { 
 				title: 'Отели, русский турист, сайт про туризм и путешествия' 
 			}

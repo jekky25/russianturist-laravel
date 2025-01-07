@@ -27,9 +27,9 @@
 							<td>{{ $city->id }}</td>
 							<td>{{ $city->name }} @if (!empty($city->country))(<a href="{{route('admin.country.edit', $city->country->id)}}">{{ $city->country->name }}</a>)@endif</td>
 							<td>{{ $city->slug }}</td>
-							<td>@if (!empty($city->fotos))
-									@foreach ($city->fotos as $foto)
-										<span class="max-w-100px"><img class="w-100" alt="" title="" src="{{ asset($foto->imagePath) }}" /></span>
+							<td>@if (!empty($city->pictures))
+									@foreach ($city->pictures as $picture)
+										<span class="max-w-100px"><img class="w-100" alt="" title="" src="{{ asset($picture->imagePath) }}" /></span>
 									@endforeach
 								@endif
 							</td>

@@ -4,7 +4,7 @@
 		<div class="hot_prew">
 			<div class="pr_fot_hotel" style="width:150px;" v-if="hotel.pictures">
 				<h2>
-					<router-link :to="{ name: 'hotel_fotos', params: { name: `${hotel.slug}`, foto:'_foto' } }" :title="`${hotel.name}`" :alt="`${hotel.name}`">Фотографии отеля</router-link>
+					<router-link :to="{ name: 'hotel_pictures', params: { name: `${hotel.slug}`, picture:'_picture' } }" :title="`${hotel.name}`" :alt="`${hotel.name}`">Фотографии отеля</router-link>
 				</h2>
 				<picture-short-list :pictures="hotel.pictures" :hotel="hotel"></picture-short-list>
 			</div>

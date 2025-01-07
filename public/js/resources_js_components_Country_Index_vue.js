@@ -64,10 +64,10 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       return false;
     },
     setConfigPicture: function setConfigPicture(res) {
-      this.configHeightCountryPicture = parseInt(res.config.foto_height_country) + 10;
-      this.configCountryWidthPicture = parseInt(res.config.foto_width_country);
-      this.configCountryHeightPicture = parseInt(res.config.foto_height_country);
-      this.configMarginCountryWidthPicture = parseInt(res.config.foto_width_country) + 10;
+      this.configHeightCountryPicture = parseInt(res.config.picture_height_country) + 10;
+      this.configCountryWidthPicture = parseInt(res.config.picture_width_country);
+      this.configCountryHeightPicture = parseInt(res.config.picture_height_country);
+      this.configMarginCountryWidthPicture = parseInt(res.config.picture_width_country) + 10;
       return false;
     }
   }
@@ -123,7 +123,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
           title: "".concat(country.name),
           alt: "".concat(country.name),
-          src: "".concat(country.fotoStr),
+          src: "".concat(country.pictureStr),
           width: "".concat($data.configCountryWidthPicture),
           height: "".concat($data.configCountryHeightPicture)
         }, null, 8 /* PROPS */, _hoisted_2)];

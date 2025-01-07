@@ -23537,20 +23537,20 @@ __webpack_require__.r(__webpack_exports__);
       title: 'Города, русский турист, сайт про туризм и путешествия'
     }
   }, {
-    path: '/hotels/:name/foto/:id.html',
+    path: '/hotels/:name/picture/:id.html',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Picture_HotelIndexId_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Picture/HotelIndexId */ "./resources/js/components/Picture/HotelIndexId.vue"));
     },
-    name: 'hotel_fotos_id',
+    name: 'hotel_pictures_id',
     meta: {
       title: 'Отели, русский турист, сайт про туризм и путешествия'
     }
   }, {
-    path: '/hotels/:name/foto.html',
+    path: '/hotels/:name/picture.html',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Picture_HotelIndex_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Picture/HotelIndex */ "./resources/js/components/Picture/HotelIndex.vue"));
     },
-    name: 'hotel_fotos',
+    name: 'hotel_pictures',
     meta: {
       title: 'Отели, русский турист, сайт про туризм и путешествия'
     }

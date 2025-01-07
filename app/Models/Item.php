@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Providers\SapeServiceProvider;
-use App\Models\Foto;
+use App\Models\Picture;
 
 class Item extends Model
 {
@@ -24,8 +24,8 @@ class Item extends Model
 
 	public function getFirstImagePathAttribute()
 	{
-		if ($this->fotos->count() == 0 || $this->fotos[0] == null) return null;
-		return $this->fotos[0]->image_path;
+		if ($this->pictures->count() == 0 || $this->pictures[0] == null) return null;
+		return $this->pictures[0]->image_path;
 	}
 
 	public function getDescriptionAttribute($val)
@@ -34,10 +34,10 @@ class Item extends Model
 	}
 	
 	/**
-	* get fotos
+	* get pictures
 	*/
-	public function fotos()
+	public function pictures()
 	{
-		return $this->hasMany(Foto::class, 'parent_id', 'id')->where('type', 'item');
+		return $this->hasMany(Picture::class, 'parent_id', 'id')->where('type', 'item');
 	}
 }

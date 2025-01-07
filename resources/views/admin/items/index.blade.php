@@ -25,9 +25,9 @@
 						<tr>
 							<td>{{ $item->id }}</td>
 							<td>{{ $item->name }}</td>
-							<td>@if (!empty($item->fotos))
-								@foreach ($item->fotos as $foto)
-									<span class="max-w-100px"><img class="w-100" alt="" title="" src="{{ asset($foto->imagePath) }}" /></span>
+							<td>@if (!empty($item->pictures))
+								@foreach ($item->pictures as $picture)
+									<span class="max-w-100px"><img class="w-100" alt="" title="" src="{{ asset($picture->imagePath) }}" /></span>
 								@endforeach
 							@endif
 						</td>

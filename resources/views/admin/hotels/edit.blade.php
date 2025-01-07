@@ -16,7 +16,7 @@
 				<x-admin.inputSelect :value="old('stars', $hotel->stars)" :items="($stars)" title="Рейтинг" name="stars" />
 				<x-admin.inputSelect :value="old('city_id', $hotel->city_id)" :items="($cities)" title="Город" name="city_id" />
 				<x-admin.textarea  :value="old('description', $hotel->description)" title="Описание" name="description" placeholder="Введите описание" />
-				<x-admin.inputFile  :image="$hotel->fotos" title="Главное изображение" name="image" placeholder="Выберите файл" />
+				<x-admin.inputFile  :image="$hotel->pictures" title="Главное изображение" name="image" placeholder="Выберите файл" />
 				<div class="form-group row">
 					<div class="col-6"></div>
 					<div class="col-6">

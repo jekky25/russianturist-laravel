@@ -25,7 +25,7 @@ class ItemService
 	 */
 	public function getAll()
 	{
-		$this->items = Item::select('*')->with(['fotos'])->orderBy('id')->get();
+		$this->items = Item::select('*')->with(['pictures'])->orderBy('id')->get();
 		return $this->items;
 	}
 
@@ -36,7 +36,7 @@ class ItemService
 	*/
 	public function getAllByPaginate($count)
 	{
-		$items = Item::select('*')->with(['fotos'])->orderBy('create_time')->paginate($count);
+		$items = Item::select('*')->with(['pictures'])->orderBy('create_time')->paginate($count);
 		$items = LengthPager::makeLengthAware($items, $items->total(), $count);
 		$items->withPath('/items/');
 		return $items;
@@ -51,7 +51,7 @@ class ItemService
 	{
 		$item = Item::select('*')
 		->where('id', $id)
-		->with(['fotos'])
+		->with(['pictures'])
 		->first();
 		return $item;
 	}
@@ -61,18 +61,18 @@ class ItemService
 	 * @param \Illuminate\Database\Eloquent\Collection $row 
 	 * @return void
 	 */
-	public function getFotos(&$row)
+	public function getPictures(&$row)
 	{
-		$foto = $row->fotos()
+		$picture = $row->pictures()
 			->where('type','item')
 			->orderBy('position')
 			->first();
-		$row['fotos'] = $foto;
+		$row['pictures'] = $picture;
 		
-		$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/items/' . $row['fotos']['id'] . '.jpg') : asset ('image/no_foto.jpg');
+		$row['pictureStr']		= !empty ($row['pictures']) ? asset('fotos/items/' . $row['pictures']['id'] . '.jpg') : asset ('image/no_foto.jpg');
 
-		$foto_out = asset('fotos/items/'. $row['fotos']['id'] . '.jpg');
-		$row['items_img'] = !empty($foto_out) ? '<img title="' . $row['name'] . '" alt="' . $row['name'] . '" src="' . $foto_out . '" width="' . $this->boardConfig['foto_width_item_id'] . '" height="' . $this->boardConfig['foto_height_item_id'] . '">' : '';
+		$picture_out = asset('fotos/items/'. $row['fotos']['id'] . '.jpg');
+		$row['items_img'] = !empty($picture_out) ? '<img title="' . $row['name'] . '" alt="' . $row['name'] . '" src="' . $picture_out . '" width="' . $this->boardConfig['picture_width_item_id'] . '" height="' . $this->boardConfig['picture_height_item_id'] . '">' : '';
 	}
 
 	/**
@@ -121,11 +121,11 @@ class ItemService
 	public function destroy($id) {
 		try {
 			$item = Item::find($id);
-			if ($item->fotos->count() > 0)
+			if ($item->pictures->count() > 0)
 			{
-				foreach ($item->fotos as $foto)
+				foreach ($item->pictures as $picture)
 				{
-					$this->image->destroyFoto($foto);
+					$this->image->destroyPicture($picture);
 				}
 			}
 			$item->delete();

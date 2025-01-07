@@ -62,7 +62,7 @@ var _hoisted_2 = {
   "class": "hot_prew"
 };
 var _hoisted_3 = {
-  "class": "item_foto"
+  "class": "item_picture"
 };
 var _hoisted_4 = ["title", "alt", "src"];
 var _hoisted_5 = ["innerHTML"];

@@ -116,10 +116,10 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       return false;
     },
     setConfigPicture: function setConfigPicture(res) {
-      this.configHeightHotelPicture = parseInt(res.config.foto_height_hotel) + 10;
-      this.configHotelWidthPicture = parseInt(res.config.foto_width_hotel);
-      this.configMarginHotelWidthPicture = parseInt(res.config.foto_width_hotel) + 10;
-      this.configHotelHeightPicture = parseInt(res.config.foto_height_hotel);
+      this.configHeightHotelPicture = parseInt(res.config.picture_height_hotel) + 10;
+      this.configHotelWidthPicture = parseInt(res.config.picture_width_hotel);
+      this.configMarginHotelWidthPicture = parseInt(res.config.picture_width_hotel) + 10;
+      this.configHotelHeightPicture = parseInt(res.config.picture_height_hotel);
       return false;
     }
   }
@@ -154,7 +154,7 @@ var _hoisted_5 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_hotel_short_list = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("hotel-short-list");
   return $data.country ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.country.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "country_foto",
+    "class": "country_picture",
     innerHTML: $data.country.img
   }, null, 8 /* PROPS */, _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_hotel_short_list, {
     countryId: $data.country.id

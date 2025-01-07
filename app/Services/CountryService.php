@@ -37,7 +37,7 @@ class CountryService
 	public function getAll($orderBy = 'name')
 	{
 		$this->countries = Country::select('*')->orderBy($orderBy)->get();
-		$this->addFotos();
+		$this->addPictures();
 		return $this->countries;
 	}
 
@@ -45,11 +45,11 @@ class CountryService
 	* add pictures of the countries to the object
 	* @return void
 	*/
-	public function addFotos()
+	public function addPictures()
 	{
 		foreach ($this->countries as &$row) 
 		{
-			$row['fotoStr'] = asset($row->image_path);
+			$row['pictureStr'] = asset($row->image_path);
 		}
 	}
 

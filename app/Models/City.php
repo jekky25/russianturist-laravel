@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Providers\SapeServiceProvider;
-use App\Models\Foto;
+use App\Models\Picture;
 
 class City extends Model
 {
@@ -29,16 +29,16 @@ class City extends Model
 
 	public function getFirstImagePathAttribute()
 	{
-		if ($this->fotos->count() == 0) return null;
-		return $this->fotos[0]->image_path;
+		if ($this->pictures->count() == 0) return null;
+		return $this->pictures[0]->image_path;
 	}
 
 	/**
-	* get fotos
+	* get pictures
 	*/
-	public function fotos()
+	public function pictures()
 	{
-		return $this->hasMany(Foto::class, 'parent_id', 'id')->where('type', 'city');
+		return $this->hasMany(Picture::class, 'parent_id', 'id')->where('type', 'city');
 	}
 
 	/**

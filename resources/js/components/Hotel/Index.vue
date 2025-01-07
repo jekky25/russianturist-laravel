@@ -52,10 +52,10 @@
 			},
 			setConfigPicture(res)
 			{
-				this.configHeightHotelPicture			= parseInt(res.config.foto_height_hotel) + 10;
-				this.configHotelWidthPicture			= parseInt(res.config.foto_width_hotel);
-				this.configHotelHeightPicture			= parseInt(res.config.foto_height_hotel);
-				this.configMarginHotelWidthPicture		= parseInt(res.config.foto_width_hotel) + 10;
+				this.configHeightHotelPicture			= parseInt(res.config.picture_height_hotel) + 10;
+				this.configHotelWidthPicture			= parseInt(res.config.picture_width_hotel);
+				this.configHotelHeightPicture			= parseInt(res.config.picture_height_hotel);
+				this.configMarginHotelWidthPicture		= parseInt(res.config.picture_width_hotel) + 10;
 				return false;
 			}
 		}

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\BaseConfig;
 use App\Services\ImageService;
-use App\Models\Foto;
+use App\Models\Picture;
 use App\Traits\TStr;
 
 class Country extends Model
@@ -50,15 +50,15 @@ class Country extends Model
 
 	public function getImgAttribute()
 	{
-		$foto = asset($this->image_path);
-		return !empty($this->image) ? '<img title="' . $this['name'] . '" alt="' . $this['name'] . '" src="' . $foto . '" width="' . $this->boardConfig['foto_width_country_id'] . '" height="' . $this->boardConfig['foto_height_country_id'] . '">' : '';
+		$picture = asset($this->image_path);
+		return !empty($this->image) ? '<img title="' . $this['name'] . '" alt="' . $this['name'] . '" src="' . $picture . '" width="' . $this->boardConfig['picture_width_country_id'] . '" height="' . $this->boardConfig['picture_height_country_id'] . '">' : '';
 	}
 
 	/**
-	* get fotos
+	* get pictures
 	*/
-	public function fotos()
+	public function pictures()
 	{
-		return $this->hasMany(Foto::class, 'parent_id', 'id');
+		return $this->hasMany(Picture::class, 'parent_id', 'id');
 	}
 }

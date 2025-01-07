@@ -1,8 +1,8 @@
 <template>
-	<div class="foto1" v-for="picture in pictures" :style="{'height': configHeightHotelPrew + 'px'}">
+	<div class="picture1" v-for="picture in pictures" :style="{'height': configHeightHotelPrew + 'px'}">
 		<div :style="{'width': configWidthHotelPrew + 'px', 'padding': 0}">
-			<router-link :to="{ name: 'hotel_fotos_id', params: { name: `${hotel.slug}`, foto:'_foto_', id: `${picture.id}` } }" :title="`${hotel.name}`" :alt="`${hotel.name}`" class="prew">
-				<img :title="`${hotel.name}`" :alt="`${hotel.name}`" :src="`${picture.fotoStr}`" :width="`${configWidthHotelPrew}`" :height="`${configHeightHotelPrew}`" :class="`${picture.active}`" >
+			<router-link :to="{ name: 'hotel_pictures_id', params: { name: `${hotel.slug}`, picture:'_picture_', id: `${picture.id}` } }" :title="`${hotel.name}`" :alt="`${hotel.name}`" class="prew">
+				<img :title="`${hotel.name}`" :alt="`${hotel.name}`" :src="`${picture.pictureStr}`" :width="`${configWidthHotelPrew}`" :height="`${configHeightHotelPrew}`" :class="`${picture.active}`" >
 			</router-link>
 		</div>
 	</div>
@@ -45,8 +45,8 @@
 			},
 			setConfigPicture(res)
 			{
-				this.configHeightHotelPrew			= parseInt(res.config.foto_height_hotel_prew);
-				this.configWidthHotelPrew			= parseInt(res.config.foto_width_hotel_prew);
+				this.configHeightHotelPrew			= parseInt(res.config.picture_height_hotel_prew);
+				this.configWidthHotelPrew			= parseInt(res.config.picture_width_hotel_prew);
 				return false;
 			}
 		}

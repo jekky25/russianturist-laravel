@@ -25,7 +25,7 @@ class HotelService
 	*/
 	public function getAll()
 	{
-		$this->hotels = Hotel::select('*')->with(['fotos'])->orderBy('name')->get();
+		$this->hotels = Hotel::select('*')->with(['pictures'])->orderBy('name')->get();
 		return $this->hotels;
 	}
 
@@ -37,7 +37,7 @@ class HotelService
 	{
 		return Hotel::select('*')
 			->where('id', $id)
-			->with(['city', 'fotos'])
+			->with(['city', 'pictures'])
 			->firstOrFail();
 	}
 
@@ -51,7 +51,7 @@ class HotelService
 		$this->hotels = Hotel::select('*')->orderBy('create_time','desc')->limit($limit)->get();
 		foreach ($this->hotels as &$row)
 		{
-			$this->getFotos($row);
+			$this->getPictures($row);
 		}
 		unset ($row);
 		return $this->hotels;
@@ -73,7 +73,7 @@ class HotelService
 		$hotel->city				= $hotel->city()->first();
 
 		$this->hotels = $hotel;
-		$this->getFotos($this->hotels, 3);
+		$this->getPictures($this->hotels, 3);
 		$this->getPicturesBlockLink();
 		$this->getPictureParams();
 		$this->getSliderParams();
@@ -113,7 +113,7 @@ class HotelService
 
 		foreach ($this->hotels as &$row)
 		{
-			$this->getFotos($row);
+			$this->getPictures($row);
 		}
 		unset ($row);
 		return $this->hotels;
@@ -136,36 +136,36 @@ class HotelService
 		->get();
 		foreach ($this->hotels as &$row)
 		{
-			$this->getFotos($row);
+			$this->getPictures($row);
 		}
 		unset ($row);
 		return $this->hotels;
 	}
 
 	/**
-	* add fotos to the object
+	* add pictures to the object
 	* @return void
 	*/
-	public function getFotos(&$row, $limit = 1)
+	public function getPictures(&$row, $limit = 1)
 	{
-		$foto = $row->fotos()
+		$picture = $row->pictures()
 			->where('type','hotel')
 			->orderBy('position')
 			->limit($limit)
 			->get();
 		if ($limit > 1)	
 		{
-			$row->fotos	= $foto;
+			$row->pictures	= $picture;
 			return;
 		}
-		$row['fotos'] = $foto;
+		$row['pictures'] = $picture;
 		$stars = '';
 		$row['stars'] = intval ($row['stars']);
 			for ($j = 0; $j < $row['stars']; $j++) {
 				$stars .= '<img alt="" src="' . asset('image/star.png') . '" />';
 			}
 			$row['starsStr']	= $row['stars'] = $stars;
-			$row['fotoStr']		= !empty ($row['fotos']) ? asset('fotos/hotels/' . $row['fotos'][0]['id'] . '.jpg') : asset ('image/no_foto.jpg');
+			$row['pictureStr']		= !empty ($row['pictures']) ? asset('fotos/hotels/' . $row['pictures'][0]['id'] . '.jpg') : asset ('image/no_foto.jpg');
 	}
 
 	/**
@@ -175,7 +175,7 @@ class HotelService
 	private function getPicturesBlockLink()
 	{
 		$hotel = &$this->hotels;
-		$hotel->hotel_fotos_enter = !empty($hotel->fotos) ? '<a href="' . route('hotel_fotos',[$hotel->slug,'_foto']) . '" alt="' . $hotel->name . '" title="' . $hotel->name . '">Фотографии отеля</a>' : '';
+		$hotel->hotel_pictures_enter = !empty($hotel->pictures) ? '<a href="' . route('hotel_pictures',[$hotel->slug,'_picture']) . '" alt="' . $hotel->name . '" title="' . $hotel->name . '">Фотографии отеля</a>' : '';
 		unset ($hotel);
 	}
 
@@ -194,10 +194,10 @@ class HotelService
 	*/
 	private function getPictureParams()
 	{
-		foreach ($this->hotels->fotos as $k => &$row)
+		foreach ($this->hotels->pictures as $k => &$row)
 		{
 			$row['f_act']		= $this->getPictureActiveClass($k);
-			$row['foto_out']	= $this->getPictureLink($row['id']);
+			$row['picture_out']	= $this->getPictureLink($row['id']);
 		}
 	}
 
@@ -209,20 +209,20 @@ class HotelService
 	private function getSliderParams()
 	{
 		$id = $this->selectedPicture;
-		foreach ($this->hotels->fotos as $k => &$row)
+		foreach ($this->hotels->pictures as $k => &$row)
 		{
 			$row['f_act'] = '';
 			if ( ($id == 0 && $k == 0) || $id > 0 && $id == $row['id'])
 			{
 				$row['f_act']	 		= 'f_act';
-				$this->hotels->selFoto 		= $row;
-				$this->hotels->prevFoto		= $k > 0 ? $this->hotels->fotos[($k-1)] : [];
-				$this->hotels->nextFoto		= ($k + 1) < count(($this->hotels->fotos) ) ? $this->hotels->fotos[($k+1)] : [];
-				$this->hotels->positionFoto	= ($k + 1);
+				$this->hotels->selPicture 		= $row;
+				$this->hotels->prevPicture		= $k > 0 ? $this->hotels->pictures[($k-1)] : [];
+				$this->hotels->nextPicture		= ($k + 1) < count(($this->hotels->pictures) ) ? $this->hotels->pictures[($k+1)] : [];
+				$this->hotels->positionPicture	= ($k + 1);
 			}
-			$row['foto_out'] = asset('/fotos/hotels/' . $row['id'] . '.jpg');
+			$row['picture_out'] = asset('/fotos/hotels/' . $row['id'] . '.jpg');
 		}
-		$this->hotels->countFoto	= count($this->hotels->fotos);
+		$this->hotels->countPicture	= count($this->hotels->pictures);
 	}
 
 	/**
@@ -293,11 +293,11 @@ class HotelService
 	public function destroy($id) {
 		try {
 			$hotel = Hotel::find($id);
-			if ($hotel->fotos->count() > 0)
+			if ($hotel->pictures->count() > 0)
 			{
-				foreach ($hotel->fotos as $foto)
+				foreach ($hotel->pictures as $picture)
 				{
-					$this->image->destroyFoto($foto);
+					$this->image->destroyPicture($picture);
 				}
 			}
 			$hotel->delete();

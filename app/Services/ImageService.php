@@ -3,7 +3,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
-use App\Models\Foto;
+use App\Models\Picture;
 use File;
 
 class ImageService
@@ -16,18 +16,18 @@ class ImageService
 	* @param string $type
 	* @return string
 	*/
-	public static function getFotoType($type)
+	public static function getPictureType($type)
 	{
-		return constant(Foto::class . "::" . $type);
+		return constant(Picture::class . "::" . $type);
 	}
 
 	/**
 	* get picture by id
-	* @return \App\Models\Foto 
+	* @return \App\Models\Picture 
 	*/
 	public function getById($id)
 	{
-		return Foto::select('*')
+		return Picture::select('*')
 			->where('id', $id)
 			->firstOrFail();
 	}
@@ -60,14 +60,14 @@ class ImageService
 
 	/**
 	 * destroy image from the storage and from the model
-	 * @param Foto $foto
+	 * @param Picture $picture
 	 *
 	 * @return bool
 	 */
-	public function destroyFoto(Foto $foto)
+	public function destroyPicture(Picture $picture)
 	{
-		$this->destroy($foto->ImagePath);
-		$foto->delete();
+		$this->destroy($picture->ImagePath);
+		$picture->delete();
 		return true;
 	}
 
@@ -88,13 +88,13 @@ class ImageService
 	{
 		if (empty($image)) return false;
 		$imageName = $this->put($class::IMAGES_DIRECTORY, $image);
-		$requestFoto = [
+		$requestPicture = [
 			'parent_id'	=> $parentId,
-			'position'	=> Foto::START_SORT,
+			'position'	=> Picture::START_SORT,
 			'type'		=> $class::IMAGES_TYPE,
 			'image'		=> $imageName
 		];
-		Foto::create($requestFoto);
+		Picture::create($requestPicture);
 	}
 	/**
 	 * update image in the storage
@@ -124,11 +124,11 @@ class ImageService
 
 	/**
 	 * copy pictures from the old folder to the new folder in the storage
-	 * @param Foto $picture
+	 * @param Picture $picture
 	 *
 	 * @return void
 	 */
-	public static function copyFromOldToNewFormat(Foto $picture)
+	public static function copyFromOldToNewFormat(Picture $picture)
 	{
 		try {
 			$picture->image = $picture->id . '.jpg';

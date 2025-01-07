@@ -6,28 +6,28 @@
 <div class="hot_prew">
 <div class="pr_fot_hotel" style="width:150px;">
 			<h2><a href="{{route('hotel_name',$hotel->hotels_eng_name)}}" alt="{{$hotel->hotels_name}}" title="{{$hotel->hotels_name}}">Описание отеля</a></h2>
-			@if (!empty ($hotel->fotos))
-				@foreach ($hotel->fotos as $item)
-					<div class="foto1" style="height:{{$boardConfig['foto_height_hotel_prew']}}px;">
-						<div style="width:{{$boardConfig['foto_width_hotel_prew']}}px; padding:0;">
-							<a href="{{route('hotel_fotos_id',[$hotel->hotels_eng_name, '_foto_',$item['id']])}}" alt="{{$hotel['hotels_name']}}" title="{{$hotel['hotels_name']}}" class="prew">
-								<img title="{{$hotel['hotels_name']}}" alt="{{$hotel['hotels_name']}}" src="{{$item['foto_out']}}" width="{{$boardConfig['foto_width_hotel_prew']}}" height="{{$boardConfig['foto_height_hotel_prew']}}" {!!$item['f_act']!!}>
+			@if (!empty ($hotel->pictures))
+				@foreach ($hotel->pictures as $item)
+					<div class="picture1" style="height:{{$boardConfig['picture_height_hotel_prew']}}px;">
+						<div style="width:{{$boardConfig['picture_width_hotel_prew']}}px; padding:0;">
+							<a href="{{route('hotel_pictures_id',[$hotel->hotels_eng_name, '_picture_',$item['id']])}}" alt="{{$hotel['hotels_name']}}" title="{{$hotel['hotels_name']}}" class="prew">
+								<img title="{{$hotel['hotels_name']}}" alt="{{$hotel['hotels_name']}}" src="{{$item['picture_out']}}" width="{{$boardConfig['picture_width_hotel_prew']}}" height="{{$boardConfig['picture_height_hotel_prew']}}" {!!$item['f_act']!!}>
 							</a>
 						</div>
 					</div>
   				@endforeach
 			@endif
 </div>
-<div class="foto_big">
+<div class="picture_big">
 <div style="width:{{$resultX_im}}px;">
-		<img title="{{$hotel['hotels_name']}}" alt="{{$hotel['hotels_name']}}" src="{{asset('/fotos/hotels/' . $hotel->selFoto['id'] . '.jpg')}}" width="{{$resultX_im}} " height="{{$resultY_im}}">
-		@if (!empty ($hotel->prevFoto))
-		<a href="{{route('hotel_fotos_id',[$hotel->hotels_eng_name, '_foto_',$hotel->prevFoto['id']])}}" class="no_dec left"><< предыдущее</a>
+		<img title="{{$hotel['hotels_name']}}" alt="{{$hotel['hotels_name']}}" src="{{asset('/fotos/hotels/' . $hotel->selPicture['id'] . '.jpg')}}" width="{{$resultX_im}} " height="{{$resultY_im}}">
+		@if (!empty ($hotel->prevPicture))
+		<a href="{{route('hotel_pictures_id',[$hotel->hotels_eng_name, '_picture_',$hotel->prevPicture['id']])}}" class="no_dec left"><< предыдущее</a>
 		@endif
-		@if (!empty ($hotel->nextFoto))
-		<a href="{{route('hotel_fotos_id',[$hotel->hotels_eng_name, '_foto_',$hotel->nextFoto['id']])}}" class="no_dec right">следуюее >></a>
+		@if (!empty ($hotel->nextPicture))
+		<a href="{{route('hotel_pictures_id',[$hotel->hotels_eng_name, '_picture_',$hotel->nextPicture['id']])}}" class="no_dec right">следуюее >></a>
 		@endif
-		{{$hotel->positionFoto}} /{{$hotel->countFoto}} </div>
+		{{$hotel->positionPicture}} /{{$hotel->countPicture}} </div>
 </div>
 <div class="banner_gog2">
 <script type="text/javascript"><!--

@@ -140,8 +140,8 @@ div.main_items_id div.hot_prew {margin-bottom:10px; padding-bottom:10px;}
 div.main_items_id h1 {color:#6d0f0a; font-size:14px; text-align:center; padding-bottom:20px;}
 div.main_items_id a img {border:1px solid #c6a33f; margin-right:5px;}
 div.main_items_id img {border:1px solid #c6a33f;}
-.item_foto, .country_foto {float:left; padding-right: 5px;}
-.item_foto img, .country_foto img {border:1px solid #c6a33f;}
+.item_picture, .country_picture {float:left; padding-right: 5px;}
+.item_picture img, .country_picture img {border:1px solid #c6a33f;}
 div.main_items_id div.hot_prew a, div.main_items_id div.hot_prew a:visited {text-decoration:underline;}
 
 
@@ -162,13 +162,13 @@ div.country_r p {padding-top:5px;}
 div.pr_fot_hotel {font-size:10px; float:right; width:30%; text-align:justify; padding-left:10px; margin-bottom:5px;
 border-left:#ca9f36 1px solid; margin-left:10px;}
 div.pr_fot_hotel h2 {color:#6d0f0a; font-size:12px; text-align:center; padding-bottom:20px;}
-div.pr_fot_hotel .foto1 {padding-right:0; text-align:center; margin-bottom:10px; padding-bottom:10px;}
-div.pr_fot_hotel .foto1 div {width:120px; padding:0; margin:auto;}
-div.pr_fot_hotel .foto1 a {padding:0px;}
-div.pr_fot_hotel .foto1 img {border:1px solid #c6a33f;}
-div.foto_big {text-align:center;}
-div.foto_big div {margin:auto;}
-div.foto_big img {border:1px solid #c6a33f; margin-bottom:10px;}
+div.pr_fot_hotel .picture1 {padding-right:0; text-align:center; margin-bottom:10px; padding-bottom:10px;}
+div.pr_fot_hotel .picture1 div {width:120px; padding:0; margin:auto;}
+div.pr_fot_hotel .picture1 a {padding:0px;}
+div.pr_fot_hotel .picture1 img {border:1px solid #c6a33f;}
+div.picture_big {text-align:center;}
+div.picture_big div {margin:auto;}
+div.picture_big img {border:1px solid #c6a33f; margin-bottom:10px;}
 .f_act {border:1px solid #f00 !important;}
 span.rek {font-size:9px;}
 span.rek span {color:#f00;}
@@ -179,7 +179,7 @@ div.pagination {text-align:center; padding-top:5px;}
 div.pagination a {text-decoration: none;}
 div.pagination a.active {color:#f72d4e;}
 
-.foto_big div.img-table {
+.picture_big div.img-table {
   display: table;
   width:auto; 
   margin:0 auto;

@@ -9,13 +9,13 @@
 				<picture-short-list :pictures="hotel.pictures" :hotel="hotel"></picture-short-list>
 			</div>
 		</div>
-		<div class="foto_big">
+		<div class="picture_big">
 			<div class="img-table">
-				<div class="img-block"><img :title="`${hotel.name}`" :alt="`${hotel.name}`" :src="`${hotel.pictureSelected.fotoStr}`"></div>
+				<div class="img-block"><img :title="`${hotel.name}`" :alt="`${hotel.name}`" :src="`${hotel.pictureSelected.pictureStr}`"></div>
 				<div class="img-link-block">
-					<router-link :to="{ name: 'hotel_fotos_id', params: { name: `${hotel.slug}`, foto:'_foto_', id: `${hotel.picturePrev.id}` } }" class="no_dec left" v-if="hotel.picturePrev"><< предыдущее</router-link>
+					<router-link :to="{ name: 'hotel_pictures_id', params: { name: `${hotel.slug}`, picture:'_picture_', id: `${hotel.picturePrev.id}` } }" class="no_dec left" v-if="hotel.picturePrev"><< предыдущее</router-link>
 					{{ hotel.picturePosition }} / {{ hotel.pictureCount }}
-					<router-link :to="{ name: 'hotel_fotos_id', params: { name: `${hotel.slug}`, foto:'_foto_', id: `${hotel.pictureNext.id}` } }" class="no_dec right" v-if="hotel.pictureNext">следуюее >></router-link>
+					<router-link :to="{ name: 'hotel_pictures_id', params: { name: `${hotel.slug}`, picture:'_picture_', id: `${hotel.pictureNext.id}` } }" class="no_dec right" v-if="hotel.pictureNext">следуюее >></router-link>
 				</div>
 			</div>
 		</div>

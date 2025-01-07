@@ -2,7 +2,7 @@
 	<div class="main_items_id" v-if="country">
 		<h1>{{ country.name }}</h1>
 		<div class="hot_prew">
-			<div class="country_foto" v-html="country.img"></div>
+			<div class="country_picture" v-html="country.img"></div>
 			<div class="country_r">
 				<hotel-short-list :countryId="country.id"></hotel-short-list>
 			</div>

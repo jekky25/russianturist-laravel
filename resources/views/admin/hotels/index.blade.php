@@ -27,9 +27,9 @@
 							<td>{{ $hotel->id }}</td>
 							<td>{{ $hotel->name }}</td>
 							<td>{{ $hotel->slug }}</td>
-							<td>@if (!empty($hotel->fotos))
-								@foreach ($hotel->fotos as $foto)
-									<span class="max-w-100px"><img class="w-100" alt="" title="" src="{{ asset($foto->imagePath) }}" /></span>
+							<td>@if (!empty($hotel->pictures))
+								@foreach ($hotel->pictures as $picture)
+									<span class="max-w-100px"><img class="w-100" alt="" title="" src="{{ asset($picture->imagePath) }}" /></span>
 								@endforeach
 							@endif
 						</td>

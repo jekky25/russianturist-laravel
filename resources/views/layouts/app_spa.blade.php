@@ -7,7 +7,7 @@
 <meta name="yandex-verification" content="fe6c88b999494404" />
 <meta content="Туризм и путешествия" name="classification">
 <?/*=$CODE_INPUT['META']*/?>
-<link href="{{ asset("css/site.css?t=9") }}" type="text/css" rel="stylesheet">
+<link href="{{ asset("css/site.css?t=10") }}" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div id="app" class="overhtm">

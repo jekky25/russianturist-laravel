@@ -21,7 +21,7 @@ class CityService
 	*/
 	public function getAll()
 	{
-		$this->cities = City::select('*')->with(['country', 'fotos'])->orderBy('name')->get();
+		$this->cities = City::select('*')->with(['country', 'pictures'])->orderBy('name')->get();
 		return $this->cities;
 	}
 
@@ -33,7 +33,7 @@ class CityService
 	{
 		return City::select('*')
 			->where('id', $id)
-			->with(['country', 'fotos'])
+			->with(['country', 'pictures'])
 			->firstOrFail();
 	}
 
@@ -82,11 +82,11 @@ class CityService
 	public function destroy($id) {
 		try {
 			$city = City::find($id);
-			if ($city->fotos->count() > 0)
+			if ($city->pictures->count() > 0)
 			{
-				foreach ($city->fotos as $foto)
+				foreach ($city->pictures as $picture)
 				{
-					$this->image->destroyFoto($foto);
+					$this->image->destroyPicture($picture);
 				}
 			}
 			$city->delete();
@@ -99,17 +99,17 @@ class CityService
 	* add pictures of the cities to the object
 	* @return void
 	*/
-	public function getFotos()
+	public function getPictures()
 	{
 		foreach ($this->cities as &$row) 
 		{
-			$foto = $row->fotos()
+			$picture = $row->pictures()
 				->where('type', City::IMAGES_TYPE)
 				->orderBy('position')
 				->first();
-			$row['fotos'] = $foto;
+			$row['pictures'] = $picture;
 		
-			$row['fotoStr']		= !empty($row['fotos']) ? asset('fotos/cities/' . $row['fotos']['id'] . '.jpg') : asset('image/no_foto.jpg');
+			$row['pictureStr']		= !empty($row['pictures']) ? asset('fotos/cities/' . $row['pictures']['id'] . '.jpg') : asset('image/no_foto.jpg');
 		}
 	}
 
@@ -125,11 +125,11 @@ class CityService
 				->first();
 		$city->description = str_replace("\n", "\n<br />\n", $city->description);
 		$city->country = $city->country()->first();
-		$foto   = $city->fotos()
+		$picture   = $city->pictures()
 				->where('type','city')
 				->orderBy('position')
 				->first();
-		$city->foto	= $foto;
+		$city->picture	= $picture;
 		return $city;
 	}
 
@@ -142,8 +142,8 @@ class CityService
 	*/
 	public function getPictureLink($city, $width, $height)
 	{
-		$foto_out 					= !empty($city->foto) ? asset('/fotos/citys/' . $city->foto['id'] . '.jpg') : '';
-		$city->cities_img 			= !empty($foto_out) ? '<img title="' . $city->name . '" alt="' . $city->name . '" src="' . $foto_out . '" width="' . $width . '" height="' . $height . '">' : '';
+		$picture_out 				= !empty($city->picture) ? asset('/fotos/citys/' . $city->picture['id'] . '.jpg') : '';
+		$city->cities_img 			= !empty($picture_out) ? '<img title="' . $city->name . '" alt="' . $city->name . '" src="' . $picture_out . '" width="' . $width . '" height="' . $height . '">' : '';
 		return $city;
 	}
 }

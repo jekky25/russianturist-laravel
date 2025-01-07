@@ -2,7 +2,7 @@
 	<div class="main_items_id" v-if="city">
 		<h1>{{ city.name }} (<router-link :to="{ name: 'country_name', params: { name: `${city.country.slug}` } }">{{ city.country.name }}</router-link>)</h1>
 		<div class="hot_prew">
-			<div class="country_foto">
+			<div class="country_picture">
 				<img :title="`${city.name}`" :alt="`${city.name}`" :src="`${city.firstImagePath}`">
 			</div>
 			<div class="country_r">

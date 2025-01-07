@@ -13,7 +13,7 @@
 				<x-admin.errors />			
 				<x-admin.input :value="old('name', $item->name)" title="Название" name="name" placeholder="Введите название" />
 				<x-admin.textarea :value="old('description', $item->description)" title="Описание" name="description" placeholder="Введите описание" />
-				<x-admin.inputFile :image="$item->fotos" title="Главное изображение" name="image" placeholder="Выберите файл" />
+				<x-admin.inputFile :image="$item->pictures" title="Главное изображение" name="image" placeholder="Выберите файл" />
 				<div class="form-group row">
 					<div class="col-6"></div>
 					<div class="col-6">

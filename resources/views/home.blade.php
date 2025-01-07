@@ -23,11 +23,11 @@ google_ad_height = 250;
 							<h1 >Новые описания отелей</h1>
 							@if (!empty ($hotels))
 							@foreach ($hotels as $item)
-							<div class="hot_prew" style="height:{{ ($boardConfig['foto_height_hotel'] + 10)}}px;">
+							<div class="hot_prew" style="height:{{ ($boardConfig['picture_height_hotel'] + 10)}}px;">
 							<a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}" class="prew">
-								<img title="{{$item['hotels_name']}}" alt="{{$item['hotels_name']}}" src="{{$item['fotoStr']}}" width="{{$boardConfig['foto_width_hotel']}}" height="{{$boardConfig['foto_height_hotel']}}">
+								<img title="{{$item['hotels_name']}}" alt="{{$item['hotels_name']}}" src="{{$item['pictureStr']}}" width="{{$boardConfig['picture_width_hotel']}}" height="{{$boardConfig['picture_height_hotel']}}">
 							</a>
-							<h3 class="tit_hot" style="margin-left:{{($boardConfig['foto_width_hotel'] + 10)}}px;"><a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}">{{App\Helpers\Helper::cutText($item['hotels_name'],40)}} {!!$item['starsStr']!!}</a></h3>
+							<h3 class="tit_hot" style="margin-left:{{($boardConfig['picture_width_hotel'] + 10)}}px;"><a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}">{{App\Helpers\Helper::cutText($item['hotels_name'],40)}} {!!$item['starsStr']!!}</a></h3>
 							<p>{{App\Helpers\Helper::cutText($item['hotels_description'],300)}}<a href="{{route('hotel_name',$item['hotels_eng_name'])}}" title="{{$item['hotels_name']}}"> »»</a></p>
 						</div>
   							@endforeach

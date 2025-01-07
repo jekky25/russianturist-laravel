@@ -15,7 +15,7 @@
 				<x-admin.input  :value="old('slug', $city->slug)" title="Транскрипция" name="slug" placeholder="Введите значение" />
 				<x-admin.inputSelect :value="old('country_id', $city->country_id)" :items="($countries)" title="Страна" name="country_id" />
 				<x-admin.textarea  :value="old('description', $city->description)" title="Описание" name="description" placeholder="Введите описание" />
-				<x-admin.inputFile  :image="$city->fotos" title="Главное изображение" name="image" placeholder="Выберите файл" />
+				<x-admin.inputFile  :image="$city->pictures" title="Главное изображение" name="image" placeholder="Выберите файл" />
 				<div class="form-group row">
 					<div class="col-6"></div>
 					<div class="col-6">

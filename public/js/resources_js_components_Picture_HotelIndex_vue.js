@@ -122,8 +122,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       }))();
     },
     setConfigPicture: function setConfigPicture(res) {
-      this.configHeightHotelPrew = parseInt(res.config.foto_height_hotel_prew);
-      this.configWidthHotelPrew = parseInt(res.config.foto_width_hotel_prew);
+      this.configHeightHotelPrew = parseInt(res.config.picture_height_hotel_prew);
+      this.configWidthHotelPrew = parseInt(res.config.picture_width_hotel_prew);
       return false;
     }
   }
@@ -158,7 +158,7 @@ var _hoisted_3 = {
   }
 };
 var _hoisted_4 = {
-  "class": "foto_big"
+  "class": "picture_big"
 };
 var _hoisted_5 = {
   "class": "img-table"
@@ -205,14 +205,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8 /* PROPS */, ["pictures", "hotel"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     title: "".concat($data.hotel.name),
     alt: "".concat($data.hotel.name),
-    src: "".concat($data.hotel.pictureSelected.fotoStr)
+    src: "".concat($data.hotel.pictureSelected.pictureStr)
   }, null, 8 /* PROPS */, _hoisted_7)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [$data.hotel.picturePrev ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
     key: 0,
     to: {
-      name: 'hotel_fotos_id',
+      name: 'hotel_pictures_id',
       params: {
         name: "".concat($data.hotel.slug),
-        foto: '_foto_',
+        picture: '_picture_',
         id: "".concat($data.hotel.picturePrev.id)
       }
     },
@@ -225,10 +225,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8 /* PROPS */, ["to"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.hotel.picturePosition) + " / " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.hotel.pictureCount) + " ", 1 /* TEXT */), $data.hotel.pictureNext ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
     key: 1,
     to: {
-      name: 'hotel_fotos_id',
+      name: 'hotel_pictures_id',
       params: {
         name: "".concat($data.hotel.slug),
-        foto: '_foto_',
+        picture: '_picture_',
         id: "".concat($data.hotel.pictureNext.id)
       }
     },
@@ -260,7 +260,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.pictures, function (picture) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      "class": "foto1",
+      "class": "picture1",
       style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)({
         'height': $data.configHeightHotelPrew + 'px'
       })
@@ -271,10 +271,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       })
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
       to: {
-        name: 'hotel_fotos_id',
+        name: 'hotel_pictures_id',
         params: {
           name: "".concat($data.hotel.slug),
-          foto: '_foto_',
+          picture: '_picture_',
           id: "".concat(picture.id)
         }
       },
@@ -286,7 +286,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
           title: "".concat($data.hotel.name),
           alt: "".concat($data.hotel.name),
-          src: "".concat(picture.fotoStr),
+          src: "".concat(picture.pictureStr),
           width: "".concat($data.configWidthHotelPrew),
           height: "".concat($data.configHeightHotelPrew),
           "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)("".concat(picture.active))

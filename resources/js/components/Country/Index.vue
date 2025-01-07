@@ -4,7 +4,7 @@
 		<template v-if="countries">
 			<div  v-for="country in countries" class="hot_prew" :style="{'height': configHeightCountryPicture + 'px'}">
 				<router-link :title="`${country.name}`" :alt="`${country.name}`" :to="{ name: 'country_name', params: { name: `${country.slug}` } }" class="prew">
-					<img :title="`${country.name}`" :alt="`${country.name}`" :src="`${country.fotoStr}`" :width="`${configCountryWidthPicture}`" :height="`${configCountryHeightPicture}`">
+					<img :title="`${country.name}`" :alt="`${country.name}`" :src="`${country.pictureStr}`" :width="`${configCountryWidthPicture}`" :height="`${configCountryHeightPicture}`">
 				</router-link>
 				<h3 class="tit_hot" :style="{'margin-left':configMarginCountryWidthPicture + 'px'}">
 					<router-link :title="`${country.name}`" :alt="`${country.name}`" :to="{ name: 'country_name', params: { name: `${country.slug}` } }">{{ country.name }}</router-link>
@@ -52,10 +52,10 @@
 			},
 			setConfigPicture(res)
 			{
-				this.configHeightCountryPicture			= parseInt(res.config.foto_height_country) + 10;
-				this.configCountryWidthPicture			= parseInt(res.config.foto_width_country);
-				this.configCountryHeightPicture			= parseInt(res.config.foto_height_country);
-				this.configMarginCountryWidthPicture	= parseInt(res.config.foto_width_country) + 10;
+				this.configHeightCountryPicture			= parseInt(res.config.picture_height_country) + 10;
+				this.configCountryWidthPicture			= parseInt(res.config.picture_width_country);
+				this.configCountryHeightPicture			= parseInt(res.config.picture_height_country);
+				this.configMarginCountryWidthPicture	= parseInt(res.config.picture_width_country) + 10;
 				return false;
 			}
 		}

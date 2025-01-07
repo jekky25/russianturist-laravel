@@ -58,8 +58,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 		Route::delete('/{id}', 'IndexController@destroy')->name('admin.city.destroy');
 	});
 
-	Route::group(['namespace' => 'Foto', 'prefix' => 'fotos', 'middleware' => ['auth', 'admin']], function() {
-		Route::delete('/{id}/back/form/', 'IndexController@destroyBackForm')->name('admin.foto.destroy.back.form');
+	Route::group(['namespace' => 'picture', 'prefix' => 'pictures', 'middleware' => ['auth', 'admin']], function() {
+		Route::delete('/{id}/back/form/', 'IndexController@destroyBackForm')->name('admin.picture.destroy.back.form');
 	});
 	
 	Route::group(['namespace' => 'Hotel', 'prefix' => 'hotels', 'middleware' => ['auth', 'admin']], function() {
@@ -88,7 +88,7 @@ Route::post('/login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/{page}', 'IndexController')->where('page', '.*');
-Route::get('/hotels/{name}{foto}.html', 'HotelController@getHotelFotos')->where('foto', '_foto')->name('hotel_fotos');
+Route::get('/hotels/{name}{picture}.html', 'HotelController@getHotelPictures')->where('picture', '_picture')->name('hotel_pictures');
 Route::get('/', 'HomeController@index')->name('home');
 
 if (!function_exists('pr')) {

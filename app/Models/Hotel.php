@@ -32,16 +32,16 @@ class Hotel extends Model
 
 	public function getFirstImagePathAttribute()
 	{
-		if ($this->fotos->count() == 0) return null;
-		return $this->fotos[0]->image_path;
+		if ($this->pictures->count() == 0) return null;
+		return $this->pictures[0]->image_path;
 	}
 
 	/**
-	* get fotos
+	* get pictures
 	*/
-	public function fotos()
+	public function pictures()
 	{
-		return $this->hasMany(Foto::class, 'parent_id', 'id')->where('type', 'hotel');
+		return $this->hasMany(Picture::class, 'parent_id', 'id')->where('type', 'hotel');
 	}
 
 	/**

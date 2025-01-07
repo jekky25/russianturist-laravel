@@ -71,9 +71,9 @@
 			},
 			setConfigPicture(res)
 			{
-				this.configHeightItemPicture			= parseInt(res.config.foto_height_item);
-				this.configWidthItemPicture				= parseInt(res.config.foto_width_item);
-				this.configMarginItemWidthPicture		= parseInt(res.config.foto_width_item) + 10;
+				this.configHeightItemPicture			= parseInt(res.config.picture_height_item);
+				this.configWidthItemPicture				= parseInt(res.config.picture_width_item);
+				this.configMarginItemWidthPicture		= parseInt(res.config.picture_width_item) + 10;
 				return false;
 			}
 		},

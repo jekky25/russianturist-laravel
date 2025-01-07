@@ -116,10 +116,10 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
       return false;
     },
     setConfigPicture: function setConfigPicture(res) {
-      this.configHeightHotelPicture = parseInt(res.config.foto_height_hotel) + 10;
-      this.configHotelWidthPicture = parseInt(res.config.foto_width_hotel);
-      this.configMarginHotelWidthPicture = parseInt(res.config.foto_width_hotel) + 10;
-      this.configHotelHeightPicture = parseInt(res.config.foto_height_hotel);
+      this.configHeightHotelPicture = parseInt(res.config.picture_height_hotel) + 10;
+      this.configHotelWidthPicture = parseInt(res.config.picture_width_hotel);
+      this.configMarginHotelWidthPicture = parseInt(res.config.picture_width_hotel) + 10;
+      this.configHotelHeightPicture = parseInt(res.config.picture_height_hotel);
       return false;
     }
   }
@@ -147,7 +147,7 @@ var _hoisted_2 = {
   "class": "hot_prew"
 };
 var _hoisted_3 = {
-  "class": "country_foto"
+  "class": "country_picture"
 };
 var _hoisted_4 = ["title", "alt", "src"];
 var _hoisted_5 = {

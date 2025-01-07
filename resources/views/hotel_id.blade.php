@@ -5,13 +5,13 @@
 	<h1>{{$hotel->hotels_name}} (<a href="{{route('city_name',$hotel->city['slug'])}}">{{$hotel->city['name']}}</a>)</h1>
 	<div class="hot_prew">
 		<div class="pr_fot_hotel" style="width:150px;">
-			<h2>{!!$hotel->hotel_fotos_enter!!}</h2>
-			@if (!empty ($hotel->fotos))
-				@foreach ($hotel->fotos as $item)
-					<div class="foto1" style="height:{{$boardConfig['foto_height_hotel_prew']}}px;">
-						<div style="width:{{$boardConfig['foto_width_hotel_prew']}}px; padding:0;">
-							<a href="{{route('hotel_fotos_id',[$hotel['hotels_eng_name'],'_foto_',$item['id']])}}" alt="{{$hotel['hotels_name']}}" title="{{$hotel['hotels_name']}}" class="prew">
-								<img title="{{$hotel['hotels_name']}}" alt="{{$hotel['hotels_name']}}" src="{{$item['foto_out']}}" width="{{$boardConfig['foto_width_hotel_prew']}}" height="{{$boardConfig['foto_height_hotel_prew']}}" {!!$item['f_act']!!}>
+			<h2>{!!$hotel->hotel_pictures_enter!!}</h2>
+			@if (!empty ($hotel->pictures))
+				@foreach ($hotel->pictures as $item)
+					<div class="picture1" style="height:{{$boardConfig['picture_height_hotel_prew']}}px;">
+						<div style="width:{{$boardConfig['picture_width_hotel_prew']}}px; padding:0;">
+							<a href="{{route('hotel_pictures_id',[$hotel['hotels_eng_name'],'_picture_',$item['id']])}}" alt="{{$hotel['hotels_name']}}" title="{{$hotel['hotels_name']}}" class="prew">
+								<img title="{{$hotel['hotels_name']}}" alt="{{$hotel['hotels_name']}}" src="{{$item['picture_out']}}" width="{{$boardConfig['picture_width_hotel_prew']}}" height="{{$boardConfig['picture_height_hotel_prew']}}" {!!$item['f_act']!!}>
 							</a>
 						</div>
 					</div>
