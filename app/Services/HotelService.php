@@ -180,15 +180,6 @@ class HotelService
 	}
 
 	/**
-	* get a link of the picture 
-	* @param  int  $pictureId
-	* @return string
-	*/
-	private function getPictureLink($pictureId)
-	{
-		return asset('/fotos/hotels/' . $pictureId . '.jpg');
-	}
-	/**
 	* get picture params
 	* @return void
 	*/
@@ -197,7 +188,6 @@ class HotelService
 		foreach ($this->hotels->pictures as $k => &$row)
 		{
 			$row['f_act']		= $this->getPictureActiveClass($k);
-			$row['picture_out']	= $this->getPictureLink($row['id']);
 		}
 	}
 

@@ -40,8 +40,6 @@ class CityController extends Controller
 	*/
 	public function getCityByName($name)
 	{
-		$city	= $this->city->getByName($name);
-		$city	= $this->city->getPictureLink($city, $this->boardConfig['picture_width_city_id'], $this->boardConfig['picture_height_city_id']);
-		return new CityFullResource($city);
+		return new CityFullResource($this->city->getByName($name));
 	}
 }

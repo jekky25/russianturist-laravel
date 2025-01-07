@@ -132,18 +132,4 @@ class CityService
 		$city->picture	= $picture;
 		return $city;
 	}
-
-	/**
-	* get a picture link
-	* @param  \Illuminate\Database\Eloquent\Collection $city
-	* @param  int $width
-	* @param  int $height
-	* @return \Illuminate\Database\Eloquent\Collection 
-	*/
-	public function getPictureLink($city, $width, $height)
-	{
-		$picture_out 				= !empty($city->picture) ? asset('/fotos/citys/' . $city->picture['id'] . '.jpg') : '';
-		$city->cities_img 			= !empty($picture_out) ? '<img title="' . $city->name . '" alt="' . $city->name . '" src="' . $picture_out . '" width="' . $width . '" height="' . $height . '">' : '';
-		return $city;
-	}
 }
