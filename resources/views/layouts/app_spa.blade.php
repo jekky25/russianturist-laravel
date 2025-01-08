@@ -8,7 +8,7 @@
 <meta content="Туризм и путешествия" name="classification">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <?/*=$CODE_INPUT['META']*/?>
-<link href="{{ asset("css/site.css?t=11") }}" type="text/css" rel="stylesheet">
+<link href="{{ asset("css/site.css?t=27") }}" type="text/css" rel="stylesheet">
 <link href="{{ asset("css/media.css?t=12") }}" type="text/css" rel="stylesheet">
 </head>
 <body>

@@ -127,8 +127,19 @@ div.main_r h1, div.main_r h2
 	padding-bottom:20px;
 }
 div.main_r p {padding-top:10px;}
-.prew {display:block;}
-.prew img {border:1px solid #c6a33f; float:left; margin-right:10px;}
+.prew {
+  display:block;
+  width:100px;
+  max-height: 100px;
+}
+.prew img {
+  border:1px solid #c6a33f; 
+  float:left; 
+  margin-right:10px;
+  max-width: 100px;
+  min-width: 100px;
+  height:100px;
+}
 
 
 .prew1 img {display:block; float:left; padding-right:10px; position: relative;}
@@ -192,4 +203,23 @@ div.pagination a.active {color:#f72d4e;}
 .name_my_mess {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.preview-container
+{
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.preview-container-right 
+{
+  padding-left: 10px;
+  width: 100%;
+}
+
+.shot-picture-block-link img
+{
+  width:120px;
 }

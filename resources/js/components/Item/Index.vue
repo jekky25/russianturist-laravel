@@ -2,14 +2,16 @@
 	<div class="main_items">
 		<h1>Статьи</h1>
 		<template v-if="items">
-			<div  v-for="item in items" class="hot_prew" :style="{'height': configHeightItemPicture + 'px'}">
+			<div  v-for="item in items" class="hot_prew preview-container">
 				<router-link :title="`${item.name}`" :alt="`${item.name}`" :to="{ name: 'item_id', params: { id: `${item.id}` } }" class="prew">
-					<img :title="`${item.name}`" :alt="`${item.name}`" :src="`${item.firstImagePath}`" :width="`${configWidthItemPicture}`" :height="`${configHeightItemPicture}`">
+					<img :title="`${item.name}`" :alt="`${item.name}`" :src="`${item.firstImagePath}`">
 				</router-link>
-				<h3 class="tit_hot" :style="{'margin-left':configMarginItemWidthPicture + 'px'}">
-					<router-link :title="`${item.name}`" :alt="`${item.name}`" :to="{ name: 'item_id', params: { id: `${item.id}` } }">{{ item.name }}</router-link>
-				</h3>
-				<p><span v-html="item.description"></span><router-link :title="`${item.name}`" :alt="`${item.name}`" :to="{ name: 'item_id', params: { id: `${item.id}` } }"> »»</router-link></p>
+				<div class="preview-container-right">
+					<h3 class="tit_hot">
+						<router-link :title="`${item.name}`" :alt="`${item.name}`" :to="{ name: 'item_id', params: { id: `${item.id}` } }">{{ item.name }}</router-link>
+					</h3>
+					<p><span v-html="item.description"></span><router-link :title="`${item.name}`" :alt="`${item.name}`" :to="{ name: 'item_id', params: { id: `${item.id}` } }"> »»</router-link></p>
+				</div>
 			</div>
 		</template>
 	</div>
@@ -19,7 +21,6 @@
 	</div>
 </template>
 <script>
-	import getConfig from "../../methods/getConfig.js";
 	export default {
 		name: 'ItemIndex',
 		data() {
@@ -27,23 +28,15 @@
 				items: [],
 				pagination: [],
 				errors: null,
-				configHeightItemPicture: 0,
-				configWidthItemPicture: 0,
-				configMarginItemWidthPicture: 0,
 				currentPage: 1
 			};
 		},
 		mounted() {
 			this.getCurrentPage();
 			this.getItems(this.currentPage);
-			this.getPictureParams();
 		},
 		methods:
 		{
-			async getPictureParams()
-			{
-				this.setConfigPicture(await getConfig());
-			},
 			getCurrentPage()
 			{
 				this.currentPage = typeof(this.$route.query.page) !== 'undefined' ? parseInt(this.$route.query.page) : 1;
@@ -68,13 +61,6 @@
 					entry.label = entry.label.replace("Next", '');
 				});
 				return ar;
-			},
-			setConfigPicture(res)
-			{
-				this.configHeightItemPicture			= parseInt(res.config.picture_height_item);
-				this.configWidthItemPicture				= parseInt(res.config.picture_width_item);
-				this.configMarginItemWidthPicture		= parseInt(res.config.picture_width_item) + 10;
-				return false;
 			}
 		},
 		watch: {
