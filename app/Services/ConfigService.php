@@ -1,72 +1,77 @@
 <?php
+
 namespace App\Services;
 
-use App\Models\Config;
 use App\Http\Resources\Admin\Config\ConfigResource;
+use App\Helpers\CacheKeys;
+use App\Models\Config;
 
 class ConfigService
 {
 	/**
-	* get all configs
-	* @return \Illuminate\Database\Eloquent\Collection 
-	*/
+	 * get all configs
+	 * @return \Illuminate\Database\Eloquent\Collection 
+	 */
 	public function getAll()
 	{
-		return ConfigResource::collection(Config::all());
+		return \Cache::remember(CacheKeys::configAll(), Config::CASHE_TIME, function () {
+			return ConfigResource::collection(Config::all());
+		});
 	}
 
 	/**
-	* get config by id
-	* @return \Illuminate\Database\Eloquent\Collection 
-	*/
+	 * get config by id
+	 * @return \Illuminate\Database\Eloquent\Collection 
+	 */
 	public function getById($id)
 	{
-		$config = Config::select('*')
-			->where('id', $id)
-			->firstOrFail();
+		$config = \Cache::remember(CacheKeys::configById($id), Config::CASHE_TIME, function () use ($id) {
+			return Config::select('*')
+				->where('id', $id)
+				->firstOrFail();
+		});
 		return new ConfigResource($config);
 	}
 
 	/**
-	* create a config
-	* @param  array $request
-	* @return void
-	*/	
-	public function create($request) 
+	 * create a config
+	 * @param  array $request
+	 * @return void
+	 */
+	public function create($request)
 	{
 		try {
 			Config::create($request);
 		} catch (\Exception $e) {
-			throw new \Exception('Failed to create a Config '.$e->getMessage());
+			throw new \Exception('Failed to create a Config ' . $e->getMessage());
 		}
 	}
 
 	/**
-	* update a config
-	* @param array $params
-	* @return void
-	*/	
+	 * update a config
+	 * @param array $params
+	 * @return void
+	 */
 	public function update($id, $params)
 	{
 		try {
 			Config::find($id)->update($params);
 		} catch (\Exception $e) {
-			throw new \Exception('Failed to update the Config. '.$e->getMessage());
+			throw new \Exception('Failed to update the Config. ' . $e->getMessage());
 		}
 	}
 
-	
 	/**
-	* delete a config
-	* @param  id $id
-	* @return void
-	*/
-	public function destroy($id) {
+	 * delete a config
+	 * @param  id $id
+	 * @return void
+	 */
+	public function destroy($id)
+	{
 		try {
 			Config::find($id)->delete();
 		} catch (\Exception $e) {
-			throw new \Exception('Failed to delete Config . '.$e->getMessage());
+			throw new \Exception('Failed to delete Config . ' . $e->getMessage());
 		}
 	}
-
 }

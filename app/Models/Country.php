@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\BaseConfig;
+use App\Models\Events\RemoveCountryCache;
 use App\Services\ImageService;
+use App\Traits\BaseConfig;
 use App\Models\Picture;
 use App\Traits\TStr;
 
@@ -14,6 +15,7 @@ class Country extends Model
 	use HasFactory, BaseConfig, TStr;
 
 	const IMAGES_DIRECTORY	= 'images/country';
+	const CASHE_TIME		= 60*60; //1 hour
 
 	protected $table = 'countries';
 	public $boardConfig = [];
@@ -25,6 +27,11 @@ class Country extends Model
 	];
 	public $timestamps		= false;
 	protected $primaryKey 	= 'id';
+
+	protected $dispatchesEvents = [
+        'updating' => RemoveCountryCache::class,
+		'deleting' => RemoveCountryCache::class
+    ];
 
 	/**
 	* Create a new controller instance.

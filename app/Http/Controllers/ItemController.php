@@ -1,12 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Services\ItemService;
-use App\Services\CountryService;
 use App\Traits\BaseConfig;
 use App\Traits\Pagination;
+use App\Services\ItemService;
 use App\Http\Resources\ItemResource;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\ItemFullResource;
 
 class ItemController extends Controller
@@ -15,19 +15,17 @@ class ItemController extends Controller
 	public $boardingConfig 	= [];
 	public $countPerPage 	= 30;
 	/**
-	* Create a new controller instance.
-	*
-	* @return void
-	*/
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
 	public function __construct(
 		public ItemService 		$itemService,
-	)
-	{
-	}
+	) {}
 	/**
-	* Get all items
-	* @return json
-	*/
+	 * Get all items
+	 * @return json
+	 */
 	public function getItems()
 	{
 		$items	= $this->itemService->getAllByPaginate($this->countPerPage);
@@ -35,10 +33,10 @@ class ItemController extends Controller
 	}
 
 	/**
-	* Show an item page
-	* @param  string  $id
-	* @return \Illuminate\Http\Response
-	*/
+	 * Show an item page
+	 * @param  string  $id
+	 * @return \Illuminate\Http\Response
+	 */
 	public function getItemById($id)
 	{
 		$item			= $this->itemService->getById($id);
